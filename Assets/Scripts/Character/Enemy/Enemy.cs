@@ -10,7 +10,7 @@
         public Transform foot;
         public EnemySFXManager sfx;
         public int damage;
-
+        public bool agro;
         public int Health { get; private set; }
 
         private void Start()
