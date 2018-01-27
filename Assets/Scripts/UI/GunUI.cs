@@ -52,7 +52,7 @@
         /// Number of bullets in your clip
         public void Fire(int bulletsInClip)
         {
-            if (bulletsInClip > 0)
+            if (bulletsInClip >= 0)
             {
                 this.bulletsInClip = bulletsInClip;
                 UseBullet(bulletsInClip + 1);

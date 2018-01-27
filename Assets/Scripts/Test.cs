@@ -6,10 +6,12 @@
     public class Test : MonoBehaviour
     {
         public SonarPool pool;
+        public BulletPool bpool;
 
         private void Start()
         {
             pool.Init();
+            bpool.Init();
         }
 
         private void Update()

@@ -17,11 +17,12 @@
 
         protected override void LocalUpdate()
         {
-            this.rgbdy.velocity = this.transform.right * speed;
+            this.rgbdy.velocity = this.transform.forward * speed;
         }
 
         protected override void LocalDeallocate()
         {
+            this.rgbdy.velocity = Vector3.zero;
         }
 
         protected override void LocalDelete()

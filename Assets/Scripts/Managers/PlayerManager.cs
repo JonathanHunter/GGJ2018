@@ -11,7 +11,7 @@
 
         public static PlayerManager Instance { get; set; }
 
-        private void Start()
+        public void Init()
         {
             if (Instance != null && Instance != this)
             {

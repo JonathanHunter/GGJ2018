@@ -24,6 +24,7 @@
         public CameraEffects camEffects;
         public int maxHealth;
         public HealthUI healthUI;
+        public Transform gunPos;
 
         private int moveHash;
         private int meleeHash;
@@ -93,15 +94,19 @@
             if (!reloading && !shooting && CustomInput.BoolFreshPress(CustomInput.UserInput.Shoot))
             {
                 this.shooting = true;
+                GameObject g = BulletPool.Instance.GetBullet(BulletPool.BulletTypes.Player);
+                g.transform.position = gunPos.position;
+                g.transform.rotation = this.transform.rotation;
+                //UnityEditor.EditorApplication.isPaused = true;
                 this.anim.SetBool(this.shootHash, true);
                 this.agro.radius += 1f;
                 this.sfx.PlayPlayerGunfireSFX();
-                this.reloadUI.Fire(this.bullets - 1);
+                this.reloadUI.Fire(this.bullets);
             }
             else if (this.shooting)
                 this.rgdb.velocity *= .75f;
 
-            if(!reloading && (bullets == 0 || CustomInput.BoolFreshPress(CustomInput.UserInput.Reload)))
+            if(!reloading && (bullets <= 0 || CustomInput.BoolFreshPress(CustomInput.UserInput.Reload)))
             {
                 this.reloading = true;
                 this.reloadUI.StartReload();
@@ -115,6 +120,7 @@
             if (!this.recharging && CustomInput.BoolFreshPress(CustomInput.UserInput.Screech))
             {
                 this.recharging = true;
+                this.agro.radius *= 2f;
                 this.screechUI.StartRecharge();
                 this.camEffects.Screech();
                 GameObject s = SonarPool.Instance.GetSonar(1f, 10f);
