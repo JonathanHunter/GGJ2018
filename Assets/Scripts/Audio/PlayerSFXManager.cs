@@ -164,7 +164,7 @@
         public void PlayPlayerStickTapSFX()
         {
             stickTap.pitch = Random.Range(0.9f, 1.1f);
-            stickTap.volume = Random.Range(0.9f, 1.0f);
+            stickTap.volume = Random.Range(0.05f, 0.1f);
             stickTap.Play();
         }
 

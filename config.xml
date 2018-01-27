@@ -8,13 +8,13 @@
     <Keyboard_LookDown>None</Keyboard_LookDown>
     <Keyboard_LookLeft>None</Keyboard_LookLeft>
     <Keyboard_LookRight>None</Keyboard_LookRight>
-    <Keyboard_Attack>J</Keyboard_Attack>
-    <Keyboard_NextWeapon>E</Keyboard_NextWeapon>
-    <Keyboard_PrevWeapon>Q</Keyboard_PrevWeapon>
-    <Keyboard_Pause>Space</Keyboard_Pause>
+    <Keyboard_Melee>Mouse0</Keyboard_Melee>
+    <Keyboard_Shoot>Mouse1</Keyboard_Shoot>
+    <Keyboard_Reload>R</Keyboard_Reload>
+    <Keyboard_Screech>Space</Keyboard_Screech>
+    <Keyboard_Pause>Escape</Keyboard_Pause>
     <Keyboard_Accept>Return</Keyboard_Accept>
-    <Keyboard_Cancel>Escape</Keyboard_Cancel>
-    <Keyboard_Target>K</Keyboard_Target>
+    <Keyboard_Cancel>Backspace</Keyboard_Cancel>
     <Gamepad_Up>Left Stick Up</Gamepad_Up>
     <Gamepad_Down>Left Stick Down</Gamepad_Down>
     <Gamepad_Left>Left Stick Left</Gamepad_Left>
@@ -23,13 +23,13 @@
     <Gamepad_LookDown>Right Stick Down</Gamepad_LookDown>
     <Gamepad_LookLeft>Right Stick Left</Gamepad_LookLeft>
     <Gamepad_LookRight>Right Stick Right</Gamepad_LookRight>
-    <Gamepad_Attack>A</Gamepad_Attack>
-    <Gamepad_NextWeapon>RB</Gamepad_NextWeapon>
-    <Gamepad_PrevWeapon>LB</Gamepad_PrevWeapon>
+    <Gamepad_Melee>Left Trigger</Gamepad_Melee>
+    <Gamepad_Shoot>Right Trigger</Gamepad_Shoot>
+    <Gamepad_Reload>X</Gamepad_Reload>
+    <Gamepad_Screech>A</Gamepad_Screech>
     <Gamepad_Pause>Start</Gamepad_Pause>
     <Gamepad_Accept>A</Gamepad_Accept>
     <Gamepad_Cancel>B</Gamepad_Cancel>
-    <Gamepad_Target>Right Trigger</Gamepad_Target>
   </Player0>
   <Player1>
     <Keyboard_Up>None</Keyboard_Up>
@@ -40,13 +40,13 @@
     <Keyboard_LookDown>None</Keyboard_LookDown>
     <Keyboard_LookLeft>None</Keyboard_LookLeft>
     <Keyboard_LookRight>None</Keyboard_LookRight>
-    <Keyboard_Attack>None</Keyboard_Attack>
-    <Keyboard_NextWeapon>None</Keyboard_NextWeapon>
-    <Keyboard_PrevWeapon>None</Keyboard_PrevWeapon>
+    <Keyboard_Melee>None</Keyboard_Melee>
+    <Keyboard_Shoot>None</Keyboard_Shoot>
+    <Keyboard_Reload>None</Keyboard_Reload>
+    <Keyboard_Screech>None</Keyboard_Screech>
     <Keyboard_Pause>None</Keyboard_Pause>
     <Keyboard_Accept>None</Keyboard_Accept>
     <Keyboard_Cancel>None</Keyboard_Cancel>
-    <Keyboard_Target>None</Keyboard_Target>
     <Gamepad_Up>
     </Gamepad_Up>
     <Gamepad_Down>
@@ -63,20 +63,20 @@
     </Gamepad_LookLeft>
     <Gamepad_LookRight>
     </Gamepad_LookRight>
-    <Gamepad_Attack>
-    </Gamepad_Attack>
-    <Gamepad_NextWeapon>
-    </Gamepad_NextWeapon>
-    <Gamepad_PrevWeapon>
-    </Gamepad_PrevWeapon>
+    <Gamepad_Melee>
+    </Gamepad_Melee>
+    <Gamepad_Shoot>
+    </Gamepad_Shoot>
+    <Gamepad_Reload>
+    </Gamepad_Reload>
+    <Gamepad_Screech>
+    </Gamepad_Screech>
     <Gamepad_Pause>
     </Gamepad_Pause>
     <Gamepad_Accept>
     </Gamepad_Accept>
     <Gamepad_Cancel>
     </Gamepad_Cancel>
-    <Gamepad_Target>
-    </Gamepad_Target>
   </Player1>
   <Player2>
     <Keyboard_Up>None</Keyboard_Up>
@@ -87,13 +87,13 @@
     <Keyboard_LookDown>None</Keyboard_LookDown>
     <Keyboard_LookLeft>None</Keyboard_LookLeft>
     <Keyboard_LookRight>None</Keyboard_LookRight>
-    <Keyboard_Attack>None</Keyboard_Attack>
-    <Keyboard_NextWeapon>None</Keyboard_NextWeapon>
-    <Keyboard_PrevWeapon>None</Keyboard_PrevWeapon>
+    <Keyboard_Melee>None</Keyboard_Melee>
+    <Keyboard_Shoot>None</Keyboard_Shoot>
+    <Keyboard_Reload>None</Keyboard_Reload>
+    <Keyboard_Screech>None</Keyboard_Screech>
     <Keyboard_Pause>None</Keyboard_Pause>
     <Keyboard_Accept>None</Keyboard_Accept>
     <Keyboard_Cancel>None</Keyboard_Cancel>
-    <Keyboard_Target>None</Keyboard_Target>
     <Gamepad_Up>
     </Gamepad_Up>
     <Gamepad_Down>
@@ -110,20 +110,20 @@
     </Gamepad_LookLeft>
     <Gamepad_LookRight>
     </Gamepad_LookRight>
-    <Gamepad_Attack>
-    </Gamepad_Attack>
-    <Gamepad_NextWeapon>
-    </Gamepad_NextWeapon>
-    <Gamepad_PrevWeapon>
-    </Gamepad_PrevWeapon>
+    <Gamepad_Melee>
+    </Gamepad_Melee>
+    <Gamepad_Shoot>
+    </Gamepad_Shoot>
+    <Gamepad_Reload>
+    </Gamepad_Reload>
+    <Gamepad_Screech>
+    </Gamepad_Screech>
     <Gamepad_Pause>
     </Gamepad_Pause>
     <Gamepad_Accept>
     </Gamepad_Accept>
     <Gamepad_Cancel>
     </Gamepad_Cancel>
-    <Gamepad_Target>
-    </Gamepad_Target>
   </Player2>
   <Player3>
     <Keyboard_Up>None</Keyboard_Up>
@@ -134,13 +134,13 @@
     <Keyboard_LookDown>None</Keyboard_LookDown>
     <Keyboard_LookLeft>None</Keyboard_LookLeft>
     <Keyboard_LookRight>None</Keyboard_LookRight>
-    <Keyboard_Attack>None</Keyboard_Attack>
-    <Keyboard_NextWeapon>None</Keyboard_NextWeapon>
-    <Keyboard_PrevWeapon>None</Keyboard_PrevWeapon>
+    <Keyboard_Melee>None</Keyboard_Melee>
+    <Keyboard_Shoot>None</Keyboard_Shoot>
+    <Keyboard_Reload>None</Keyboard_Reload>
+    <Keyboard_Screech>None</Keyboard_Screech>
     <Keyboard_Pause>None</Keyboard_Pause>
     <Keyboard_Accept>None</Keyboard_Accept>
     <Keyboard_Cancel>None</Keyboard_Cancel>
-    <Keyboard_Target>None</Keyboard_Target>
     <Gamepad_Up>
     </Gamepad_Up>
     <Gamepad_Down>
@@ -157,20 +157,20 @@
     </Gamepad_LookLeft>
     <Gamepad_LookRight>
     </Gamepad_LookRight>
-    <Gamepad_Attack>
-    </Gamepad_Attack>
-    <Gamepad_NextWeapon>
-    </Gamepad_NextWeapon>
-    <Gamepad_PrevWeapon>
-    </Gamepad_PrevWeapon>
+    <Gamepad_Melee>
+    </Gamepad_Melee>
+    <Gamepad_Shoot>
+    </Gamepad_Shoot>
+    <Gamepad_Reload>
+    </Gamepad_Reload>
+    <Gamepad_Screech>
+    </Gamepad_Screech>
     <Gamepad_Pause>
     </Gamepad_Pause>
     <Gamepad_Accept>
     </Gamepad_Accept>
     <Gamepad_Cancel>
     </Gamepad_Cancel>
-    <Gamepad_Target>
-    </Gamepad_Target>
   </Player3>
   <Player4>
     <Keyboard_Up>None</Keyboard_Up>
@@ -181,13 +181,13 @@
     <Keyboard_LookDown>None</Keyboard_LookDown>
     <Keyboard_LookLeft>None</Keyboard_LookLeft>
     <Keyboard_LookRight>None</Keyboard_LookRight>
-    <Keyboard_Attack>None</Keyboard_Attack>
-    <Keyboard_NextWeapon>None</Keyboard_NextWeapon>
-    <Keyboard_PrevWeapon>None</Keyboard_PrevWeapon>
+    <Keyboard_Melee>None</Keyboard_Melee>
+    <Keyboard_Shoot>None</Keyboard_Shoot>
+    <Keyboard_Reload>None</Keyboard_Reload>
+    <Keyboard_Screech>None</Keyboard_Screech>
     <Keyboard_Pause>None</Keyboard_Pause>
     <Keyboard_Accept>None</Keyboard_Accept>
     <Keyboard_Cancel>None</Keyboard_Cancel>
-    <Keyboard_Target>None</Keyboard_Target>
     <Gamepad_Up>
     </Gamepad_Up>
     <Gamepad_Down>
@@ -204,20 +204,20 @@
     </Gamepad_LookLeft>
     <Gamepad_LookRight>
     </Gamepad_LookRight>
-    <Gamepad_Attack>
-    </Gamepad_Attack>
-    <Gamepad_NextWeapon>
-    </Gamepad_NextWeapon>
-    <Gamepad_PrevWeapon>
-    </Gamepad_PrevWeapon>
+    <Gamepad_Melee>
+    </Gamepad_Melee>
+    <Gamepad_Shoot>
+    </Gamepad_Shoot>
+    <Gamepad_Reload>
+    </Gamepad_Reload>
+    <Gamepad_Screech>
+    </Gamepad_Screech>
     <Gamepad_Pause>
     </Gamepad_Pause>
     <Gamepad_Accept>
     </Gamepad_Accept>
     <Gamepad_Cancel>
     </Gamepad_Cancel>
-    <Gamepad_Target>
-    </Gamepad_Target>
   </Player4>
   <Player5>
     <Keyboard_Up>None</Keyboard_Up>
@@ -228,13 +228,13 @@
     <Keyboard_LookDown>None</Keyboard_LookDown>
     <Keyboard_LookLeft>None</Keyboard_LookLeft>
     <Keyboard_LookRight>None</Keyboard_LookRight>
-    <Keyboard_Attack>None</Keyboard_Attack>
-    <Keyboard_NextWeapon>None</Keyboard_NextWeapon>
-    <Keyboard_PrevWeapon>None</Keyboard_PrevWeapon>
+    <Keyboard_Melee>None</Keyboard_Melee>
+    <Keyboard_Shoot>None</Keyboard_Shoot>
+    <Keyboard_Reload>None</Keyboard_Reload>
+    <Keyboard_Screech>None</Keyboard_Screech>
     <Keyboard_Pause>None</Keyboard_Pause>
     <Keyboard_Accept>None</Keyboard_Accept>
     <Keyboard_Cancel>None</Keyboard_Cancel>
-    <Keyboard_Target>None</Keyboard_Target>
     <Gamepad_Up>
     </Gamepad_Up>
     <Gamepad_Down>
@@ -251,20 +251,20 @@
     </Gamepad_LookLeft>
     <Gamepad_LookRight>
     </Gamepad_LookRight>
-    <Gamepad_Attack>
-    </Gamepad_Attack>
-    <Gamepad_NextWeapon>
-    </Gamepad_NextWeapon>
-    <Gamepad_PrevWeapon>
-    </Gamepad_PrevWeapon>
+    <Gamepad_Melee>
+    </Gamepad_Melee>
+    <Gamepad_Shoot>
+    </Gamepad_Shoot>
+    <Gamepad_Reload>
+    </Gamepad_Reload>
+    <Gamepad_Screech>
+    </Gamepad_Screech>
     <Gamepad_Pause>
     </Gamepad_Pause>
     <Gamepad_Accept>
     </Gamepad_Accept>
     <Gamepad_Cancel>
     </Gamepad_Cancel>
-    <Gamepad_Target>
-    </Gamepad_Target>
   </Player5>
   <Player6>
     <Keyboard_Up>None</Keyboard_Up>
@@ -275,13 +275,13 @@
     <Keyboard_LookDown>None</Keyboard_LookDown>
     <Keyboard_LookLeft>None</Keyboard_LookLeft>
     <Keyboard_LookRight>None</Keyboard_LookRight>
-    <Keyboard_Attack>None</Keyboard_Attack>
-    <Keyboard_NextWeapon>None</Keyboard_NextWeapon>
-    <Keyboard_PrevWeapon>None</Keyboard_PrevWeapon>
+    <Keyboard_Melee>None</Keyboard_Melee>
+    <Keyboard_Shoot>None</Keyboard_Shoot>
+    <Keyboard_Reload>None</Keyboard_Reload>
+    <Keyboard_Screech>None</Keyboard_Screech>
     <Keyboard_Pause>None</Keyboard_Pause>
     <Keyboard_Accept>None</Keyboard_Accept>
     <Keyboard_Cancel>None</Keyboard_Cancel>
-    <Keyboard_Target>None</Keyboard_Target>
     <Gamepad_Up>
     </Gamepad_Up>
     <Gamepad_Down>
@@ -298,19 +298,19 @@
     </Gamepad_LookLeft>
     <Gamepad_LookRight>
     </Gamepad_LookRight>
-    <Gamepad_Attack>
-    </Gamepad_Attack>
-    <Gamepad_NextWeapon>
-    </Gamepad_NextWeapon>
-    <Gamepad_PrevWeapon>
-    </Gamepad_PrevWeapon>
+    <Gamepad_Melee>
+    </Gamepad_Melee>
+    <Gamepad_Shoot>
+    </Gamepad_Shoot>
+    <Gamepad_Reload>
+    </Gamepad_Reload>
+    <Gamepad_Screech>
+    </Gamepad_Screech>
     <Gamepad_Pause>
     </Gamepad_Pause>
     <Gamepad_Accept>
     </Gamepad_Accept>
     <Gamepad_Cancel>
     </Gamepad_Cancel>
-    <Gamepad_Target>
-    </Gamepad_Target>
   </Player6>
 </Controls>

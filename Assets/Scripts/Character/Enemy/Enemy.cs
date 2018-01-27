@@ -4,13 +4,14 @@
     using Audio;
     using ObjectPooling;
 
-    public abstract class Enemy : MonoBehaviour 
+    public abstract class Enemy : MonoBehaviour
     {
         public int maxHealth = 100;
         public Transform foot;
         public EnemySFXManager sfx;
-        public int Health;
-      //  public int Health { get; private set; }
+        public int damage;
+
+        public int Health { get; private set; }
 
         private void Start()
         {
@@ -24,14 +25,19 @@
                 return;
 
             LocalUpdate();
-            if(this.Health <= 0)
+            if (this.Health <= 0)
             {
                 sfx.PlayEnemyDieSFX();
                 this.gameObject.SetActive(false);
             }
         }
 
-        public void Shoot()
+        public int GetDamage()
+        {
+            return this.damage;
+        }
+
+        protected void Shoot()
         {
 
 
@@ -39,7 +45,7 @@
 
         private void OnCollisionEnter(Collision collision)
         {
-            if(collision.gameObject.tag == "PlayerWeapon")
+            if (collision.gameObject.tag == "PlayerWeapon")
             {
                 this.Health -= collision.gameObject.GetComponent<ObjectPooling.Bullets.Bullet>().GetDamage();
                 sfx.PlayEnemyGetHitSFX();
@@ -52,6 +58,13 @@
             if (other.gameObject.tag == "Player")
             {
                 InAgroRange();
+            }
+
+            if (other.gameObject.tag == "PlayerWeapon")
+            {
+                this.Health -= other.gameObject.GetComponent<ObjectPooling.Bullets.Bullet>().GetDamage();
+                sfx.PlayEnemyGetHitSFX();
+                TookDamage();
             }
         }
 
