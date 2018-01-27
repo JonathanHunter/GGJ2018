@@ -11,14 +11,16 @@
     {
         private float minDamage = 0.0f, maxDamage = 5.0f, damageTime = 0, damageMaxTime = 0.35f, minScreech = 0.0f, maxScreech = 0.5f, screechTime = 0, screechMaxTime = 0.6f;
 
+        public FullScreenWhiteout whiteOut;
+
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Z)){
+            /*if (Input.GetKeyDown(KeyCode.Z)){
                 TakeDamage();
             }
             if (Input.GetKeyDown(KeyCode.X)){
                 Screech();
-            }
+            }*/
             if (damageTime > 0)
             {
                 transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, transform.localEulerAngles.y, Mathf.Lerp(minDamage, maxDamage, damageTime/damageMaxTime));
@@ -46,6 +48,7 @@
         {
             maxDamage *= Random.Range(0.0f, 1.0f) < 0.5f ? 1 : -1;
             damageTime = damageMaxTime;
+            whiteOut.ScreenFlash(new Color(1, 0, 0, 0.5f), damageMaxTime, 2);
             AbortScreech();
         }
 
@@ -57,6 +60,7 @@
             screechTime = screechMaxTime;
             maxDamage *= Random.Range(0.0f, 1.0f) < 0.5f ? 1 : -1;
             damageTime = damageMaxTime;
+            whiteOut.ScreenFlash(new Color(1, 1, 1, 0.5f), screechMaxTime, 1);
         }
 
         /// <summary>
