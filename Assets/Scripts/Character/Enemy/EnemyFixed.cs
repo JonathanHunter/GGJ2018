@@ -79,7 +79,7 @@ public class EnemyFixed : Enemy
         // approaches a destination point).
         agent.autoBraking = false;
         agent.speed = 0.5f;
-        GotoNextPoint();
+        //GotoNextPoint();
 
     }
 
@@ -113,7 +113,7 @@ public class EnemyFixed : Enemy
     protected override void InAgroRange()
     {
         print("agro");
-        TargetPlayer();
+       // TargetPlayer();
     }
 }
 
