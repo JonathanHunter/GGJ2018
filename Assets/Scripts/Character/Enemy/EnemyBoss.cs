@@ -15,8 +15,15 @@ public class EnemyBoss : Enemy
     private float minAttackRange = 3f;
     private float fov = 90f;
     private NavMeshAgent agent;
-
-
+    
+    enum b_state
+    {
+        IDLE,
+        BLOCKING,
+        DODGING,
+        CHARGING, 
+        ATTACKING,
+    }
 
     void GotoNextPoint()
     {
@@ -87,6 +94,9 @@ public class EnemyBoss : Enemy
 
         // Choose the next destination point when the agent gets
         // close to the current one.
+
+        
+
         if (this.agro)
         {
             attack();
