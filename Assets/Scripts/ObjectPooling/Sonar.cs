@@ -24,8 +24,10 @@
             {
                 s += Time.deltaTime * this.speed;
                 this.transform.localScale = Vector3.one * s;
-                SetAlpha((s / maxScale));
-                
+                // SetAlpha((s / maxScale));
+                SetAlpha(( 1 - ((1) /(1 + (s/maxScale))) ));
+               
+
             }
             else
                 ReturnSonar();

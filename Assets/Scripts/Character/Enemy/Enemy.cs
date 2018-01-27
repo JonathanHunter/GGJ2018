@@ -31,6 +31,12 @@
             }
         }
 
+        private void Shoot()
+        {
+
+
+        }
+
         private void OnCollisionEnter(Collision collision)
         {
             if(collision.gameObject.tag == "PlayerWeapon")
