@@ -1,7 +1,5 @@
 ﻿namespace GGJ2018.Effects
 {
-    using System.Collections;
-    using System.Collections.Generic;
     using UnityEngine;
 
     /// <summary>
@@ -15,6 +13,9 @@
 
         void Update()
         {
+            if (Managers.GameState.Instance.CurrentState != Managers.GameState.State.Playing)
+                return;
+
             /*if (Input.GetKeyDown(KeyCode.Z)){
                 TakeDamage();
             }

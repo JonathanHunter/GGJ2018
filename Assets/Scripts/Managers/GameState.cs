@@ -24,6 +24,7 @@
             }
 
             Instance = this;
+            DontDestroyOnLoad(this);
         }
     }
 }
