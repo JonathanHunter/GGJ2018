@@ -44,7 +44,6 @@
 
         public void ReturnSonar(GameObject sonar)
         {
-            Debug.Log("a");
             IPoolable s = sonar.GetComponent<IPoolable>();
             DeallocateEntity(sonarPrefab, s);
         }
