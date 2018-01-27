@@ -16,7 +16,7 @@ public class EnemyRandom : Enemy
     private float fov = 90f;
     private NavMeshAgent agent;
 
-    bool agro = false;
+ 
 
     void GotoNextPoint()
     {
@@ -43,26 +43,29 @@ public class EnemyRandom : Enemy
         return finalPosition;
     }
 
-      void attack()
+    void attack()
+    {
+        Vector3 dist= playerManager.player.position - agent.transform.position;
+        if (dist.magnitude > 3f)
         {
-            if (agent.remainingDistance > 2f)
-            {
-                agent.speed = 2.0f;
-                print("Chase");
-                agent.destination = playerManager.player.position;
-            }
-            else
-            {
-                print("Fixed Fire");
-                agent.destination = agent.destination;
-            }
+            agent.speed = 1.0f; // increase speed to chase 
+            print("Chase");
+            agent.destination = playerManager.player.position;
         }
+        else if (dist.magnitude <= 3f)
+        {
+            print("Fixed Fire");
+            agent.destination = agent.transform.position;
+        }
+        this.Shoot();
+
+    }
 
     void TargetPlayer()
     {
         Vector3 direction = playerManager.player.position - this.transform.position;
         float angle = Vector3.Angle(direction, transform.forward);//Draw the angle in front of the AI
-        this.transform.Rotate(direction, angle);
+        this.transform.Rotate(direction, angle/2);
     }
     protected override void LocalInit()
     {
@@ -74,7 +77,7 @@ public class EnemyRandom : Enemy
         // between points (ie, the agent doesn't slow down as it
         // approaches a destination point).
         agent.autoBraking = false;
-        agent.speed = 1.0f;
+        agent.speed = 0.5f;
         GotoNextPoint();
 
     }
@@ -84,11 +87,16 @@ public class EnemyRandom : Enemy
 
         // Choose the next destination point when the agent gets
         // close to the current one.
-        if (!agent.pathPending && agent.remainingDistance < 0.5f && !agro)
+        if (this.agro)
         {
-            GotoNextPoint();
+            attack();
         }
-      
+
+        if (!agent.pathPending && agent.remainingDistance < 0.5f && !this.agro)
+        {
+            GotoNextPoint(); // search for player
+        }
+       
     }
 
     protected override void TookDamage()
@@ -97,19 +105,15 @@ public class EnemyRandom : Enemy
         //Health = this.Health - 20;
         float rate = this.Health / maxHealth  ;
         agent.speed = agent.speed - rate;
-
+   
     }
 
     
     protected override void InAgroRange()
-    {
-          
-            print("agro");
-            TargetPlayer();
-            attack();
-            this.Shoot();
-           
-       
+    {  
+        print("agro");
+        LocalUpdate();
+        TargetPlayer();      
     }
 }
 
