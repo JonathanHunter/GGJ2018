@@ -1,16 +1,18 @@
 fileFormatVersion: 2
-guid: 48d82cd31d7b54f12bd63c746dffd248
-timeCreated: 1517024015
+guid: f4de02d5784254d409b0f2c62ce520b9
+timeCreated: 1517034980
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
-    100000: //RootNode
-    400000: //RootNode
-    2100000: No Name
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: Room
+    100000: default
+    100002: //RootNode
+    400000: default
+    400002: //RootNode
+    2100000: defaultMat
+    2300000: default
+    3300000: default
+    4300000: default
   externalObjects: {}
   materials:
     importMaterials: 1
