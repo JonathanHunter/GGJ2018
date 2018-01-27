@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 3ad8aef4f3166b0428bafc9823c016fe
-timeCreated: 1517070044
+guid: bfb4cdd731e394a45aeddeaf73984283
+timeCreated: 1517070886
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -208,7 +208,7 @@ ModelImporter:
     4300008: Pants
     4300010: Cylinder.001
     4300012: Plane
-    7400000: Battec_GunFire
+    7400000: Battec_StickWait
     9500000: //RootNode
     13700000: Cylinder
     13700002: Cylinder.001
@@ -245,10 +245,10 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Battec_GunFire
+      name: Battec_StickWait
       takeName: Take 001
       firstFrame: 1
-      lastFrame: 17
+      lastFrame: 30
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
