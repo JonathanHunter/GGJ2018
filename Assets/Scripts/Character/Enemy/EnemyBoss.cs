@@ -6,7 +6,7 @@ using GGJ2018.Character.Enemy;
 using GGJ2018.Character.Player;
 using GGJ2018.Managers;
 
-public class EnemyRBoss : Enemy
+public class EnemyBoss : Enemy
 {
     public PlayerManager playerManager;
     public Transform[] points; // locations to patrol
@@ -16,41 +16,68 @@ public class EnemyRBoss : Enemy
     private float fov = 90f;
     private NavMeshAgent agent;
 
-    bool agro = false;
+
 
     void GotoNextPoint()
     {
         // Set the agent to go to the currently selected destination
-        Vector3 position = new Vector3(Random.Range(-2.0f, 2.0f), 0, Random.Range(-2.0f, 2.0f));
-        agent.destination = position;
- 
+
+        // Vector3 position = new Vector3(Random.Range(-3.0f,3.0f), 0, Random.Range(-3.0f, 3.0f)) + this.transform.position  ;
+
+
+        agent.destination = RandomNavmeshLocation(Random.Range(-10.0f, 10.0f));
+        //agent.destination = playerManager.player.position;
+        print("next location");
+    }
+
+    public Vector3 RandomNavmeshLocation(float radius)
+    {
+        Vector3 randomDirection = Random.insideUnitSphere * radius;
+        randomDirection += agent.transform.position;
+        NavMeshHit hit;
+        Vector3 finalPosition = Vector3.zero;
+        if (NavMesh.SamplePosition(randomDirection, out hit, radius, 1))
+        {
+            finalPosition = hit.position;
+        }
+        return finalPosition;
     }
 
     void attack()
     {
-        if (!agent.pathPending && agent.remainingDistance < 0.5f)
+        Vector3 dist = playerManager.player.position - agent.transform.position;
+        if (dist.magnitude > 3f)
         {
-            GotoNextPoint();
+            agent.speed = 1.0f; // increase speed to chase 
+            print("Chase");
+            agent.destination = playerManager.player.position;
         }
+        else if (dist.magnitude <= 3f)
+        {
+            print("Fixed Fire");
+            agent.destination = agent.transform.position;
+        }
+        this.Shoot();
+
     }
 
     void TargetPlayer()
     {
         Vector3 direction = playerManager.player.position - this.transform.position;
         float angle = Vector3.Angle(direction, transform.forward);//Draw the angle in front of the AI
-        this.transform.Rotate(direction, angle);
+        this.transform.Rotate(direction, angle / 2);
     }
     protected override void LocalInit()
     {
-        
-       
+        maxHealth = 100;
+
         agent = GetComponent<NavMeshAgent>();
         // points[0].position = agent.transform.position;
         // Disabling auto-braking allows for continuous movement
         // between points (ie, the agent doesn't slow down as it
         // approaches a destination point).
         agent.autoBraking = false;
-
+        agent.speed = 0.5f;
         GotoNextPoint();
 
     }
@@ -60,35 +87,32 @@ public class EnemyRBoss : Enemy
 
         // Choose the next destination point when the agent gets
         // close to the current one.
-        if (!agent.pathPending && agent.remainingDistance < 0.5f)
+        if (this.agro)
         {
-            GotoNextPoint();
+            attack();
         }
-      
+
+        if (!agent.pathPending && agent.remainingDistance < 0.5f && !this.agro)
+        {
+            GotoNextPoint(); // search for player
+        }
+
     }
 
     protected override void TookDamage()
     {
         sfx.PlayEnemyGetHitSFX();
         //Health = this.Health - 20;
-        float rate = this.Health / maxHealth  ;
-        agent.speed = 1.5f - rate;
+        float rate = this.Health / maxHealth;
+        agent.speed = agent.speed - rate;
 
     }
 
+
     protected override void InAgroRange()
     {
-        if (agent.remainingDistance > 1f)
-        {
-            GotoNextPoint();
-           agent.destination = playerManager.player.transform.position;
-        }
-        else
-        {
-            agent.isStopped = true; 
-        }
-        attack();
-       
+        print("agro");
+        TargetPlayer();
     }
 }
 

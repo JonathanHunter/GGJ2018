@@ -9,8 +9,8 @@ using GGJ2018.Managers;
 public class EnemyFixed : Enemy
 {
     public PlayerManager playerManager;
-    public Transform startPos;
     public Transform[] points; // locations to patrol
+    public Transform startPos;
     private int destPoint = 0;
     private float agroRange = 15f;
     private float minAttackRange = 3f;
@@ -47,13 +47,18 @@ public class EnemyFixed : Enemy
     void attack()
     {
         Vector3 dist = playerManager.player.position - agent.transform.position;
-       if (dist.magnitude <= 3f)
+        if (dist.magnitude > 3f)
+        {
+            agent.speed = 1.0f; // increase speed to chase 
+            print("Chase");
+            agent.destination = playerManager.player.position;
+        }
+        else if (dist.magnitude <= 3f)
         {
             print("Fixed Fire");
-            this.Shoot();
-           
+            agent.destination = agent.transform.position;
         }
-        
+        this.Shoot();
 
     }
 
@@ -74,7 +79,6 @@ public class EnemyFixed : Enemy
         // approaches a destination point).
         agent.autoBraking = false;
         agent.speed = 0.5f;
-        agent.isStopped = true;
         GotoNextPoint();
 
     }
@@ -88,12 +92,12 @@ public class EnemyFixed : Enemy
         {
             attack();
         }
-
+        /*
         if (!agent.pathPending && agent.remainingDistance < 0.5f && !this.agro)
         {
-           // GotoNextPoint(); // search for player
+            GotoNextPoint(); // search for player
         }
-
+        */
     }
 
     protected override void TookDamage()
@@ -109,7 +113,6 @@ public class EnemyFixed : Enemy
     protected override void InAgroRange()
     {
         print("agro");
-        LocalUpdate();
         TargetPlayer();
     }
 }
