@@ -5,8 +5,6 @@
     public class CameraControl : MonoBehaviour
     {
         public bool ForceCursorUnLock;
-        public bool inverted;
-        public float sensitivity;
 
         private bool shouldLockCursor;
 
@@ -61,12 +59,12 @@
         /// <returns> The offset vector. </returns>
         private Vector2 GetOffset()
         {
-            Vector2 mouse = new Vector2((this.inverted ? 1 : -1) * CustomInput.MouseYRaw, CustomInput.MouseXRaw);
+            Vector2 mouse = new Vector2((Managers.GameState.Instance.Inverted ? 1 : -1) * CustomInput.MouseYRaw, CustomInput.MouseXRaw);
             Vector2 controller = new Vector2(
-                (this.inverted ? 1 : -1) * (CustomInput.Bool(CustomInput.UserInput.LookUp) ? CustomInput.Raw(CustomInput.UserInput.LookUp) : CustomInput.Raw(CustomInput.UserInput.LookDown)),
+                (Managers.GameState.Instance.Inverted ? 1 : -1) * (CustomInput.Bool(CustomInput.UserInput.LookUp) ? CustomInput.Raw(CustomInput.UserInput.LookUp) : CustomInput.Raw(CustomInput.UserInput.LookDown)),
                 CustomInput.Bool(CustomInput.UserInput.LookRight) ? CustomInput.Raw(CustomInput.UserInput.LookRight) : CustomInput.Raw(CustomInput.UserInput.LookLeft));
 
-            return (mouse + controller) * this.sensitivity;
+            return (mouse + controller) * Managers.GameState.Instance.Sensitivity;
         }
     }
 }
