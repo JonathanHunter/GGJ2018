@@ -14,6 +14,8 @@ public class GunUI : MonoBehaviour {
     Vector3 initScaleBullet, initScale;
     float initPosYBullet;
 
+    private AudioSource sfx;
+
     /// <summary>
     /// Whether or not the Reload is recharging
     /// </summary>
@@ -21,6 +23,7 @@ public class GunUI : MonoBehaviour {
 
     void Start()
     {
+        sfx = GetComponent<AudioSource>();
         initScale = transform.localScale;
         initScaleBullet = emptyBullets[0].transform.localScale;
         initPosYBullet = emptyBullets[0].transform.localPosition.y;
@@ -124,6 +127,7 @@ public class GunUI : MonoBehaviour {
             flashBullets[i].enabled = false;
             emptyBullets[i].enabled = false;
         }
+        sfx.Play();
         StartCoroutine(ScaleEverything(0.25f));
     }
 
