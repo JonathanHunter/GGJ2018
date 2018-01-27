@@ -43,13 +43,20 @@ public class EnemyRandom : Enemy
         return finalPosition;
     }
 
-    void attack()
-    {
-
-
-    
-      
-    }
+      void attack()
+        {
+            if (agent.remainingDistance > 2f)
+            {
+                agent.speed = 2.0f;
+                print("Chase");
+                agent.destination = playerManager.player.position;
+            }
+            else
+            {
+                print("Fixed Fire");
+                agent.destination = agent.destination;
+            }
+        }
 
     void TargetPlayer()
     {
@@ -59,7 +66,7 @@ public class EnemyRandom : Enemy
     }
     protected override void LocalInit()
     {
-        Health = 100;
+        maxHealth = 100;
        
         agent = GetComponent<NavMeshAgent>();
         // points[0].position = agent.transform.position;
@@ -67,7 +74,7 @@ public class EnemyRandom : Enemy
         // between points (ie, the agent doesn't slow down as it
         // approaches a destination point).
         agent.autoBraking = false;
-
+        agent.speed = 1.0f;
         GotoNextPoint();
 
     }
@@ -77,7 +84,7 @@ public class EnemyRandom : Enemy
 
         // Choose the next destination point when the agent gets
         // close to the current one.
-        if (!agent.pathPending && agent.remainingDistance < 0.5f)
+        if (!agent.pathPending && agent.remainingDistance < 0.5f && !agro)
         {
             GotoNextPoint();
         }
@@ -89,25 +96,19 @@ public class EnemyRandom : Enemy
         sfx.PlayEnemyGetHitSFX();
         //Health = this.Health - 20;
         float rate = this.Health / maxHealth  ;
-        agent.speed = 1.1f - rate;
+        agent.speed = agent.speed - rate;
 
     }
 
+    
     protected override void InAgroRange()
     {
-        agro = true;
-        print("agro");
-        if (agent.remainingDistance > 2f )
-        {
-            print("Chase");
-            agent.destination = playerManager.player.transform.position;
-        }
-        else
-        {
-            print("Fixed Fire");
-            agent.isStopped = true;
-        }
-        attack();
+          
+            print("agro");
+            TargetPlayer();
+            attack();
+            this.Shoot();
+           
        
     }
 }
