@@ -20,6 +20,9 @@
 
         private void Update()
         {
+            if (Managers.GameState.Instance.CurrentState != Managers.GameState.State.Playing)
+                return;
+
             LocalUpdate();
             if(this.Health <= 0)
             {

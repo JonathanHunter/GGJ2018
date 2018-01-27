@@ -34,6 +34,9 @@
 
         private void Update()
         {
+            if (Managers.GameState.Instance.CurrentState != Managers.GameState.State.Playing)
+                return;
+
             float yRot = cameraControl.UpdateCamera();
             if (yRot != 0)
             {

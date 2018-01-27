@@ -16,6 +16,9 @@
 
         private void Update()
         {
+            if (Managers.GameState.Instance.CurrentState != Managers.GameState.State.Playing)
+                return;
+
             float s = this.transform.localScale.x;
             if (s < maxScale)
             {
