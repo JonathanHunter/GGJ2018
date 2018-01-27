@@ -21,17 +21,34 @@ public class EnemyRandom : Enemy
     void GotoNextPoint()
     {
         // Set the agent to go to the currently selected destination
-        Vector3 position = new Vector3(Random.Range(-2.0f, 2.0f), 0, Random.Range(-2.0f, 2.0f));
-        agent.destination = position;
- 
+
+        // Vector3 position = new Vector3(Random.Range(-3.0f,3.0f), 0, Random.Range(-3.0f, 3.0f)) + this.transform.position  ;
+
+
+       agent.destination = RandomNavmeshLocation(Random.Range(-10.0f, 10.0f));
+        //agent.destination = playerManager.player.position;
+        print("next location");
+    }
+
+    public Vector3 RandomNavmeshLocation(float radius)
+    {
+        Vector3 randomDirection = Random.insideUnitSphere * radius;
+        randomDirection += agent.transform.position;
+        NavMeshHit hit;
+        Vector3 finalPosition = Vector3.zero;
+        if (NavMesh.SamplePosition(randomDirection, out hit, radius, 1))
+        {
+            finalPosition = hit.position;
+        }
+        return finalPosition;
     }
 
     void attack()
     {
-        if (!agent.pathPending && agent.remainingDistance < 0.5f)
-        {
-            GotoNextPoint();
-        }
+
+
+    
+      
     }
 
     void TargetPlayer()
@@ -78,14 +95,17 @@ public class EnemyRandom : Enemy
 
     protected override void InAgroRange()
     {
-        if (agent.remainingDistance > 1f)
+        agro = true;
+        print("agro");
+        if (agent.remainingDistance > 2f )
         {
-            GotoNextPoint();
-           agent.destination = playerManager.player.transform.position;
+            print("Chase");
+            agent.destination = playerManager.player.transform.position;
         }
         else
         {
-            agent.isStopped = true; 
+            print("Fixed Fire");
+            agent.isStopped = true;
         }
         attack();
        
