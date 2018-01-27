@@ -6784,7 +6784,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 002efe359a634d84ca425cba561e62a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  whiteOut: {fileID: 0}
+  whiteOut: {fileID: 114540251359205774}
 --- !u!114 &114493128545965472
 MonoBehaviour:
   m_ObjectHideFlags: 1
