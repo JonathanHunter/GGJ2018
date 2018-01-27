@@ -16,14 +16,22 @@
             CursorLock();
         }
 
-        private void Update()
+        public float UpdateCamera()
         {
             if (CursorLock())
             {
                 Vector2 offset = GetOffset();
-                this.transform.rotation = this.transform.rotation * Quaternion.Euler(offset.x, offset.y, 0f);
-                this.transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0);
+                if (offset.x != 0)
+                {
+                    float z = this.transform.rotation.eulerAngles.z;
+                    this.transform.Rotate(new Vector3(offset.x, 0f, 0f));
+                    this.transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, z);
+                }
+
+                return offset.y;
             }
+
+            return 0;
         }
 
         /// <summary> Locks or unlocks the cursor from the screen. </summary>
