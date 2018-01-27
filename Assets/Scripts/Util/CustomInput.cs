@@ -14,7 +14,7 @@
         /// <summary> This is used to define user inputs, changed to add or remove buttons. </summary>
         public enum UserInput
         {
-            Up, Down, Left, Right, Attack, NextWeapon, PrevWeapon, Pause, Accept, Cancel, Target
+            Up, Down, Left, Right, LookUp, LookDown, LookLeft, LookRight, Attack, NextWeapon, PrevWeapon, Pause, Accept, Cancel, Target
         }
 
         /// <summary> The file to save the bindings to. </summary>
@@ -37,6 +37,10 @@
             rawSign[(int)UserInput.Accept] = 1;
             rawSign[(int)UserInput.Cancel] = 1;
             rawSign[(int)UserInput.Target] = 1;
+            rawSign[(int)UserInput.LookUp] = 1;
+            rawSign[(int)UserInput.LookDown] = -1;
+            rawSign[(int)UserInput.LookLeft] = -1;
+            rawSign[(int)UserInput.LookRight] = 1;
         }
 
         /// <summary> 
@@ -72,10 +76,14 @@
             if (gamepad == null)
                 throw new System.AccessViolationException(UnitializedMessage);
 
-            gamepad[(int)UserInput.Up, 0] = DPAD_UP;
-            gamepad[(int)UserInput.Down, 0] = DPAD_DOWN;
-            gamepad[(int)UserInput.Left, 0] = DPAD_LEFT;
-            gamepad[(int)UserInput.Right, 0] = DPAD_RIGHT;
+            gamepad[(int)UserInput.Up, 0] = LEFT_STICK_UP;
+            gamepad[(int)UserInput.Down, 0] = LEFT_STICK_DOWN;
+            gamepad[(int)UserInput.Left, 0] = LEFT_STICK_LEFT;
+            gamepad[(int)UserInput.Right, 0] = LEFT_STICK_RIGHT;
+            gamepad[(int)UserInput.LookUp, 0] = RIGHT_STICK_UP;
+            gamepad[(int)UserInput.LookDown, 0] = RIGHT_STICK_DOWN;
+            gamepad[(int)UserInput.LookLeft, 0] = RIGHT_STICK_LEFT;
+            gamepad[(int)UserInput.LookRight, 0] = RIGHT_STICK_RIGHT;
             gamepad[(int)UserInput.Attack, 0] = A;
             gamepad[(int)UserInput.NextWeapon, 0] = RB;
             gamepad[(int)UserInput.PrevWeapon, 0] = LB;
@@ -93,6 +101,16 @@
         public static float MouseY
         {
             get { return Input.mousePosition.y; }
+        }
+
+        public static float MouseXRaw
+        {
+            get { return Input.GetAxisRaw("Mouse X"); }
+        }
+
+        public static float MouseYRaw
+        {
+            get { return Input.GetAxisRaw("Mouse Y"); }
         }
 
         // NOTE: Modification of the code below this should be unecessary.
