@@ -4,10 +4,11 @@ using UnityEngine.AI;
 using System.Collections;
 using GGJ2018.Character.Enemy;
 using GGJ2018.Character.Player;
+using GGJ2018.Managers;
 
-public class EnemyAi : Enemy
+public class EnemyRandom : Enemy
 {
-    public Player player;
+    public PlayerManager playerManager;
     public Transform[] points; // locations to patrol
     private int destPoint = 0;
     private float agroRange = 15f;
@@ -33,6 +34,12 @@ public class EnemyAi : Enemy
         }
     }
 
+    void TargetPlayer()
+    {
+        Vector3 direction = playerManager.player.position - this.transform.position;
+        float angle = Vector3.Angle(direction, transform.forward);//Draw the angle in front of the AI
+        this.transform.Rotate(direction, angle);
+    }
     protected override void LocalInit()
     {
         Health = 100;
@@ -74,7 +81,7 @@ public class EnemyAi : Enemy
         if (agent.remainingDistance > 1f)
         {
             GotoNextPoint();
-           agent.destination = player.transform.position;
+           agent.destination = playerManager.player.transform.position;
         }
         else
         {
