@@ -4,13 +4,13 @@
     using Audio;
     using ObjectPooling;
 
-    public abstract class Enemy : MonoBehaviour
+    public abstract class Enemy : MonoBehaviour 
     {
-        public int maxHealth;
+        public int maxHealth = 100;
         public Transform foot;
         public EnemySFXManager sfx;
-
-        public int Health { get; private set; }
+        public int Health;
+      //  public int Health { get; private set; }
 
         private void Start()
         {
