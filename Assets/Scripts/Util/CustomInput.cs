@@ -14,7 +14,7 @@
         /// <summary> This is used to define user inputs, changed to add or remove buttons. </summary>
         public enum UserInput
         {
-            Up, Down, Left, Right, LookUp, LookDown, LookLeft, LookRight, Attack, NextWeapon, PrevWeapon, Pause, Accept, Cancel, Target
+            Up, Down, Left, Right, LookUp, LookDown, LookLeft, LookRight, Melee, Shoot, Reload, Screech, Pause, Accept, Cancel
         }
 
         /// <summary> The file to save the bindings to. </summary>
@@ -30,13 +30,13 @@
             rawSign[(int)UserInput.Down] = -1;
             rawSign[(int)UserInput.Left] = -1;
             rawSign[(int)UserInput.Right] = 1;
-            rawSign[(int)UserInput.Attack] = 1;
-            rawSign[(int)UserInput.NextWeapon] = 1;
-            rawSign[(int)UserInput.PrevWeapon] = 1;
+            rawSign[(int)UserInput.Melee] = 1;
+            rawSign[(int)UserInput.Shoot] = 1;
+            rawSign[(int)UserInput.Reload] = 1;
+            rawSign[(int)UserInput.Screech] = 1;
             rawSign[(int)UserInput.Pause] = 1;
             rawSign[(int)UserInput.Accept] = 1;
             rawSign[(int)UserInput.Cancel] = 1;
-            rawSign[(int)UserInput.Target] = 1;
             rawSign[(int)UserInput.LookUp] = 1;
             rawSign[(int)UserInput.LookDown] = -1;
             rawSign[(int)UserInput.LookLeft] = -1;
@@ -57,13 +57,13 @@
             keyboard[(int)UserInput.Down, 0] = KeyCode.S;
             keyboard[(int)UserInput.Left, 0] = KeyCode.A;
             keyboard[(int)UserInput.Right, 0] = KeyCode.D;
-            keyboard[(int)UserInput.Attack, 0] = KeyCode.J;
-            keyboard[(int)UserInput.NextWeapon, 0] = KeyCode.E;
-            keyboard[(int)UserInput.PrevWeapon, 0] = KeyCode.Q;
-            keyboard[(int)UserInput.Pause, 0] = KeyCode.Space;
+            keyboard[(int)UserInput.Melee, 0] = KeyCode.Mouse0;
+            keyboard[(int)UserInput.Shoot, 0] = KeyCode.Mouse1;
+            keyboard[(int)UserInput.Reload, 0] = KeyCode.R;
+            keyboard[(int)UserInput.Screech, 0] = KeyCode.Space;
+            keyboard[(int)UserInput.Pause, 0] = KeyCode.Escape;
             keyboard[(int)UserInput.Accept, 0] = KeyCode.Return;
-            keyboard[(int)UserInput.Cancel, 0] = KeyCode.Escape;
-            keyboard[(int)UserInput.Target, 0] = KeyCode.K;
+            keyboard[(int)UserInput.Cancel, 0] = KeyCode.Backspace;
         }
 
         /// <summary> 
@@ -84,13 +84,13 @@
             gamepad[(int)UserInput.LookDown, 0] = RIGHT_STICK_DOWN;
             gamepad[(int)UserInput.LookLeft, 0] = RIGHT_STICK_LEFT;
             gamepad[(int)UserInput.LookRight, 0] = RIGHT_STICK_RIGHT;
-            gamepad[(int)UserInput.Attack, 0] = A;
-            gamepad[(int)UserInput.NextWeapon, 0] = RB;
-            gamepad[(int)UserInput.PrevWeapon, 0] = LB;
+            gamepad[(int)UserInput.Melee, 0] = LEFT_TRIGGER;
+            gamepad[(int)UserInput.Shoot, 0] = RIGHT_TRIGGER;
+            gamepad[(int)UserInput.Reload, 0] = X;
+            gamepad[(int)UserInput.Screech, 0] = A;
             gamepad[(int)UserInput.Pause, 0] = START;
             gamepad[(int)UserInput.Accept, 0] = A;
             gamepad[(int)UserInput.Cancel, 0] = B;
-            gamepad[(int)UserInput.Target, 0] = RIGHT_TRIGGER;
         }
 
         public static float MouseX

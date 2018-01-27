@@ -25,6 +25,8 @@
 
             Instance = this;
             DontDestroyOnLoad(this);
+
+            Sensitivity = 1f;
         }
     }
 }
