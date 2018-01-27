@@ -56,14 +56,14 @@ public class GunUI : MonoBehaviour {
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        /*if (Input.GetKeyDown(KeyCode.Q))
         {
             Fire(bulletsInClip - 1);
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
             StartReload();
-        }
+        }*/
 
         if (reloadCounter > 0)
         {
