@@ -10,12 +10,14 @@
         public Transform foot;
         public EnemySFXManager sfx;
         public int damage;
+        public bool agro;
 
         public int Health { get; private set; }
 
         private void Start()
         {
             this.Health = maxHealth;
+            this.agro = false;
             LocalInit();
         }
 
@@ -58,6 +60,7 @@
             if (other.gameObject.tag == "Player")
             {
                 InAgroRange();
+                this.agro = true;
             }
 
             if (other.gameObject.tag == "PlayerWeapon")
