@@ -88,7 +88,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1190283310027540}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.9031286, y: 10.946758, z: -14.954586}
+  m_LocalPosition: {x: 3.3121397, y: 0.25, z: -7.0511794}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4872808333930052}
@@ -270,11 +270,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e5e9dfc575e81243a2135a63f25b854, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sonarRings:
-  - {fileID: 1713013055251120}
-  - {fileID: 1266704782970154}
-  - {fileID: 1262784209741146}
+  maxScale: 1
   referenceIndex: 0
+  sonarColor: {r: 1, g: 1, b: 1, a: 1}
+  sonarMaterials:
+  - {fileID: 23027053259300500}
+  - {fileID: 23258872626231966}
+  - {fileID: 23247996080453674}
 --- !u!135 &135637560006192108
 SphereCollider:
   m_ObjectHideFlags: 1

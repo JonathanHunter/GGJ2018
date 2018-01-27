@@ -7,9 +7,12 @@
         //[SerializeField]
         //private Material[] sonarRings;
 
-        private float maxScale;
+        public float maxScale;
         private float speed;
         public int referenceIndex;
+        public Color sonarColor = Color.white;
+
+        public Renderer[] sonarMaterials;
 
         private void Update()
         {
@@ -18,7 +21,8 @@
             {
                 s += Time.deltaTime * this.speed;
                 this.transform.localScale = Vector3.one * s;
-                SetAlpha(1f - (s / maxScale));
+                SetAlpha((s / maxScale));
+                
             }
             else
                 ReturnSonar();
@@ -55,9 +59,10 @@
 
         public void ReInitialize()
         {
-            SetAlpha(1f);
+            //SetAlpha(1f);
             this.transform.localScale = Vector3.zero;
             this.gameObject.SetActive(true);
+            
         }
 
         public void Deallocate()
@@ -77,12 +82,21 @@
 
         private void SetAlpha(float a)
         {
-            //foreach (Renderer r in sonarRings)
-            //{
-            //    Color c = r.;
-            //    c.a = a;
-            //    r.color = c;
-            //}
+            foreach (Renderer r in sonarMaterials)
+            {
+                r.material.SetFloat("_LineHeight", a);
+                //Color c = r.;
+                //c.a = a;
+                //r.color = c;
+            }
+        }
+
+        private void SetColor()
+        {
+            foreach (Renderer r in sonarMaterials)
+            {
+                //r.material.SetColor("_LineColor", sonarColor);//Set Color
+            }
         }
     }
 }

@@ -7,6 +7,8 @@ Shader "Custom/SoundShader"
 	{
 		_MainTex ("Texture", 2D) = "white" {}
 		_Color ("Color", Color) = (0,0,0,0)
+		_LineHeight ("Line Height", Float) = 1
+		_LineColor("Line Color", Color) = (0,0,0,0)
 	}
 
 	SubShader
@@ -50,6 +52,7 @@ Shader "Custom/SoundShader"
 
 			sampler2D _MainTex;
 			float4 _MainTex_ST;
+			float _LineHeight;
 
 			v2f vert (appdata v)
 			{
@@ -70,6 +73,7 @@ Shader "Custom/SoundShader"
 			
 			sampler2D _CameraDepthNormalsTexture;
 			fixed4 _Color;
+			fixed4 _LineColor;
 
 			float triWave(float t, float offset, float yOffset)
 			{
@@ -81,7 +85,7 @@ Shader "Custom/SoundShader"
 				fixed4 mainTex = tex2D(_MainTex, i.uv);
 				mainTex.r *= triWave(_Time.x * 5, abs(i.objectPos.y) * 2, -0.7) * 6;
 				// I ended up saturaing the rim calculation because negative values caused weird artifacts
-				mainTex.g *= saturate(rim) * (sin(_Time.z + mainTex.b * 5) + 1);
+				mainTex.g *= saturate(rim) *(sin(_Time.z + mainTex.b * 5) + 1);
 				return mainTex.r * _Color + mainTex.g * _Color;
 			}
 
@@ -92,13 +96,13 @@ Shader "Custom/SoundShader"
 				float intersect = 0;
 				
 				if (diff > 0)
-					intersect = 1 - smoothstep(0, _ProjectionParams.w, diff);
+					intersect = 1 - smoothstep(0, _ProjectionParams.w, diff) - _LineHeight;
 
 				float rim = 0;// 1 - abs(dot(i.normal, normalize(i.viewDir))) * 2;
 				float northPole = 0;// (i.objectPos.y - 0.45) * 20;
 				float glow = max(max(intersect, rim), northPole);
 
-				fixed4 glowColor = fixed4(lerp(_Color.rgb, fixed3(1, 1, 1), pow(glow, 4)), 1);
+				fixed4 glowColor = fixed4(lerp(_Color.rgb, _LineColor.rgb, pow(glow, 4)), 1);
 				
 				fixed4 hexes = texColor(i, rim);
 
