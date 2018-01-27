@@ -31,7 +31,7 @@
             }
         }
 
-        private void Shoot()
+        public void Shoot()
         {
 
 
