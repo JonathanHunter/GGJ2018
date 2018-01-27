@@ -37,8 +37,7 @@ public class EnemyFixed : Enemy
 
     protected override void LocalInit()
     {
-        Health = 100;
-       
+               
         agent = GetComponent<NavMeshAgent>();
         // points[0].position = agent.transform.position;
         // Disabling auto-braking allows for continuous movement

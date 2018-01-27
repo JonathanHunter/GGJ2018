@@ -42,7 +42,7 @@ public class EnemyRBoss : Enemy
     }
     protected override void LocalInit()
     {
-        Health = 300;
+        
        
         agent = GetComponent<NavMeshAgent>();
         // points[0].position = agent.transform.position;
