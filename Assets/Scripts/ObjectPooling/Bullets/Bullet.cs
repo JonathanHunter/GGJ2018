@@ -32,6 +32,8 @@
         private void OnCollisionEnter(Collision collision)
         {
             this.currentLifeTime = 0;
+            GameObject g = SonarPool.Instance.GetSonar(1f, 1f);
+            g.transform.position = this.transform.position;
         }
 
         public IPoolable SpawnCopy(int referenceIndex)
