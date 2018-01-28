@@ -212,9 +212,9 @@
 
         public void Tap()
         {
-            GameObject s = SonarPool.Instance.GetSonar(1f, 2f);
+            /*GameObject s = SonarPool.Instance.GetSonar(1f, 2f);
             s.transform.position = this.tip.position;
-            this.sfx.PlayPlayerStickTapSFX();
+            this.sfx.PlayPlayerStickTapSFX();*/
         }
     }
 }
