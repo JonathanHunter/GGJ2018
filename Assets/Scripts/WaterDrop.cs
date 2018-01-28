@@ -6,6 +6,7 @@
 	public class WaterDrop : MonoBehaviour {
 
 		public float time = 4f;
+		public  float speed, size;
 		float timer;
 
 		void Start() 
@@ -26,7 +27,7 @@
 
 		void Drop() 
 		{
-			GameObject s = SonarPool.Instance.GetSonar(3f, 1f);
+			GameObject s = SonarPool.Instance.GetSonar(speed, size);
 			s.transform.position = this.transform.position;
 		}
 	}
