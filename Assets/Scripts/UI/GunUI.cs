@@ -6,9 +6,9 @@
 
     public class GunUI : MonoBehaviour
     {
-
+        public AudioSource[] ReloadSounds;
         private int bulletsInClip = 6, maxClipSize = 6;
-        private float reloadCounter = 0, maxReloadCounter = 14, toggleFlashTimer, maxToggleFlashTimer = 0.25f;
+        private float reloadCounter = 0, maxReloadCounter = 14, toggleFlashTimer, maxToggleFlashTimer = 0.15f;
         bool flashToggled = false;
 
         public Image[] bullets, emptyBullets, flashBullets;
@@ -92,6 +92,9 @@
                         if (flashToggled == false)
                         {
                             bulletsInClip++;
+                            if (reloadCounter > 2) {
+                                ReloadSounds[Random.Range(0, ReloadSounds.Length)].Play();
+                            }
                         }
                         toggleFlashTimer = maxToggleFlashTimer;
                         reloadCounter -= 1;
