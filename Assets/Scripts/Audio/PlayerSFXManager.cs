@@ -31,7 +31,7 @@
         /// <summary>
         /// Player gunfire sound
         /// </summary>
-        public AudioSource gunfire;
+        public AudioSource[] gunfire;
 
         /// <summary>
         /// The player's sonar sound
@@ -143,11 +143,20 @@
         }
 
         /// <summary>
-        /// Plays the player gunfire sfx.
+        /// Randomly selects and plays a sound out of the player gunfire sfx array.
         /// </summary>
         public void PlayPlayerGunfireSFX()
         {
-            gunfire.Play();
+            Shuffle(gunfire);
+            foreach (AudioSource fire in gunfire)
+            {
+                if (!fire.isPlaying)
+                {
+                    fire.Play();
+                    return;
+                }
+            }
+            gunfire[Random.Range(0, gunfire.Length)].Play();
         }
 
         /// <summary>
