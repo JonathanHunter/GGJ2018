@@ -1,7 +1,7 @@
 ﻿namespace GGJ2018.ObjectPooling.Bullets
 {
-    using UnityEngine;
     using ObjectPooling;
+    using UnityEngine;
 
     public abstract class Bullet : MonoBehaviour, IPoolable
     {
@@ -22,7 +22,12 @@
         private void Update()
         {
             if (Managers.GameState.Instance.CurrentState != Managers.GameState.State.Playing)
+            {
+                Rigidbody r = this.GetComponent<Rigidbody>();
+                if (r != null)
+                    r.velocity = Vector3.zero;
                 return;
+            }
 
             LocalUpdate();
             if ((this.currentLifeTime -= Time.deltaTime) <= 0)
