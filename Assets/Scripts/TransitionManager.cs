@@ -13,6 +13,7 @@
         
         [SerializeField]
         private AudioMixer mixer;
+        float maxVolume = 0.0f, minVolume = -80.0f, volumeChangeSpeed = 50.0f;
         
         [SerializeField]
         private float speed = 2;
@@ -56,6 +57,9 @@
                 if (this.alpha < 1 && !this.decreasing)
                 {
                     this.alpha += Time.deltaTime * this.speed;
+                    float value;
+                    mixer.GetFloat("MasterVolume", out value);
+                    mixer.SetFloat("MasterVolume", Mathf.Clamp(value -= Time.deltaTime * volumeChangeSpeed, minVolume, maxVolume));
                     if (this.alpha < 0)
                         this.alpha = 0;
 
@@ -71,7 +75,7 @@
 
 		public void LoadScene(string scene) {
             FadeIn();
-			loading = SceneManager.LoadSceneAsync(scene);
+            loading = SceneManager.LoadSceneAsync(scene);
 		}
         public void FadeIn()
         {
@@ -89,6 +93,7 @@
 
         public void FadeOut()
         {
+            mixer.SetFloat("MasterVolume", 0.0f);
             this.overlay.alpha = 1f;
             this.alpha = 1f;
             this.decreasing = true;
