@@ -49,6 +49,7 @@
             else if (dist.magnitude <= agroRange)
             {
                 enemyAnimator.SetBool("isMoving", false);
+                agent.transform.LookAt(PlayerManager.Instance.player);
                 agent.destination = agent.transform.position;
             }
 
@@ -64,9 +65,7 @@
 
         void TargetPlayer()
         {
-            Vector3 direction = PlayerManager.Instance.player.position - this.transform.position;
-            float angle = Vector3.Angle(direction, transform.forward);//Draw the angle in front of the AI
-            this.transform.Rotate(direction, angle / 2);
+            agent.transform.LookAt(PlayerManager.Instance.player);
         }
 
         protected override void LocalInit()
@@ -109,7 +108,7 @@
 
         protected override void InAgroRange()
         {
-            // TargetPlayer();
+             TargetPlayer();
         }
     }
 }
