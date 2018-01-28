@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: de6f803e3d80129409d7113d84f17c45
-timeCreated: 1517157790
+guid: d4cc1278aa0398249a889b68b97ea067
+timeCreated: 1517158813
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -191,7 +191,7 @@ ModelImporter:
     2100002: RacMacho_Material__80
     2100004: RacMacho_default2
     4300000: RacMacho:Mesh
-    7400000: DonGuanWalk
+    7400000: DonGuanoHurt
     9500000: //RootNode
     13700000: RacMacho:Mesh
   externalObjects: {}
@@ -222,10 +222,10 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: DonGuanWalk
+      name: DonGuanoHurt
       takeName: Take 001
       firstFrame: 1
-      lastFrame: 27
+      lastFrame: 16
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
