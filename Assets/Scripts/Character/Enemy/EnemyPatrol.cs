@@ -16,9 +16,7 @@ public class EnemyPatrol : Enemy
     private float agroRange = 15f;
     private float minAttackRange = 3f;
     private float fov = 90f;
-    private NavMeshAgent agent;
-
- 
+  
 
     void GotoNextPoint()
     {
