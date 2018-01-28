@@ -112,11 +112,12 @@
                 this.agro.radius += 1f;
                 this.sfx.PlayPlayerGunfireSFX();
                 this.reloadUI.Fire(this.bullets);
+                this.bullets--;
             }
             else if (this.shooting)
                 this.rgdb.velocity *= .75f;
 
-            if(!reloading && (bullets <= 0 || CustomInput.BoolFreshPress(CustomInput.UserInput.Reload)))
+            if(!reloading && (bullets < 0 || CustomInput.BoolFreshPress(CustomInput.UserInput.Reload)))
             {
                 this.reloading = true;
                 this.reloadUI.StartReload();
@@ -207,7 +208,6 @@
         {
             this.shooting = false;
             this.anim.SetBool(this.shootHash, false);
-            this.bullets--;
         }
 
         public void Tap()
