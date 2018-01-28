@@ -70,6 +70,8 @@
                 this.Health -= collision.gameObject.GetComponent<ObjectPooling.Bullets.Bullet>().GetDamage();
                 sfx.PlayEnemyGetHitSFX();
                 TookDamage();
+                this.agro = true;
+                this.InAgroRange();
             }
         }
 
@@ -79,6 +81,7 @@
             {
                 InAgroRange();
                 this.agro = true;
+                this.InAgroRange();
             }
 
             if (other.gameObject.tag == "PlayerWeapon")
