@@ -10,7 +10,7 @@
         public Transform endPos;
         public Transform[] points; // locations to patrol
         private int destPoint = 0;
-        private float agroRange = 15f;
+        private float agroRange = 5f;
         private float minAttackRange = 3f;
         private float fov = 90f;
         public float cooldown = 5f;
@@ -43,7 +43,8 @@
         }
 
         void attack()
-        { enemyAnimator.SetBool("isMoving", true);
+        {
+            enemyAnimator.SetBool("isMoving", true);
             Vector3 dist = PlayerManager.Instance.player.position - agent.transform.position;
             if (dist.magnitude > agroRange)
             {
@@ -117,7 +118,7 @@
 
         protected override void InAgroRange()
         {
-            TargetPlayer();
+          //  TargetPlayer();
         }
     }
 }
