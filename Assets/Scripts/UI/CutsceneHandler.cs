@@ -6,17 +6,29 @@ using UnityEngine.UI;
 /// <summary>
 /// Script for handling the progression of cutscenes
 /// </summary>
-public class CutsceneHandler : MonoBehaviour {
+public class CutsceneHandler : MonoBehaviour
+{
 
-    //public Image[] images1, images2, images3, images4;
+    public CutsceneObject[] cutsceneObjects;
+    private int index = 0;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    // Update is called once per frame
+    void Update()
+    {
+        if (cutsceneObjects[index].finished)
+        {
+            if (index < cutsceneObjects.Length)
+            {
+                index++;
+            }
+            else
+            {
+                //Go to next scene
+            }
+        }
+        if (!cutsceneObjects[index].active)
+        {
+            cutsceneObjects[index].Activate();
+        }
+    }
 }
