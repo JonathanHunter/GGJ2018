@@ -20,3 +20,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Cutscenes/Chapter1.unity
     guid: 23660c91bf0b7754290d8864c5e3f961
+  - enabled: 1
+    path: Assets/Scenes/Cutscenes/Chapter2.unity
+    guid: 37e25c602f0228941a6ae72bf2aa7c48
+  - enabled: 1
+    path: Assets/Scenes/Cutscenes/Chapter3.unity
+    guid: 6b5dc0bb5f8126344a0fb3e9d3f4b255
+  - enabled: 1
+    path: Assets/Scenes/Cutscenes/Ending.unity
+    guid: 2b434f6f63350ad44adfbaf1350cd949
