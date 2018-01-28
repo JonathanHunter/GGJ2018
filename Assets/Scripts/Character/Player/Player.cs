@@ -35,6 +35,7 @@
         private bool reloading;
         private bool recharging;
         private float originalRadius;
+        private bool dead;
 
         public int Health { get; private set; }
 
@@ -61,12 +62,20 @@
             this.recharging = false;
             this.Health = this.maxHealth;
             this.healthUI.SetMaxHealth(this.maxHealth);
+            this.dead = false;
         }
 
         private void Update()
         {
             if (Managers.GameState.Instance.CurrentState != Managers.GameState.State.Playing)
                 return;
+
+            if(this.Health <= 0 && !this.dead)
+            {
+                GameOver.Instance.Show();
+                this.sfx.PlayPlayerDieSFX();
+                this.dead = true;
+            }
 
             float yRot = cameraControl.UpdateCamera();
             if (yRot != 0)
