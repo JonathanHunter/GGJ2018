@@ -17,6 +17,7 @@
         public bool shooting;
         public NavMeshAgent agent;
         public int Health { get; private set; }
+        public GameObject ragdoll;
       
 
         private void Start()
@@ -37,6 +38,10 @@
             {
                 sfx.PlayEnemyDieSFX();
                 this.gameObject.SetActive(false);
+                if (ragdoll != null)
+                {
+                    GameObject.Instantiate(ragdoll, transform.position, transform.rotation);
+                }
             }
         }
 

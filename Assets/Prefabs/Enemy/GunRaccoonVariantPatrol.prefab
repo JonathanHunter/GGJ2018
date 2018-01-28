@@ -2909,6 +2909,7 @@ MonoBehaviour:
   agro: 0
   shooting: 0
   agent: {fileID: 195861617796780986}
+  ragdoll: {fileID: 1969610122450610, guid: ae5736d18de5e8948b89fb3e164b1c47, type: 2}
   playerManager: {fileID: 0}
   startPos: {fileID: 4620287968162476}
   endPos: {fileID: 4234264337334746}
