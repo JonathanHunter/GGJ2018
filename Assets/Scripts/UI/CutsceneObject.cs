@@ -22,7 +22,7 @@ public class CutsceneObject : MonoBehaviour {
         active = true;
         audioActive = true;
         voiceClip.Play();
-        StartCoroutine(FadeInImage(1.0f));
+        StartCoroutine(FadeInImage(0.75f));
     }
 
     void Update()
@@ -30,7 +30,7 @@ public class CutsceneObject : MonoBehaviour {
         if (audioActive && !voiceClip.isPlaying)
         {
             audioActive = false;
-            StartCoroutine(FadeOutImage(1.0f));
+            StartCoroutine(FadeOutImage(0.75f));
         }
     }
 
@@ -39,8 +39,9 @@ public class CutsceneObject : MonoBehaviour {
         for (float d = duration; d > 0; d -= Time.deltaTime)
         {
             image.color = Color.Lerp(activeCol, inactiveCol, d/duration);
+            yield return new WaitForSeconds(0);
         }
-        yield return new WaitForSeconds(0);
+        image.color = activeCol;
     }
 
     IEnumerator FadeOutImage(float duration)
@@ -48,9 +49,9 @@ public class CutsceneObject : MonoBehaviour {
         for (float d = duration; d > 0; d -= Time.deltaTime)
         {
             image.color = Color.Lerp(inactiveCol, activeCol, d / duration);
+            yield return new WaitForSeconds(0);
         }
         image.color = inactiveCol;
-        yield return new WaitForSeconds(0);
         active = false;
         finished = true;
     }
