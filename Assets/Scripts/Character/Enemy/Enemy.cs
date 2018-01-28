@@ -18,6 +18,7 @@
         public NavMeshAgent agent;
         public int Health { get; private set; }
         public GameObject ragdoll;
+        public bool disableStepSonar = false;
       
 
         private void Start()
@@ -106,9 +107,12 @@
 
         public void StepEvent()
         {
-            sfx.PlayEnemyStepSFX();
-            GameObject g = SonarPool.Instance.GetSonar(2f, 2f);
-            g.transform.position = foot.position;
+            if (!disableStepSonar)
+            {
+                sfx.PlayEnemyStepSFX();
+                GameObject g = SonarPool.Instance.GetSonar(1f, 1f);
+                g.transform.position = foot.position;
+            }
         }
 
         protected abstract void LocalInit();
