@@ -5,81 +5,85 @@ using UnityEngine;
 /// <summary>
 /// Manager that handles playing player sounds if they are available.
 /// </summary>
-public class PlayerSFXManager : MonoBehaviour {
-    
+public class EnemySFXManager : MonoBehaviour {
+
     /// <summary>
-    /// Player step sounds array
+    /// Enemy step sounds array
     /// </summary>
     public AudioSource[] steps;
 
     /// <summary>
-    /// Player melee attack sounds array
+    /// Enemy melee attack sounds array
     /// </summary>
     public AudioSource[] meleeAttacks;
 
     /// <summary>
-    /// Player get hit sounds array
+    /// Enemy get hit sounds array
     /// </summary>
     public AudioSource[] getHit;
 
     /// <summary>
-    /// Player die sounds array
+    /// Enemy die sounds array
     /// </summary>
     public AudioSource[] die;
 
     /// <summary>
-    /// Player gunfire sound
+    /// Enemy gunfire sound
     /// </summary>
     public AudioSource gunfire;
 
     /// <summary>
-    /// The player's sonar sound
+    /// The minimum distance from the enemy in which sounds still play at max volume.
     /// </summary>
-    public AudioSource sonar;
+    public float minDistance;
 
     /// <summary>
-    /// The player's stick tap sound
+    /// The maximum distance from the enemy before the sounds fade completely.
     /// </summary>
-    public AudioSource stickTap;
+    public float maxDistance;
+
+    //Overides the min and max distance of each audiosource attached to this enemy
+    void Start()
+    {
+        foreach (AudioSource audio in GetComponentsInChildren<AudioSource>())
+        {
+            audio.maxDistance = maxDistance;
+            audio.minDistance = minDistance;
+        }
+    }
 
     /*void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A)){
-            PlayPlayerStepSFX();
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            PlayEnemyStepSFX();
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
-            PlayPlayerMeleeSFX();
+            PlayEnemyMeleeSFX();
         }
         if (Input.GetKeyDown(KeyCode.D))
         {
-            PlayPlayerGetHitSFX();
+            PlayEnemyGetHitSFX();
         }
         if (Input.GetKeyDown(KeyCode.F))
         {
-            PlayPlayerDieSFX();
+            PlayEnemyDieSFX();
         }
         if (Input.GetKeyDown(KeyCode.G))
         {
-            PlayPlayerGunfireSFX();
-        }
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            PlayPlayerSonarSFX();
-        }
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            PlayPlayerStickTapSFX();
+            PlayEnemyGunfireSFX();
         }
     }*/
 
     /// <summary>
-    /// Randomly selects and plays a sound out of the player step sfx array.
+    /// Randomly selects and plays a sound out of the enemy step sfx array.
     /// </summary>
-    public void PlayPlayerStepSFX()
+    public void PlayEnemyStepSFX()
     {
         Shuffle(steps);
-        foreach(AudioSource step in steps) {
+        foreach (AudioSource step in steps)
+        {
             if (!step.isPlaying)
             {
                 step.Play();
@@ -90,9 +94,9 @@ public class PlayerSFXManager : MonoBehaviour {
     }
 
     /// <summary>
-    /// Randomly selects and plays a sound out of the player melee sfx array.
+    /// Randomly selects and plays a sound out of the enemy melee sfx array.
     /// </summary>
-    public void PlayPlayerMeleeSFX()
+    public void PlayEnemyMeleeSFX()
     {
         Shuffle(meleeAttacks);
         foreach (AudioSource meleeAttack in meleeAttacks)
@@ -107,9 +111,9 @@ public class PlayerSFXManager : MonoBehaviour {
     }
 
     /// <summary>
-    /// Randomly selects and plays a sound out of the player get hit sfx array.
+    /// Randomly selects and plays a sound out of the enemy get hit sfx array.
     /// </summary>
-    public void PlayPlayerGetHitSFX()
+    public void PlayEnemyGetHitSFX()
     {
         Shuffle(getHit);
         foreach (AudioSource hit in getHit)
@@ -124,9 +128,9 @@ public class PlayerSFXManager : MonoBehaviour {
     }
 
     /// <summary>
-    /// Randomly selects and plays a sound out of the player die sfx array.
+    /// Randomly selects and plays a sound out of the enemy die sfx array.
     /// </summary>
-    public void PlayPlayerDieSFX()
+    public void PlayEnemyDieSFX()
     {
         Shuffle(die);
         foreach (AudioSource death in die)
@@ -141,29 +145,11 @@ public class PlayerSFXManager : MonoBehaviour {
     }
 
     /// <summary>
-    /// Plays the player gunfire sfx.
+    /// Plays the enemy gunfire sfx.
     /// </summary>
-    public void PlayPlayerGunfireSFX()
+    public void PlayEnemyGunfireSFX()
     {
         gunfire.Play();
-    }
-
-    /// <summary>
-    /// Plays the player sonar sfx.
-    /// </summary>
-    public void PlayPlayerSonarSFX()
-    {
-        sonar.Play();
-    }
-
-    /// <summary>
-    /// Plays the player sticktap sfx. Slightly randomizes volume and pitch
-    /// </summary>
-    public void PlayPlayerStickTapSFX()
-    {
-        stickTap.pitch = Random.Range(0.9f, 1.1f);
-        stickTap.volume = Random.Range(0.9f, 1.0f);
-        stickTap.Play();
     }
 
     /// <summary>
