@@ -23,6 +23,7 @@
             Instance = this;
             GameObject player = Instantiate(playerPrefab);
             player.transform.position = this.transform.position;
+            player.transform.rotation = this.transform.rotation;
             this.player = player.transform;
         }
     }

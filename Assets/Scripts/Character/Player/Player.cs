@@ -97,7 +97,6 @@
                 GameObject g = BulletPool.Instance.GetBullet(BulletPool.BulletTypes.Player);
                 g.transform.position = gunPos.position;
                 g.transform.rotation = this.transform.rotation;
-                //UnityEditor.EditorApplication.isPaused = true;
                 this.anim.SetBool(this.shootHash, true);
                 this.agro.radius += 1f;
                 this.sfx.PlayPlayerGunfireSFX();
