@@ -85,7 +85,7 @@
         public void Play()
         { 
             Random.InitState(System.DateTime.Now.Millisecond);
-            SceneManager.LoadScene(this.scene);
+            TransitionManager.Instance.LoadScene(this.scene);
         }
 
         public void GoToCredits()

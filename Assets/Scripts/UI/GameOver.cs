@@ -56,13 +56,13 @@
         public void Retry()
         {
             Managers.GameState.Instance.CurrentState = Managers.GameState.State.Playing;
-            UnityEngine.SceneManagement.SceneManager.LoadScene(scene);
+            TransitionManager.Instance.LoadScene(scene);
         }
 
         public void Quit()
         {
             Managers.GameState.Instance.CurrentState = Managers.GameState.State.Playing;
-            UnityEngine.SceneManagement.SceneManager.LoadScene("Title");
+            TransitionManager.Instance.LoadScene("Title");
         }
 
         public void Show()
