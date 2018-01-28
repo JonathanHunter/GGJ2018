@@ -1,4 +1,4 @@
-﻿namespace GGJ2018.Scripts.Effects.ExplodingDesk
+﻿namespace GGJ2018.Effects.ExplodingDesk
 {
     using System.Collections;
     using System.Collections.Generic;
@@ -35,6 +35,11 @@
             {
                 if (sfPlayed == false)
                 {
+                    GameObject g = ObjectPooling.SonarPool.Instance.GetSonar(3f, 6f);
+                    if (g != null)
+                    {
+                        g.transform.position = this.transform.position;
+                    }
                     Destroy(desk);
                     explodedDesk.SetActive(true);
                     explodedDesk.transform.DetachChildren();
@@ -46,7 +51,7 @@
 
             if (sfPlayed){
                 soundTimer -= Time.deltaTime;
-                if(soundTimer <= 0)
+                if (soundTimer <= 0)
                 {
                     Destroy(gameObject);
                 }

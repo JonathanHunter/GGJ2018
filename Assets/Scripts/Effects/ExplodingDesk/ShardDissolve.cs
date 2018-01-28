@@ -13,7 +13,6 @@ public class ShardDissolve : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        this.GetComponent<Collider>().enabled = false;
         lifeTime -= Time.deltaTime;
 
         if(lifeTime <= 0)
