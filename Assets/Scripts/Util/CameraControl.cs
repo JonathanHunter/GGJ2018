@@ -19,7 +19,8 @@
             if (CursorLock())
             {
                 Vector2 offset = GetOffset();
-                if (offset.x != 0)
+                Quaternion rotation = this.transform.rotation * Quaternion.Euler(offset.x, 0f, 0f);
+                if (offset.x != 0 && ((360 - rotation.eulerAngles.x < 80) || rotation.eulerAngles.x < 80))
                 {
                     float z = this.transform.rotation.eulerAngles.z;
                     this.transform.Rotate(new Vector3(offset.x, 0f, 0f));
