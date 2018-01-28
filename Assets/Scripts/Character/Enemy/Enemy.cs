@@ -83,7 +83,7 @@
         public void StepEvent()
         {
             sfx.PlayEnemyStepSFX();
-            GameObject g = SonarPool.Instance.GetSonar(1f, 1f);
+            GameObject g = SonarPool.Instance.GetSonar(2f, 2f);
             g.transform.position = foot.position;
         }
 
