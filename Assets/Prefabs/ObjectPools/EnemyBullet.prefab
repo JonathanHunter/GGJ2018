@@ -406,5 +406,8 @@ MonoBehaviour:
   damage: 1
   lifeTime: 5
   type: 1
+  trails:
+  - {fileID: 114169361610180292}
+  - {fileID: 114795032775459864}
   speed: 4
   rgbdy: {fileID: 54811066486415864}
