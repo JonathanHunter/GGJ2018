@@ -83,9 +83,21 @@
 
             if (other.gameObject.tag == "PlayerWeapon")
             {
-                this.Health -= other.gameObject.GetComponent<ObjectPooling.Bullets.Bullet>().GetDamage();
+                ObjectPooling.Bullets.Bullet temp = other.gameObject.GetComponent<ObjectPooling.Bullets.Bullet>();
+                if (temp == null)
+                {
+                    this.Health -= 1;
+                }
+                else
+                {
+                    this.Health -= temp.GetDamage();
+                }
                 sfx.PlayEnemyGetHitSFX();
                 TookDamage();
+            }
+            if (other.gameObject.tag == "CaneWeaponHitBox" && other.GetComponent<BoxCollider>() != null)
+            {
+                other.GetComponent<BoxCollider>().enabled = false;
             }
         }
 

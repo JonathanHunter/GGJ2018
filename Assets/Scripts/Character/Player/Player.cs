@@ -25,6 +25,7 @@
         public int maxHealth;
         public HealthUI healthUI;
         public Transform gunPos;
+        public BoxCollider CaneHitbox;
 
         private int moveHash;
         private int meleeHash;
@@ -94,6 +95,7 @@
             {
                 this.meleeCollider.enabled = true;
                 this.meleeing = true;
+                CaneHitbox.enabled = true;
                 this.anim.SetBool(this.meleeHash, true);
                 this.sfx.PlayPlayerMeleeSFX();
             }
@@ -195,6 +197,7 @@
 
         public void MeleeDone()
         {
+            CaneHitbox.enabled = false;
             this.meleeCollider.enabled = true;
             this.meleeing = false;
             this.anim.SetBool(this.meleeHash, false);
