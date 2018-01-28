@@ -112,7 +112,7 @@ public class EnemyRandom : Enemy
     protected override void InAgroRange()
     {  
         print("agro");
-        TargetPlayer();      
+       // TargetPlayer();      
     }
 }
 

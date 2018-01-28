@@ -10,6 +10,7 @@
         public Transform foot;
         public Transform gunPos;
         public EnemySFXManager sfx;
+        public Animator enemyAnimator;
         public int damage;
         public bool agro;
         public bool shooting;
@@ -48,6 +49,7 @@
             g.transform.position = gunPos.position ;
             g.transform.rotation = this.transform.rotation;
             shooting = true;
+            enemyAnimator.SetTrigger("fireGun");
         
         }
 
