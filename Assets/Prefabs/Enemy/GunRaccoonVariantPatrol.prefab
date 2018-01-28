@@ -5635,7 +5635,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e8c38f8da4c6bb48acf7958057a44e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 3
+  maxHealth: 6
   foot: {fileID: 4225438804154586}
   gunPos: {fileID: 4645832757700124}
   sfx: {fileID: 114553428638927230}
@@ -5645,6 +5645,7 @@ MonoBehaviour:
   shooting: 0
   agent: {fileID: 195861617796780986}
   ragdoll: {fileID: 1969610122450610, guid: ae5736d18de5e8948b89fb3e164b1c47, type: 2}
+  disableStepSonar: 0
   startPos: {fileID: 4620287968162476}
   endPos: {fileID: 4234264337334746}
   points:
