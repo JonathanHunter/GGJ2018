@@ -5548,7 +5548,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c629b05ffb9bef84382ff88dc88d7294, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 30
   foot: {fileID: 4905540209020090}
   gunPos: {fileID: 0}
   sfx: {fileID: 114607835936040394}
