@@ -1706,16 +1706,12 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Find your way through this
-
-    dark world with your trusty cane!
+  m_Text: 'Use your trusty cane!
 
     (Left Click/Trigger)
 
 
-    Be sure to defend yourself from
-
-    enemy threats with your firearm!
+    Fire your gun!
 
     (Right Click/Trigger)'
 --- !u!222 &565095245
@@ -5875,14 +5871,11 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'These are echoes that only you can see.
+  m_Text: 'Echoes let you see.
 
-    Use your can to create more, or even just by walking.
+    Use your Screech!
 
-    You also posses the ability to yell out creating a larger echo letting you see
-    more! (Space/Y/Triangle)
-
-    But beware as this also alerts others to your presence!'
+    (Space/Y/Triangle)'
 --- !u!222 &2072446848
 CanvasRenderer:
   m_ObjectHideFlags: 0
