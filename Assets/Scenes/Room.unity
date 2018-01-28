@@ -533,7 +533,7 @@ Prefab:
     - target: {fileID: 114278066181776050, guid: 10490a620d63642289873ec288fc5b3f,
         type: 2}
       propertyPath: nextScene
-      value: CityHall
+      value: Chapter3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 10490a620d63642289873ec288fc5b3f, type: 2}
