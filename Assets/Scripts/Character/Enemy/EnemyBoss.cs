@@ -71,11 +71,10 @@
             if (!this.doOnce)
             {
                 this.agent.SetDestination(Managers.PlayerManager.Instance.player.position);
+                this.agent.isStopped = false;
             }
 
-            if (Vector2.Distance(
-                new Vector2(this.transform.position.x, this.transform.position.z),
-                new Vector2(this.RunLocations[this.currentRunIndex].position.x, this.RunLocations[this.currentRunIndex].position.z)) < 1f)
+            if (Vector3.Distance(Managers.PlayerManager.Instance.player.position, this.transform.position) < 2.5f)
             {
                 this.agent.isStopped = true;
                 this.currState = State.Attack;
@@ -104,12 +103,11 @@
             if(!this.doOnce)
             {
                 this.currentRunIndex = Random.Range(0, 3);
-                this.agent.SetDestination(this.RunLocations[this.currentRunIndex].position);
+                this.agent.destination = this.RunLocations[this.currentRunIndex].position;
+                this.agent.isStopped = false;
             }
 
-            if(Vector2.Distance(
-                new Vector2(this.transform.position.x, this.transform.position.z), 
-                new Vector2(this.RunLocations[this.currentRunIndex].position.x, this.RunLocations[this.currentRunIndex].position.z)) < .2f)
+            if (Vector3.Distance(Managers.PlayerManager.Instance.player.position, this.RunLocations[this.currentRunIndex].position) < 2.5f)
             {
                 this.agent.isStopped = true;
                 this.currState = State.Chase;

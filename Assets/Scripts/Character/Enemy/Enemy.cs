@@ -109,9 +109,9 @@
 
         public void StepEvent()
         {
+            sfx.PlayEnemyStepSFX();
             if (!disableStepSonar)
             {
-                sfx.PlayEnemyStepSFX();
                 GameObject g = SonarPool.Instance.GetSonar(1f, 1f);
                 g.transform.position = foot.position;
             }
