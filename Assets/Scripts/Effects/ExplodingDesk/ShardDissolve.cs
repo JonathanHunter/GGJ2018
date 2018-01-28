@@ -40,8 +40,6 @@
             {
                 if (sliceAmount >= .98f)
                 {
-                    GameObject s = SonarPool.Instance.GetSonar(3f, 3f);
-                    s.transform.position = transform.position;
                     Destroy(this.gameObject);
                 }
                 else
@@ -57,5 +55,14 @@
 
 
         }
+        void OnCollisionEnter(Collision collision)
+        {
+            GameObject s = SonarPool.Instance.GetSonar(3f, 3f);
+            if (s != null)
+            {
+                s.transform.position = transform.position;
+            }
+        }
+        
     }
 }
