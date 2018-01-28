@@ -8,14 +8,17 @@
     {
         public int maxHealth = 100;
         public Transform foot;
+        public Transform gunPos;
         public EnemySFXManager sfx;
         public int damage;
         public bool agro;
-
+        public bool shooting;
         public int Health { get; private set; }
+      
 
         private void Start()
         {
+          
             this.Health = maxHealth;
             this.agro = false;
             LocalInit();
@@ -41,8 +44,11 @@
 
         protected void Shoot()
         {
-
-
+            GameObject g = BulletPool.Instance.GetBullet(BulletPool.BulletTypes.Enemy);
+            g.transform.position = gunPos.position ;
+            g.transform.rotation = this.transform.rotation;
+            shooting = true;
+        
         }
 
         private void OnCollisionEnter(Collision collision)

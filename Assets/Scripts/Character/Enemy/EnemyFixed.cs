@@ -12,11 +12,11 @@ public class EnemyFixed : Enemy
     public Transform[] points; // locations to patrol
     public Transform startPos;
     private int destPoint = 0;
-    private float agroRange = 15f;
+    private float agroRange = 5f;
     private float minAttackRange = 3f;
     private float fov = 90f;
     private NavMeshAgent agent;
-
+    public float cooldown = 5;
 
 
     void GotoNextPoint()
@@ -47,19 +47,25 @@ public class EnemyFixed : Enemy
     void attack()
     {
         Vector3 dist = playerManager.player.position - agent.transform.position;
-        if (dist.magnitude > 3f)
+        if (dist.magnitude > agroRange)
         {
             agent.speed = 1.0f; // increase speed to chase 
             print("Chase");
             agent.destination = playerManager.player.position;
         }
-        else if (dist.magnitude <= 3f)
+        else if (dist.magnitude <= agroRange)
         {
             print("Fixed Fire");
             agent.destination = agent.transform.position;
         }
-        this.Shoot();
 
+        if ((cooldown -= Time.deltaTime) <= 0)
+        {
+            sfx.PlayEnemyGunfireSFX();
+            this.Shoot();
+            cooldown = 5f;
+        }
+        shooting = false;
     }
 
     void TargetPlayer()
@@ -70,10 +76,8 @@ public class EnemyFixed : Enemy
     }
     protected override void LocalInit()
     {
-        maxHealth = 100;
-
+        
         agent = GetComponent<NavMeshAgent>();
-        // points[0].position = agent.transform.position;
         // Disabling auto-braking allows for continuous movement
         // between points (ie, the agent doesn't slow down as it
         // approaches a destination point).
@@ -103,7 +107,6 @@ public class EnemyFixed : Enemy
     protected override void TookDamage()
     {
         sfx.PlayEnemyGetHitSFX();
-        //Health = this.Health - 20;
         float rate = this.Health / maxHealth;
         agent.speed = agent.speed - rate;
 

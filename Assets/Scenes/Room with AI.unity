@@ -489,14 +489,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c43a51105f1bfe4c8a69001fa2bd8ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 3
   foot: {fileID: 539860267}
+  gunPos: {fileID: 0}
   sfx: {fileID: 1594160325}
   damage: 0
   agro: 0
+  shooting: 0
   playerManager: {fileID: 334821289}
   points: []
   startPos: {fileID: 539860267}
+  cooldown: 5
 --- !u!135 &539860269
 SphereCollider:
   m_ObjectHideFlags: 0
