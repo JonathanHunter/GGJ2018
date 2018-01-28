@@ -1254,7 +1254,6 @@ GameObject:
   - component: {fileID: 4027545291212248}
   - component: {fileID: 95900284648332812}
   - component: {fileID: 136398335988427482}
-  - component: {fileID: 135752442813394266}
   - component: {fileID: 195861617796780986}
   - component: {fileID: 114681247330759510}
   m_Layer: 0
@@ -5646,24 +5645,12 @@ MonoBehaviour:
   shooting: 0
   agent: {fileID: 195861617796780986}
   ragdoll: {fileID: 1969610122450610, guid: ae5736d18de5e8948b89fb3e164b1c47, type: 2}
-  playerManager: {fileID: 0}
   startPos: {fileID: 4620287968162476}
   endPos: {fileID: 4234264337334746}
   points:
   - {fileID: 0}
   - {fileID: 0}
---- !u!135 &135752442813394266
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1662982186065470}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.25
-  m_Center: {x: 0, y: 0, z: 0}
+  cooldown: 5
 --- !u!136 &136398335988427482
 CapsuleCollider:
   m_ObjectHideFlags: 1

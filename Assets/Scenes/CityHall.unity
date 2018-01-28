@@ -4397,7 +4397,8 @@ Prefab:
       propertyPath: agent
       value: 
       objectReference: {fileID: 1972954774}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 135592068256997506, guid: f6736a4bba360d643ac44101e62c9bf0, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: f6736a4bba360d643ac44101e62c9bf0, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &373572795
@@ -4411,7 +4412,6 @@ GameObject:
   - component: {fileID: 373572801}
   - component: {fileID: 373572800}
   - component: {fileID: 373572799}
-  - component: {fileID: 373572798}
   - component: {fileID: 373572797}
   - component: {fileID: 373572796}
   m_Layer: 0
@@ -4448,6 +4448,7 @@ MonoBehaviour:
   points:
   - {fileID: 0}
   - {fileID: 0}
+  cooldown: 5
 --- !u!195 &373572797
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -4470,19 +4471,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!135 &373572798
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 135752442813394266, guid: eea07f38a024ea24f92258aad4d4d31f,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 373572795}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.25
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &373572799
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -6209,7 +6197,6 @@ GameObject:
   - component: {fileID: 519604082}
   - component: {fileID: 519604081}
   - component: {fileID: 519604080}
-  - component: {fileID: 519604079}
   - component: {fileID: 519604078}
   - component: {fileID: 519604077}
   m_Layer: 0
@@ -6246,6 +6233,7 @@ MonoBehaviour:
   points:
   - {fileID: 0}
   - {fileID: 0}
+  cooldown: 5
 --- !u!195 &519604078
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -6268,19 +6256,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!135 &519604079
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 135752442813394266, guid: eea07f38a024ea24f92258aad4d4d31f,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 519604076}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.25
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &519604080
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -8362,7 +8337,8 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -14.302666
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 135967055121829776, guid: 5d52cf8a30a05b6429c6edc3c0e31c58, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 5d52cf8a30a05b6429c6edc3c0e31c58, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &665181767
@@ -8651,7 +8627,6 @@ GameObject:
   - component: {fileID: 701957999}
   - component: {fileID: 701957998}
   - component: {fileID: 701957997}
-  - component: {fileID: 701957996}
   - component: {fileID: 701957995}
   - component: {fileID: 701957994}
   m_Layer: 0
@@ -8688,6 +8663,7 @@ MonoBehaviour:
   points:
   - {fileID: 0}
   - {fileID: 0}
+  cooldown: 5
 --- !u!195 &701957995
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -8710,19 +8686,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!135 &701957996
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 135752442813394266, guid: eea07f38a024ea24f92258aad4d4d31f,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 701957993}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.25
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &701957997
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -10884,7 +10847,8 @@ Prefab:
       propertyPath: m_Name
       value: GunRaccoonVariantRandom (2)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 135967055121829776, guid: 5d52cf8a30a05b6429c6edc3c0e31c58, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 5d52cf8a30a05b6429c6edc3c0e31c58, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &848007213
@@ -11426,7 +11390,6 @@ GameObject:
   - component: {fileID: 900122943}
   - component: {fileID: 900122942}
   - component: {fileID: 900122941}
-  - component: {fileID: 900122940}
   - component: {fileID: 900122939}
   - component: {fileID: 900122938}
   m_Layer: 0
@@ -11463,6 +11426,7 @@ MonoBehaviour:
   points:
   - {fileID: 0}
   - {fileID: 0}
+  cooldown: 5
 --- !u!195 &900122939
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -11485,19 +11449,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!135 &900122940
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 135752442813394266, guid: eea07f38a024ea24f92258aad4d4d31f,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 900122937}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.25
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &900122941
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -21214,7 +21165,6 @@ GameObject:
   - component: {fileID: 1811707247}
   - component: {fileID: 1811707246}
   - component: {fileID: 1811707245}
-  - component: {fileID: 1811707244}
   - component: {fileID: 1811707243}
   - component: {fileID: 1811707242}
   m_Layer: 0
@@ -21251,6 +21201,7 @@ MonoBehaviour:
   points:
   - {fileID: 0}
   - {fileID: 0}
+  cooldown: 5
 --- !u!195 &1811707243
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -21273,19 +21224,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!135 &1811707244
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 135752442813394266, guid: eea07f38a024ea24f92258aad4d4d31f,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1811707241}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.25
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &1811707245
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -22628,7 +22566,8 @@ Prefab:
       propertyPath: m_Name
       value: GunRaccoonVariantRandom (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 135967055121829776, guid: 5d52cf8a30a05b6429c6edc3c0e31c58, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 5d52cf8a30a05b6429c6edc3c0e31c58, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1860858721
