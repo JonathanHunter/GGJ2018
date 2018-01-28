@@ -37,7 +37,9 @@
             LocalUpdate();
             if (this.Health <= 0)
             {
-                sfx.PlayEnemyDieSFX();
+                //sfx.PlayEnemyDieSFX();
+                GameObject temp = Instantiate(GGJ2018.Managers.PlayerManager.Instance.deathSound);
+                temp.transform.position = transform.position;
                 this.gameObject.SetActive(false);
                 if (ragdoll != null)
                 {

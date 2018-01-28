@@ -11,6 +11,8 @@
 
         public static PlayerManager Instance { get; set; }
 
+        public GameObject deathSound;
+
         public void Init()
         {
             if (Instance != null && Instance != this)
