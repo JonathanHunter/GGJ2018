@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using GGJ2018;
 
 /// <summary>
 /// Script for handling the progression of cutscenes
@@ -51,13 +52,13 @@ public class CutsceneHandler : MonoBehaviour
                 switch (cutsceneVersion)
                 {
                     case 1:
-                        UnityEngine.SceneManagement.SceneManager.LoadScene("Cavern"); ;
+                        TransitionManager.Instance.LoadScene("Cavern"); ;
                         break;
                     case 2:
-                        UnityEngine.SceneManagement.SceneManager.LoadScene("Room");
+                        TransitionManager.Instance.LoadScene("Room");
                         break;
                     case 3:
-                        UnityEngine.SceneManagement.SceneManager.LoadScene("CityHall");
+                        TransitionManager.Instance.LoadScene("CityHall");
                         break;
                     case 4:
                         StartCoroutine(ShowCredits());
@@ -91,6 +92,6 @@ public class CutsceneHandler : MonoBehaviour
         }
         credits.color = initCol;
         yield return new WaitForSeconds(1.0f);
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Title");
+        TransitionManager.Instance.LoadScene("Title");
     }
 }

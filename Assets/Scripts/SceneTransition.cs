@@ -11,7 +11,7 @@ namespace GGJ2018
 		{
 			if (other.gameObject.CompareTag("Player"))
 			{
-				SceneManager.LoadScene(nextScene);
+				TransitionManager.Instance.LoadScene(nextScene);
 			}
 		}
 	}
