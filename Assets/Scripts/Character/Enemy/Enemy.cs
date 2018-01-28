@@ -92,7 +92,7 @@
                 ObjectPooling.Bullets.Bullet temp = other.gameObject.GetComponent<ObjectPooling.Bullets.Bullet>();
                 if (temp == null)
                 {
-                    this.Health -= 1;
+                    this.Health -= 2;
                 }
                 else
                 {

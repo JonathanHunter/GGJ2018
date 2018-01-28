@@ -149,15 +149,7 @@
 
         private void OnCollisionEnter(Collision collision)
         {
-            if(collision.gameObject.tag == "Enemy")
-            {
-                int damage = collision.gameObject.GetComponent<Enemy.Enemy>().GetDamage();
-                this.Health -= damage;
-                this.healthUI.TakeDamage(damage);
-                this.sfx.PlayPlayerGetHitSFX();
-                this.camEffects.TakeDamage();
-            }
-            else if(collision.gameObject.tag == "EnemyWeapon")
+            if(collision.gameObject.tag == "EnemyWeapon")
             {
                 int damage = collision.gameObject.GetComponent<ObjectPooling.Bullets.Bullet>().GetDamage();
                 this.Health -= damage;

@@ -5535,7 +5535,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c43a51105f1bfe4c8a69001fa2bd8ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 3
+  maxHealth: 6
   foot: {fileID: 4924908168651312}
   gunPos: {fileID: 4208522082675992}
   sfx: {fileID: 114996252454178962}
@@ -5545,6 +5545,7 @@ MonoBehaviour:
   shooting: 0
   agent: {fileID: 0}
   ragdoll: {fileID: 1969610122450610, guid: ae5736d18de5e8948b89fb3e164b1c47, type: 2}
+  disableStepSonar: 0
   points: []
   startPos: {fileID: 4267808108491486}
   cooldown: 5
