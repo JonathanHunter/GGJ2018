@@ -78,6 +78,8 @@
             if (Input.GetKeyDown(KeyCode.E)){
                 Heal(1);
             }*/
+            if (Managers.GameState.Instance.CurrentState != Managers.GameState.State.Playing)
+                return;
 
             if (bigPulseTimer > 0)
             {

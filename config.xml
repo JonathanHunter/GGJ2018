@@ -26,7 +26,7 @@
     <Gamepad_Melee>Left Trigger</Gamepad_Melee>
     <Gamepad_Shoot>Right Trigger</Gamepad_Shoot>
     <Gamepad_Reload>X</Gamepad_Reload>
-    <Gamepad_Screech>A</Gamepad_Screech>
+    <Gamepad_Screech>Y</Gamepad_Screech>
     <Gamepad_Pause>Start</Gamepad_Pause>
     <Gamepad_Accept>A</Gamepad_Accept>
     <Gamepad_Cancel>B</Gamepad_Cancel>

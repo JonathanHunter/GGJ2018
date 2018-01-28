@@ -87,7 +87,7 @@
             gamepad[(int)UserInput.Melee, 0] = LEFT_TRIGGER;
             gamepad[(int)UserInput.Shoot, 0] = RIGHT_TRIGGER;
             gamepad[(int)UserInput.Reload, 0] = X;
-            gamepad[(int)UserInput.Screech, 0] = A;
+            gamepad[(int)UserInput.Screech, 0] = Y;
             gamepad[(int)UserInput.Pause, 0] = START;
             gamepad[(int)UserInput.Accept, 0] = A;
             gamepad[(int)UserInput.Cancel, 0] = B;
