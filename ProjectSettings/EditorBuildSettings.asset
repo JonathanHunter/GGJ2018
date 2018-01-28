@@ -17,3 +17,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CityHall.unity
     guid: 5a597de51c5a54a67b11db37e2819ce0
+  - enabled: 1
+    path: Assets/Scenes/Cutscenes/Chapter1.unity
+    guid: 23660c91bf0b7754290d8864c5e3f961
