@@ -13,7 +13,7 @@
         private float agroRange = 15f;
         private float minAttackRange = 3f;
         private float fov = 90f;
-
+        public float cooldown = 5f;
 
         void GotoNextPoint()
         {
@@ -43,18 +43,26 @@
         }
 
         void attack()
-        {
+        { enemyAnimator.SetBool("isMoving", true);
             Vector3 dist = PlayerManager.Instance.player.position - agent.transform.position;
-            if (dist.magnitude > 3f)
+            if (dist.magnitude > agroRange)
             {
                 agent.speed = 1.0f; // increase speed to chase 
                 agent.destination = PlayerManager.Instance.player.position;
             }
-            else if (dist.magnitude <= 3f)
+            else if (dist.magnitude <= agroRange)
             {
+                enemyAnimator.SetBool("isMoving", false);
                 agent.destination = agent.transform.position;
             }
-            this.Shoot();
+
+            if ((cooldown -= Time.deltaTime) <= 0)
+            {
+                enemyAnimator.SetBool("fireGun", true);
+                sfx.PlayEnemyGunfireSFX();
+                this.Shoot();
+                cooldown = 5f;
+            }
 
         }
 
