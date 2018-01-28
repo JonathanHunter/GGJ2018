@@ -5,7 +5,7 @@
 
     public class SonarDemo : MonoBehaviour
     {
-        private float time = .05f;
+        private float time = .5f;
 
         private void Update()
         {
@@ -15,7 +15,7 @@
                 if (s != null)
                     s.transform.position = new Vector3(Random.Range(-1f, 12f), 0f, Random.Range(-6f, 4f));
 
-                time = .05f;
+                time = .5f;
             }
         }
     }
