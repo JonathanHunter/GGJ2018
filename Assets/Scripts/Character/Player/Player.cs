@@ -199,7 +199,8 @@
         public void StepEvent()
         {
             GameObject s = SonarPool.Instance.GetSonar(2f, .5f);
-            s.transform.position = this.foot.position;
+            if(s!=null)
+                s.transform.position = this.foot.position;
             this.sfx.PlayPlayerStepSFX();
         }
 
