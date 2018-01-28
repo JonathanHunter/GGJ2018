@@ -43,7 +43,7 @@
             }
             else if(Managers.GameState.Instance.CurrentState != Managers.GameState.State.Paused)
             {
-                if (Util.CustomInput.BoolFreshPressDeleteOnRead(Util.CustomInput.UserInput.Pause))
+                if (Util.CustomInput.BoolFreshPress(Util.CustomInput.UserInput.Pause))
                 {
                     Managers.GameState.Instance.CurrentState = Managers.GameState.State.Paused;
                     EventSystem.current.SetSelectedGameObject(resume);
