@@ -61,6 +61,8 @@
 
         void Update()
         {
+            if (Managers.GameState.Instance.CurrentState != Managers.GameState.State.Playing)
+                return;
             /*if (Input.GetKeyDown(KeyCode.Q))
             {
                 Fire(bulletsInClip - 1);
