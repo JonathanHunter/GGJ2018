@@ -32,7 +32,16 @@
         private void Update()
         {
             if (Managers.GameState.Instance.CurrentState != Managers.GameState.State.Playing)
+            {
+                if(agent != null)
+                {
+                    agent.enabled = false;
+                }
                 return;
+            }
+
+            if (!agent.enabled)
+                agent.enabled = true;
 
             LocalUpdate();
             if (this.Health <= 0)
@@ -126,7 +135,8 @@
             if (!disableStepSonar)
             {
                 GameObject g = SonarPool.Instance.GetSonar(1f, 1f);
-                g.transform.position = foot.position;
+                if(g != null)
+                    g.transform.position = foot.position;
             }
         }
 
