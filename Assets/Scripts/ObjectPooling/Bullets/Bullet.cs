@@ -14,6 +14,8 @@
 
         public BulletPool.BulletTypes Type { get { return this.type; } }
 
+        public MeleeWeaponTrail[] trails;
+
         private int referenceIndex = 0;
         private float currentLifeTime = 0;
 

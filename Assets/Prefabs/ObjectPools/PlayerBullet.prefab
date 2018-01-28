@@ -360,6 +360,9 @@ MonoBehaviour:
   damage: 1
   lifeTime: 3
   type: 0
+  trails:
+  - {fileID: 114651406729436552}
+  - {fileID: 114871458630915214}
   speed: 10
   rgbdy: {fileID: 54155996037033370}
 --- !u!114 &114651406729436552

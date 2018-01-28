@@ -2,7 +2,7 @@
 
 //
 // By Anomalous Underdog, 2011
-//
+//http://wiki.unity3d.com/index.php?title=MeleeWeaponTrail
 // Based on code made by Forest Johnson (Yoggy) and xyber
 //
 
@@ -26,6 +26,8 @@ public class MeleeWeaponTrail : MonoBehaviour
     [SerializeField]
     float _lifeTime = 1.00f;
 
+    float _lifeTimeKeeper;
+
     [SerializeField]
     Color[] _colors;
 
@@ -42,6 +44,7 @@ public class MeleeWeaponTrail : MonoBehaviour
 
     [SerializeField]
     bool _autoDestruct = false;
+
 
 #if USE_INTERPOLATION
 	[SerializeField]
@@ -75,6 +78,18 @@ public class MeleeWeaponTrail : MonoBehaviour
 
     void Start()
     {
+        _lifeTimeKeeper = _lifeTime;
+    }
+
+    void OnDisable()
+    {
+        Destroy(_o);
+        _points.Clear();
+    }
+
+
+    public void startTrail()
+    {
         _lastPosition = transform.position;
         _o = new GameObject("Trail");
         _o.transform.parent = null;
@@ -88,11 +103,7 @@ public class MeleeWeaponTrail : MonoBehaviour
         _trailMesh = new Mesh();
         _trailMesh.name = name + "TrailMesh";
         _o.GetComponent<MeshFilter>().mesh = _trailMesh;
-    }
 
-    void OnDisable()
-    {
-        Destroy(_o);
     }
 
     void Update()

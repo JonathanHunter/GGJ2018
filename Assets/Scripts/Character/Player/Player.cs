@@ -106,6 +106,21 @@
             {
                 this.shooting = true;
                 GameObject g = BulletPool.Instance.GetBullet(BulletPool.BulletTypes.Player);
+
+                if (g != null)
+                {
+                    GGJ2018.ObjectPooling.Bullets.Bullet rf = g.GetComponent<GGJ2018.ObjectPooling.Bullets.Bullet>();
+                    MeleeWeaponTrail[] fb = rf.trails;
+                    if (fb != null)
+                    {
+                        foreach (MeleeWeaponTrail m in fb)
+                        {
+                            m.startTrail();
+
+                        }
+                    }
+                }
+
                 g.transform.position = gunPos.position;
                 g.transform.rotation = this.transform.rotation;
                 this.anim.SetBool(this.shootHash, true);
