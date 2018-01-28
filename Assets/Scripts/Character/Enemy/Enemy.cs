@@ -1,6 +1,7 @@
 ﻿namespace GGJ2018.Character.Enemy
 {
     using UnityEngine;
+    using UnityEngine.AI;
     using Audio;
     using ObjectPooling;
 
@@ -14,6 +15,7 @@
         public int damage;
         public bool agro;
         public bool shooting;
+        public NavMeshAgent agent;
         public int Health { get; private set; }
       
 
@@ -50,7 +52,6 @@
             g.transform.rotation = this.transform.rotation;
             shooting = true;
             enemyAnimator.SetTrigger("fireGun");
-        
         }
 
         private void OnCollisionEnter(Collision collision)

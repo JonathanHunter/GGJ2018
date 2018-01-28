@@ -15,7 +15,6 @@ public class EnemyFixed : Enemy
     private float agroRange = 5f;
     private float minAttackRange = 3f;
     private float fov = 90f;
-    private NavMeshAgent agent;
     public float cooldown = 5;
 
 
@@ -46,6 +45,7 @@ public class EnemyFixed : Enemy
 
     void attack()
     {
+        enemyAnimator.SetBool("isMoving", true);
         Vector3 dist = playerManager.player.position - agent.transform.position;
         if (dist.magnitude > agroRange)
         {
@@ -55,12 +55,14 @@ public class EnemyFixed : Enemy
         }
         else if (dist.magnitude <= agroRange)
         {
+            enemyAnimator.SetBool("isMoving", false);
             print("Fixed Fire");
             agent.destination = agent.transform.position;
         }
 
         if ((cooldown -= Time.deltaTime) <= 0)
         {
+            enemyAnimator.SetBool("fireGun", true);
             sfx.PlayEnemyGunfireSFX();
             this.Shoot();
             cooldown = 5f;
@@ -76,8 +78,8 @@ public class EnemyFixed : Enemy
     }
     protected override void LocalInit()
     {
-        
-        agent = GetComponent<NavMeshAgent>();
+
+        NavMeshAgent agent = this.GetComponent<NavMeshAgent>();
         // Disabling auto-braking allows for continuous movement
         // between points (ie, the agent doesn't slow down as it
         // approaches a destination point).

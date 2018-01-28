@@ -11,7 +11,7 @@
         {
             if(other.tag != "Player")
             {
-                GameObject s = SonarPool.Instance.GetSonar(1f, .5f);
+                GameObject s = SonarPool.Instance.GetSonar(5f, 5f);
                 s.transform.position = this.tip.position;
             }
         }
