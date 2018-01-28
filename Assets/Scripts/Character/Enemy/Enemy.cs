@@ -53,10 +53,14 @@
         protected void Shoot()
         {
             GameObject g = BulletPool.Instance.GetBullet(BulletPool.BulletTypes.Enemy);
-            g.transform.position = gunPos.position ;
-            g.transform.rotation = this.transform.rotation;
-            shooting = true;
-            enemyAnimator.SetTrigger("fireGun");
+            if (g != null)
+            {
+                g.transform.position = gunPos.position;
+                g.transform.rotation = this.transform.rotation;
+                shooting = true;
+                enemyAnimator.SetTrigger("fireGun");
+                this.sfx.PlayEnemyGunfireSFX();
+            }
         }
 
         private void OnCollisionEnter(Collision collision)
