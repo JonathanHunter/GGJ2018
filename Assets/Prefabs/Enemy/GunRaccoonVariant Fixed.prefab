@@ -2842,7 +2842,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c43a51105f1bfe4c8a69001fa2bd8ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 3
   foot: {fileID: 4924908168651312}
   gunPos: {fileID: 4208522082675992}
   sfx: {fileID: 114929884712036402, guid: a2165d4ee452d5f4ba03038a52072222, type: 2}
@@ -2850,6 +2850,7 @@ MonoBehaviour:
   damage: 0
   agro: 0
   shooting: 0
+  agent: {fileID: 0}
   playerManager: {fileID: 0}
   points: []
   startPos: {fileID: 4267808108491486}
