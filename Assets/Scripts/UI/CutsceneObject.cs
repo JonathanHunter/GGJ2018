@@ -78,7 +78,7 @@
                 }
             }
         }
-
+		
         void Skip()
         {
             StopCoroutine("FadeInImage");
