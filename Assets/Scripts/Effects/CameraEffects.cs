@@ -11,6 +11,15 @@
 
         public FullScreenWhiteout whiteOut;
 
+        //Camera params for screech effect
+        public Camera cam;
+        private float fov;
+
+        void Start()
+        {
+            fov = cam.fieldOfView;
+        }
+
         void Update()
         {
             if (Managers.GameState.Instance.CurrentState != Managers.GameState.State.Playing)
@@ -33,7 +42,8 @@
             }
             if (screechTime > 0)
             {
-                transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, Mathf.Lerp(minScreech, maxScreech, screechTime / screechMaxTime));
+                //transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, Mathf.Lerp(minScreech, maxScreech, screechTime / screechMaxTime));
+                cam.fieldOfView = Mathf.Lerp(fov, fov * 1.5f, screechTime / screechMaxTime);
                 screechTime -= Time.deltaTime;
                 if (screechTime <= 0)
                 {
