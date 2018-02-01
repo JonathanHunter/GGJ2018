@@ -7865,6 +7865,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   whiteOut: {fileID: 114540251359205774}
+  cam: {fileID: 20637891918076004}
 --- !u!114 &114493128545965472
 MonoBehaviour:
   m_ObjectHideFlags: 1
