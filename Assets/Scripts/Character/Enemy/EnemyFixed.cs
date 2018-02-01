@@ -52,7 +52,7 @@
             {
                 enemyAnimator.SetBool("fireGun", true);
                 sfx.PlayEnemyGunfireSFX();
-                this.Shoot();
+                //this.Shoot();
                 cooldown = 5f;
             }
             shooting = false;
