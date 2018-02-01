@@ -11,6 +11,8 @@
 
         public AudioSource voiceClip;
         public Image image;
+        public Text skipIcon;
+        private float skipTimer, skipTimerMax = 2.0f;
         Color inactiveCol, activeCol;
         public bool active = false, finished = false;
 
@@ -22,6 +24,7 @@
 
         public void Activate()
         {
+            skipIcon.enabled = false;
             active = true;
             voiceClip.Play();
             StartCoroutine(FadeInImage(0.75f));
@@ -49,6 +52,7 @@
             image.color = inactiveCol;
             active = false;
             finished = true;
+            skipIcon.enabled = false;
         }
 
         void Update()
@@ -56,7 +60,23 @@
             if (active && !finished && (CustomInput.BoolFreshPress(CustomInput.UserInput.Accept) || CustomInput.BoolFreshPress(CustomInput.UserInput.Melee)
                 || CustomInput.BoolFreshPress(CustomInput.UserInput.Shoot) || CustomInput.BoolFreshPress(CustomInput.UserInput.Screech) || CustomInput.BoolFreshPress(CustomInput.UserInput.Pause)))
             {
-                Skip();
+                if (!skipIcon.enabled)
+                {
+                    skipIcon.enabled = true;
+                    skipTimer = skipTimerMax;
+                }
+                else
+                {
+                    Skip();
+                }
+            }
+            if (skipTimer > 0)
+            {
+                skipTimer -= Time.deltaTime;
+                if (skipTimer <= 0)
+                {
+                    skipIcon.enabled = false;
+                }
             }
         }
 
@@ -69,6 +89,7 @@
             image.enabled = false;
             active = false;
             finished = true;
+            skipIcon.enabled = false;
         }
     }
 }
