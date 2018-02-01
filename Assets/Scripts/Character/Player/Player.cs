@@ -26,7 +26,7 @@
         public HealthUI healthUI;
         public Transform gunPos;
         public BoxCollider CaneHitbox;
-
+       
         private int moveHash;
         private int meleeHash;
         private int shootHash;

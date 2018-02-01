@@ -6,16 +6,27 @@
 
     public class EnemyPatrol : Enemy
     {
-        public Transform startPos;
-        public Transform endPos;
-        public Transform[] points; // locations to patrol
-        private int destPoint = 0;
-        private float agroRange = 5f;
-        private float minAttackRange = 3f;
-        private float fov = 90f;
-        public float cooldown = 5f;
+        public Transform[] points; // locations to patr
 
-        void GotoNextPoint()
+        new public void GotoNextPoint()
+        {
+            if (points[0] != null)
+            {
+                // Returns if no points have been set up
+                if (points.Length == 0)
+                    return;
+
+                // Set the agent to go to the currently selected destination.
+                agent.destination = points[destPoint].position;
+
+                // Choose the next point in the array as the destination,
+                // cycling to the start if necessary.
+                destPoint = (destPoint + 1) % points.Length;
+            }
+
+        }
+
+        new public void GotoNextPoint()
         {
             // Returns if no points have been set up
             if (points.Length == 0)
