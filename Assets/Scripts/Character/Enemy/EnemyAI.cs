@@ -9,12 +9,14 @@
     public class EnemyAI : MonoBehaviour
     {
         private Enemy enemy;
+        private int level;
         public Transform[] points; // locations to patr 
         private int loc = 0; // iterate through waypoints  
         
-        public EnemyAI(Enemy enemy)
+        public EnemyAI(Enemy enemy, int level)
         {
             this.enemy = enemy;
+            this.level = level;
         }
 
 
@@ -23,7 +25,6 @@
          */
         public void chase()
         {
-            enemy.enemyAnimator.SetBool("isMoving", true);
             Vector3 dist = PlayerManager.Instance.player.position - enemy.agent.transform.position;
             if (dist.magnitude > enemy.agroRange)
             {
@@ -32,7 +33,6 @@
             }
             else if (dist.magnitude <= enemy.agroRange)
             {
-                enemy.enemyAnimator.SetBool("isMoving", false);
                 enemy.agent.transform.LookAt(PlayerManager.Instance.player);
                 enemy.agent.destination = enemy.agent.transform.position;
             }
@@ -65,6 +65,22 @@
             }
             return finalPosition;
         }
+        /*
+        Find random location within navmesh from origin point
+        */
+        public static Vector3 RandomNavSphere(Vector3 origin, float dist, int layermask)
+        {
+            Vector3 randDirection = Random.insideUnitSphere * dist;
+
+            randDirection += origin;
+
+            NavMeshHit navHit;
+
+            NavMesh.SamplePosition(randDirection, out navHit, dist, layermask);
+
+            return navHit.position;
+        }
+
 
         new public void GotoNextPoint()
         {

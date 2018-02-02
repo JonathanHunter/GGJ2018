@@ -5,17 +5,26 @@
     using Audio;
     using ObjectPooling;
    
+    /*
+     * LEVEL 1 -  Shoot until dead , no chase
+     * LEVEL 2 -  Shoot & Chase, stops if you lose LOS
+     * LEVEL 3 -  Shoot, Chase, & Hunts when out of LOS
+     * LEVEL 4 -  Shoot, Chase,Hunt, Dodge
+     * LEVEL 5 -  Shoot, Chase, Hunt, Dodge, Flee
+     * 
+     */
     
 
     public abstract class Enemy :  MonoBehaviour  
     {
-
+        public int level = 0;
         public int maxHealth;
         public int Health { get; private set; }
         public int destPoint = 0;
         public int damage;
         public Transform foot;
         public Transform gunPos;
+        public Transform agroBubble;
         public EnemySFXManager sfx;
         public Animator enemyAnimator;
         public GameObject ragdoll;
@@ -24,21 +33,18 @@
         public bool shooting;
         public bool disableStepSonar = false;
         public bool smart;
+        public static float animRatio = 1.0f;
         public float cooldown = 5f;
         public float agroRange = 10f;
         private float fov = 90f;
 
 
         private void Start()
-        {          
+        {
+            agroBubble = this.transform;
             this.Health = maxHealth;
             this.agro = false;
-            this.smart = false;
             LocalInit();
-            if(smart)
-            {
-               
-            }
         }
 
         private void FixedUpdate()
@@ -48,6 +54,8 @@
 
         private void Update()
         {
+            enemyAnimator.speed = agent.speed * animRatio; // animation speed reflects agent speed
+
             if (Managers.GameState.Instance.CurrentState != Managers.GameState.State.Playing)
             {
                 if(agent != null)
@@ -59,6 +67,16 @@
 
             if (!agent.enabled)
                 agent.enabled = true;
+
+            if(agent.remainingDistance >0.01)
+            {
+                enemyAnimator.SetBool("isMoving", true);
+
+            }
+            else
+            {
+                enemyAnimator.SetBool("isMoving", false);
+            }
 
             LocalUpdate();
             if (this.Health <= 0)
@@ -133,16 +151,19 @@
                 this.InAgroRange();
             }
         }
-
+        
         private void OnTriggerEnter(Collider other)
         {
+
+            //Depricated Moving to On Trigger Stay with Raycast
+            /*
             if (other.gameObject.tag == "Player")
             {
                 InAgroRange();
                 this.agro = true;
                 this.InAgroRange();
             }
-
+            */
             if (other.gameObject.tag == "PlayerWeapon")
             {
                 ObjectPooling.Bullets.Bullet temp = other.gameObject.GetComponent<ObjectPooling.Bullets.Bullet>();
@@ -162,7 +183,62 @@
                 other.GetComponent<BoxCollider>().enabled = false;
             }
         }
+        
 
+        void OnTriggerStay(Collider other)
+        {
+            //This is to see if the player is within a certain distance of the AI.
+            if (other.gameObject.tag == "Player" )
+            {
+            //Only do this on tag "Player"
+			Vector3 direction  = other.transform.position - this.transform.position;
+			float angle = Vector3.Angle(direction, transform.forward);//Draw the angle in front of the AI
+			
+			if(angle < fov * 0.5f)//This is the angle that the AI can see
+			{
+				RaycastHit hit ;
+				
+				if(Physics.Raycast(transform.position + transform.up, direction.normalized, out hit, 0))//Check if the AI can see the player
+				{
+					if(hit.collider.tag == "Player")
+                    {
+                            InAgroRange();
+                            this.agro = true;
+                            this.InAgroRange();
+                        }
+					else if(smart)
+					{
+                            smarts.GoToNextPoint();
+
+					}
+                    else
+                    {
+
+                    }
+					
+				}
+			}
+
+				
+				//AudioSource audios = other.GetComponent<AudioSource>();
+			//	float audiorange = audios.maxDistance;
+			//	if(audios.isPlaying == true)
+				//{
+				////	Player = FindClosestPlayer();
+				//	PlayerT = Player.transform;
+				//	DoWaypoints = false;
+				//	GetComponent<NavMeshAgent>().destination = PlayerT.position;
+				//}
+				//else
+				//{
+				//	DoWaypoints = true; 
+				//}
+
+
+
+		}
+
+	}
         public void StepEvent()
         {
             sfx.PlayEnemyStepSFX();

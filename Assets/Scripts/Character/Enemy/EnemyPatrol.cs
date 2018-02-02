@@ -4,7 +4,7 @@
     using UnityEngine.AI; 
     using GGJ2018.Managers;
     using GGJ2018.Character.Enemy.Smarts;
-
+    
     public class EnemyPatrol : Enemy 
     {
         public EnemyAI smarts;
@@ -51,7 +51,7 @@
         protected override void LocalInit()
         {
             maxHealth = 3;
-            smarts = new EnemyAI(this);
+            smarts = new EnemyAI(this, 1);
             agent = GetComponent<NavMeshAgent>();
             // points[0].position = agent.transform.position;
             // Disabling auto-braking allows for continuous movement
@@ -69,7 +69,15 @@
             // close to the current one.
             if (this.agro)
             {
-                smarts.chase();
+                if (this.smart)
+                {
+                    smarts.chase();
+                }
+                else
+                {
+                    TargetPlayer();
+                    this.Shoot();
+                }
             }
 
             if (!agent.pathPending && agent.remainingDistance < 0.5f && !this.agro)
@@ -83,7 +91,7 @@
         {
             sfx.PlayEnemyGetHitSFX();
             float rate = this.Health / maxHealth;
-            agent.speed = agent.speed - rate;
+            agent.speed = agent.speed - rate; // agent speed increase as health decrease
         }
         
         protected override void InAgroRange()
