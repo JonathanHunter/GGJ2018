@@ -25,7 +25,7 @@
         public bool disableStepSonar = false;
         public bool smart;
         public float cooldown = 5f;
-
+        public float agroRange = 10f;
         private float fov = 90f;
 
 
@@ -91,7 +91,12 @@
            // destPoint = (destPoint + 1) % points.Length;
         }
 
-        protected void Shoot()
+        public void TargetPlayer()
+        {
+            //override
+        }
+        
+        public void Shoot()
         {
             GameObject g = BulletPool.Instance.GetBullet(BulletPool.BulletTypes.Enemy);
 

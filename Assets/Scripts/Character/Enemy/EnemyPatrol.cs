@@ -1,13 +1,15 @@
 ﻿namespace GGJ2018.Character.Enemy
 {
     using UnityEngine;
-    using UnityEngine.AI;
+    using UnityEngine.AI; 
     using GGJ2018.Managers;
+    using GGJ2018.Character.Enemy.Smarts;
 
-    public class EnemyPatrol : Enemy
+    public class EnemyPatrol : Enemy 
     {
+        public EnemyAI smarts;
         public Transform[] points; // locations to patr
-
+       
         new public void GotoNextPoint()
         {
             if (points[0] != null)
@@ -26,18 +28,9 @@
 
         }
 
-        new public void GotoNextPoint()
+        new void TargetPlayer()
         {
-            // Returns if no points have been set up
-            if (points.Length == 0)
-                return;
-
-            // Set the agent to go to the currently selected destination.
-            agent.destination = points[destPoint].position;
-
-            // Choose the next point in the array as the destination,
-            // cycling to the start if necessary.
-            destPoint = (destPoint + 1) % points.Length;
+            agent.transform.LookAt(PlayerManager.Instance.player);
         }
 
         public Vector3 RandomNavmeshLocation(float radius)
@@ -53,40 +46,12 @@
             return finalPosition;
         }
 
-        void attack()
-        {
-            enemyAnimator.SetBool("isMoving", true);
-            Vector3 dist = PlayerManager.Instance.player.position - agent.transform.position;
-            if (dist.magnitude > agroRange)
-            {
-                agent.speed = 1.0f; // increase speed to chase 
-                agent.destination = PlayerManager.Instance.player.position;
-            }
-            else if (dist.magnitude <= agroRange)
-            {
-                enemyAnimator.SetBool("isMoving", false);
-                agent.transform.LookAt(PlayerManager.Instance.player);
-                agent.destination = agent.transform.position;
-            }
-
-            if ((cooldown -= Time.deltaTime) <= 0)
-            {
-                enemyAnimator.SetBool("fireGun", true);
-                sfx.PlayEnemyGunfireSFX();
-                this.Shoot();
-                cooldown = 5f;
-            }
-            shooting = false;
-        }
-
-        void TargetPlayer()
-        {
-            agent.transform.LookAt(PlayerManager.Instance.player);
-        }
+        
+        
         protected override void LocalInit()
         {
-            maxHealth = 100;
-
+            maxHealth = 3;
+            smarts = new EnemyAI(this);
             agent = GetComponent<NavMeshAgent>();
             // points[0].position = agent.transform.position;
             // Disabling auto-braking allows for continuous movement
@@ -94,12 +59,8 @@
             // approaches a destination point).
             agent.autoBraking = false;
             agent.speed = 0.5f;
-            this.points[0] = startPos;
-            this.points[1] = endPos;
-
+            this.points[0] = agent.transform;
             GotoNextPoint();
-
-
         }
 
         protected override void LocalUpdate()
@@ -108,12 +69,12 @@
             // close to the current one.
             if (this.agro)
             {
-                attack();
+                smarts.chase();
             }
 
             if (!agent.pathPending && agent.remainingDistance < 0.5f && !this.agro)
             {
-                GotoNextPoint(); // search for player
+                smarts.GotoNextPoint(); // search for player
             }
 
         }
@@ -124,8 +85,7 @@
             float rate = this.Health / maxHealth;
             agent.speed = agent.speed - rate;
         }
-
-
+        
         protected override void InAgroRange()
         {
           TargetPlayer();
