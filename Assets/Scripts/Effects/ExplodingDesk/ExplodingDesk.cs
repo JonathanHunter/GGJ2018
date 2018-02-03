@@ -16,6 +16,9 @@
 
         private float soundTimer = 3f;
 
+        public float blastTimer = 1f;
+        public int sonarBlastCount = 13;
+
         // Use this for initialization
         void Start()
         {
@@ -46,6 +49,18 @@
                     Destroy(explodedDesk);
                     sfPlayed = true;
                     myAudio.PlaySong(0);
+
+                    for (int i = 0; i < sonarBlastCount; i++)
+                    {
+                        float tempTime = blastTimer;
+                        while(blastTimer > 0)
+                        {
+                            blastTimer -= Time.deltaTime;
+                        }
+                        float range = Random.Range(2, 5);
+                        g.transform.position = new Vector3(range, range);
+                        blastTimer = tempTime;
+                    }
                 }
             }
 
