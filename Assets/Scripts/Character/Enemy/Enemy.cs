@@ -260,6 +260,7 @@
                         this.agro = true;
                         this.InAgroRange();
                         los = true;
+                        //agro animation
                     }
                     else if (agro)
                     {
