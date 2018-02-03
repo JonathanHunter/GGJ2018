@@ -118,7 +118,7 @@
                 enemyAnimator.SetBool("isMoving", true);
                 enemyAnimator.speed = agent.speed * animRatio; // animation speed reflects agent speed
             }
-            else if (agent.remainingDistance >= 1) 
+            else if (agent.remainingDistance >= 0.75f && agent.remainingDistance <= 1) 
             {
                 enemyAnimator.SetBool("isMoving", true);
                 enemyAnimator.speed = 0.75f; // animation speed reflects agent speed
