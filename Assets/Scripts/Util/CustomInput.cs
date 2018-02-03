@@ -423,6 +423,14 @@
         /// <summary> Array for holding which controller name to reference </summary>
         private static Controller[] gamepadMapping;
 
+        public static ControlType GamePadType(int pad)
+        {
+            if (gamepadMapping != null && pad < gamepadMapping.Length)
+                return gamepadMapping[pad].type;
+
+            return ControlType.Xbox;
+        }
+
         /// <summary> Used to make this class a singleton. </summary>
         private static CustomInput instance;
 

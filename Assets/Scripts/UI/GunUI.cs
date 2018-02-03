@@ -38,6 +38,7 @@
         /// How long the reload will take
         public void StartReload()
         {
+            DisableFullBulletIcons();
             reloadCounter = 13;
             bulletsInClip = 0;
             toggleFlashTimer = maxToggleFlashTimer;
@@ -136,6 +137,14 @@
             }
             sfx.Play();
             StartCoroutine(ScaleEverything(0.25f));
+        }
+
+        void DisableFullBulletIcons()
+        {
+            for (int i = 0; i < bullets.Length; i++)
+            {
+                bullets[i].enabled = false;
+            }
         }
 
         IEnumerator BulletJuice(int index, float duration)
