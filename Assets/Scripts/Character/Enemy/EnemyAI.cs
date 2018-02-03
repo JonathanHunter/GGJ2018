@@ -9,9 +9,7 @@
     public class EnemyAI : MonoBehaviour
     {
         private Enemy enemy;
-        private int level;
-        private int loc = 0; // iterate through waypoints  
-
+ 
         public EnemyAI(Enemy enemy)
         {
             this.enemy = enemy;

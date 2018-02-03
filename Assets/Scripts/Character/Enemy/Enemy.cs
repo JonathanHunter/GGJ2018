@@ -37,7 +37,7 @@
         public float cooldown;
         public float agroRange = 3f;
         public float fov = 90f;
-
+        public float interest = 0;
         private float hate = 15f;
         private bool smart = true;
  
@@ -49,6 +49,7 @@
             this.Health = maxHealth;
             this.agro = false;
             agent.speed = 1f;
+            interest = hate - cooldown;
             LocalInit();
 
             switch (level)
@@ -95,7 +96,7 @@
 
         private void FixedUpdate()
         {
-
+            //was for raycast
         }
 
         private void Update()
@@ -108,16 +109,16 @@
                 }
                 return;
             }
-
+            
             if (!agent.enabled)
                 agent.enabled = true;
-
+            //if the agent is moving start the animation or else don't
             if (agent.hasPath)
             {
                 enemyAnimator.SetBool("isMoving", true);
                 enemyAnimator.speed = agent.speed * animRatio; // animation speed reflects agent speed
             }
-            else if (agent.remainingDistance >= 1)
+            else if (agent.remainingDistance >= 1) 
             {
                 enemyAnimator.SetBool("isMoving", true);
                 enemyAnimator.speed = 0.75f; // animation speed reflects agent speed
@@ -171,6 +172,7 @@
             //override
         }
 
+        //Shoots
         public void Shoot()
         {
             GameObject g = BulletPool.Instance.GetBullet(BulletPool.BulletTypes.Enemy);
@@ -209,6 +211,7 @@
             }
         }
 
+        // Handels player attacks on enemy
         private void OnTriggerEnter(Collider other)
         {
 
@@ -242,7 +245,7 @@
             }
         }
 
-
+        //Active while in range of player
         void OnTriggerStay(Collider other)
         {
             Vector3 direction = other.transform.position - this.gunPos.transform.position;
@@ -262,14 +265,16 @@
                         los = true;
                         //agro animation
                     }
-                    else if (agro)
+                    else
                     {
-                        
-                        if (((cooldown) -= Time.deltaTime) <= 0)
+                        los = false;
+                        if (((interest) -= Time.deltaTime) <= 0 && !los)
                         {
-                            los = false;
+                             agro = false;
+                             GotoNextPoint();
+                            //lose interest in the player
                         }
-                        GotoNextPoint();
+                        
 
                     }
                 }
@@ -280,7 +285,7 @@
         }
 
 
-
+        //Enemy Steps and sound generation
         public void StepEvent()
         {
             sfx.PlayEnemyStepSFX();

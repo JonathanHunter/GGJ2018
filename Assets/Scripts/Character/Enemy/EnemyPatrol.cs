@@ -8,10 +8,11 @@
 
     public class EnemyPatrol : Enemy 
     {
-        public EnemyAI smarts;
+        public EnemyAI smarts; //for future use with position variation
         public Transform[] points; // locations to patr
-        public float reset; 
-
+        public float reset;  // reset for cooldown
+        public float intrest;
+        
         new public void GotoNextPoint()
         {
             // Returns if no points have been set up
@@ -29,6 +30,7 @@
         // Chase player
        new  public void Chase()
         {
+            //Chase the player to the agroRange distance which is the minimum distance needed to shoot
             Vector3 dist = PlayerManager.Instance.player.position -  agent.transform.position;
             if (dist.magnitude >  agroRange)
             {
@@ -40,6 +42,8 @@
                  agent.destination =  agent.transform.position;
             }
 
+
+            //shoot after given time if you have LOS then reset cooldown 
             if (( cooldown -= Time.deltaTime) <= 0 && los)
             {
                  enemyAnimator.SetBool("fireGun", true);
@@ -48,7 +52,7 @@
                  cooldown = reset;
             }
              shooting = false;
-            // chase for given time then roam
+            // chase for given time then roam remove agro if loss of LOS
 
         }  
         
