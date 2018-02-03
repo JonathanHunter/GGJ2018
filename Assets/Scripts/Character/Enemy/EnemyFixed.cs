@@ -34,7 +34,7 @@
 
         void attack()
         {
-            enemyAnimator.SetBool("isMoving", true);
+           
             Vector3 dist = PlayerManager.Instance.player.position - agent.transform.position;
             if (dist.magnitude > agroRange)
             {
@@ -43,14 +43,14 @@
             }
             else if (dist.magnitude <= agroRange)
             {
-                enemyAnimator.SetBool("isMoving", false);
+           
                 agent.transform.LookAt(PlayerManager.Instance.player);
                 agent.destination = agent.transform.position;
             }
 
             if ((cooldown -= Time.deltaTime) <= 0)
             {
-                enemyAnimator.SetBool("fireGun", true);
+              
                 sfx.PlayEnemyGunfireSFX();
                 this.Shoot();
                 cooldown = 5f;

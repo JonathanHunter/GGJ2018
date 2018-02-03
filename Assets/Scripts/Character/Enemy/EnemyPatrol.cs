@@ -5,61 +5,64 @@
     using GGJ2018.Managers;
     using GGJ2018.Character.Enemy.Smarts;
     
+
     public class EnemyPatrol : Enemy 
     {
         public EnemyAI smarts;
         public Transform[] points; // locations to patr
-       
+        public float reset; 
+
         new public void GotoNextPoint()
         {
-            if (points[0] != null)
+            // Returns if no points have been set up
+            if (points.Length == 0 || this.agro)
+                return;
+
+            // Set the agent to go to the currently selected destination.
+            agent.destination = points[destPoint].position;
+
+            // Choose the next point in the array as the destination,
+            // cycling to the start if necessary.
+            destPoint = (destPoint + 1) % points.Length;
+
+        }
+        // Chase player
+       new  public void Chase()
+        {
+            Vector3 dist = PlayerManager.Instance.player.position -  agent.transform.position;
+            if (dist.magnitude >  agroRange)
             {
-                // Returns if no points have been set up
-                if (points.Length == 0)
-                    return;
-
-                // Set the agent to go to the currently selected destination.
-                agent.destination = points[destPoint].position;
-
-                // Choose the next point in the array as the destination,
-                // cycling to the start if necessary.
-                destPoint = (destPoint + 1) % points.Length;
+                 agent.destination = PlayerManager.Instance.player.position;
+            }
+            else if (dist.magnitude <=  agroRange)
+            {
+                 agent.transform.LookAt(PlayerManager.Instance.player);
+                 agent.destination =  agent.transform.position;
             }
 
-        }
-
-        new void TargetPlayer()
-        {
-            agent.transform.LookAt(PlayerManager.Instance.player);
-        }
-
-        public Vector3 RandomNavmeshLocation(float radius)
-        {
-            Vector3 randomDirection = Random.insideUnitSphere * radius;
-            randomDirection += agent.transform.position;
-            NavMeshHit hit;
-            Vector3 finalPosition = Vector3.zero;
-            if (NavMesh.SamplePosition(randomDirection, out hit, radius, 1))
+            if (( cooldown -= Time.deltaTime) <= 0 && los)
             {
-                finalPosition = hit.position;
+                 enemyAnimator.SetBool("fireGun", true);
+                 sfx.PlayEnemyGunfireSFX();
+                 Shoot();
+                 cooldown = reset;
             }
-            return finalPosition;
-        }
+             shooting = false;
+            // chase for given time then roam
 
-        
+        }  
         
         protected override void LocalInit()
         {
+            reset = cooldown;
             maxHealth = 3;
-            smarts = new EnemyAI(this, 1);
+            smarts = new EnemyAI(this);
             agent = GetComponent<NavMeshAgent>();
-            // points[0].position = agent.transform.position;
+        
             // Disabling auto-braking allows for continuous movement
             // between points (ie, the agent doesn't slow down as it
             // approaches a destination point).
             agent.autoBraking = false;
-            agent.speed = 0.5f;
-            this.points[0] = agent.transform;
             GotoNextPoint();
         }
 
@@ -67,22 +70,26 @@
         {
             // Choose the next destination point when the agent gets
             // close to the current one.
-            if (this.agro)
+            if (this.agro && level > 1)
             {
-                if (this.smart)
+                TargetPlayer();
+                Chase();
+            }
+            else if (this.agro && level ==1)
+            {
+                TargetPlayer();
+                if ((cooldown -= Time.deltaTime) <= 0 && los)
                 {
-                    smarts.chase();
-                }
-                else
-                {
-                    TargetPlayer();
-                    this.Shoot();
+                    enemyAnimator.SetBool("fireGun", true);
+                    sfx.PlayEnemyGunfireSFX();
+                    Shoot();
+                    cooldown = reset;
                 }
             }
 
             if (!agent.pathPending && agent.remainingDistance < 0.5f && !this.agro)
             {
-                smarts.GotoNextPoint(); // search for player
+                GotoNextPoint(); // search for player
             }
 
         }
@@ -90,8 +97,7 @@
         protected override void TookDamage()
         {
             sfx.PlayEnemyGetHitSFX();
-            float rate = this.Health / maxHealth;
-            agent.speed = agent.speed - rate; // agent speed increase as health decrease
+            agent.speed = agent.speed+=0.1f ; // agent speed increase as health decrease
         }
         
         protected override void InAgroRange()

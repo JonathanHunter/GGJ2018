@@ -4,7 +4,7 @@
     using UnityEngine.AI;
     using Audio;
     using ObjectPooling;
-   
+
     /*
      * LEVEL 1 -  Shoot until dead , no chase
      * LEVEL 2 -  Shoot & Chase, stops if you lose LOS
@@ -13,11 +13,11 @@
      * LEVEL 5 -  Shoot, Chase, Hunt, Dodge, Flee
      * 
      */
-    
 
-    public abstract class Enemy :  MonoBehaviour  
+
+    public abstract class Enemy : MonoBehaviour
     {
-        public int level = 0;
+        public int level = 1;
         public int maxHealth;
         public int Health { get; private set; }
         public int destPoint = 0;
@@ -29,22 +29,68 @@
         public Animator enemyAnimator;
         public GameObject ragdoll;
         public NavMeshAgent agent;
+        public bool los = false; // line of sight
         public bool agro;
         public bool shooting;
         public bool disableStepSonar = false;
-        public bool smart;
-        public static float animRatio = 1.0f;
-        public float cooldown = 5f;
-        public float agroRange = 10f;
-        private float fov = 90f;
+        public static float animRatio = 0.80f;
+        public float cooldown;
+        public float agroRange = 3f;
+        public float fov = 90f;
 
+        private float hate = 15f;
+        private bool smart = true;
+ 
 
         private void Start()
         {
+
             agroBubble = this.transform;
             this.Health = maxHealth;
             this.agro = false;
+            agent.speed = 1f;
             LocalInit();
+
+            switch (level)
+            {
+                case 0:
+                    cooldown = 8f;
+                    fov = 60f;
+                    agent.speed += 0.25f;
+                    agroRange = 10f;
+                    break;
+                case 1:
+                    cooldown = 7f;
+                    fov = 70f;
+                    agent.speed += 0.5f;
+                    agroRange = 8f;
+                    break;
+                case 2:
+                    cooldown = 6f;
+                    fov = 80f;
+                    agent.speed += 0.75f;
+                    agroRange = 6f;
+                    break;
+                case 3:
+                    cooldown = 5f;
+                    fov = 90f;
+                    agent.speed += 1f;
+                    agroRange = 5f;
+                    break;
+                case 4:
+                    cooldown = 4f;
+                    fov = 100f;
+                    agent.speed += 1.25f;
+                    agroRange = 4f;
+                    break;
+                case 5:
+                    cooldown = 3f;
+                    fov = 110f;
+                    agent.speed += 1.5f;
+                    agroRange = 3f;
+                    break;
+
+            }
         }
 
         private void FixedUpdate()
@@ -54,11 +100,9 @@
 
         private void Update()
         {
-            enemyAnimator.speed = agent.speed * animRatio; // animation speed reflects agent speed
-
             if (Managers.GameState.Instance.CurrentState != Managers.GameState.State.Playing)
             {
-                if(agent != null)
+                if (agent != null)
                 {
                     agent.enabled = false;
                 }
@@ -68,15 +112,23 @@
             if (!agent.enabled)
                 agent.enabled = true;
 
-            if(agent.remainingDistance >0.01)
+            if (agent.hasPath)
             {
                 enemyAnimator.SetBool("isMoving", true);
-
+                enemyAnimator.speed = agent.speed * animRatio; // animation speed reflects agent speed
             }
-            else
+            else if (agent.remainingDistance >= 1)
+            {
+                enemyAnimator.SetBool("isMoving", true);
+                enemyAnimator.speed = 0.75f; // animation speed reflects agent speed
+            }
+            else if (!agent.hasPath)
             {
                 enemyAnimator.SetBool("isMoving", false);
+                enemyAnimator.speed = 1f * animRatio; // animation speed reflects agent speed
             }
+
+           
 
             LocalUpdate();
             if (this.Health <= 0)
@@ -100,20 +152,25 @@
         public void GotoNextPoint()
         {
             // Returns if no points have been set up
-          
+
             // Set the agent to go to the currently selected destination.
-            agent.destination =transform.position;
+            agent.destination = transform.position;
 
             // Choose the next point in the array as the destination,
             // cycling to the start if necessary.
-           // destPoint = (destPoint + 1) % points.Length;
+            // destPoint = (destPoint + 1) % points.Length;
         }
 
         public void TargetPlayer()
         {
             //override
         }
-        
+
+        public void Chase()
+        {
+            //override
+        }
+
         public void Shoot()
         {
             GameObject g = BulletPool.Instance.GetBullet(BulletPool.BulletTypes.Enemy);
@@ -151,7 +208,7 @@
                 this.InAgroRange();
             }
         }
-        
+
         private void OnTriggerEnter(Collider other)
         {
 
@@ -164,6 +221,7 @@
                 this.InAgroRange();
             }
             */
+
             if (other.gameObject.tag == "PlayerWeapon")
             {
                 ObjectPooling.Bullets.Bullet temp = other.gameObject.GetComponent<ObjectPooling.Bullets.Bullet>();
@@ -183,69 +241,52 @@
                 other.GetComponent<BoxCollider>().enabled = false;
             }
         }
-        
+
 
         void OnTriggerStay(Collider other)
         {
-            //This is to see if the player is within a certain distance of the AI.
-            if (other.gameObject.tag == "Player" )
-            {
-            //Only do this on tag "Player"
-			Vector3 direction  = other.transform.position - this.transform.position;
-			float angle = Vector3.Angle(direction, transform.forward);//Draw the angle in front of the AI
-			
-			if(angle < fov * 0.5f)//This is the angle that the AI can see
-			{
-				RaycastHit hit ;
-				
-				if(Physics.Raycast(transform.position + transform.up, direction.normalized, out hit, 0))//Check if the AI can see the player
-				{
-					if(hit.collider.tag == "Player")
-                    {
-                            InAgroRange();
-                            this.agro = true;
-                            this.InAgroRange();
-                        }
-					else if(smart)
-					{
-                            smarts.GoToNextPoint();
+            Vector3 direction = other.transform.position - this.gunPos.transform.position;
+            float angle = Vector3.Angle(direction, transform.forward);//Draw the angle in front of the AI
 
-					}
-                    else
+            if (angle < fov * 0.5f)//This is the angle that the AI can see
+            {
+                RaycastHit hit;
+
+                if (Physics.Raycast(this.gunPos.transform.position, other.transform.position - this.gunPos.transform.position, out hit) && hit.transform.tag == "Player")
+                {
+                    if (hit.collider.tag == "Player")
                     {
+                        InAgroRange();
+                        this.agro = true;
+                        this.InAgroRange();
+                        los = true;
+                    }
+                    else if (agro)
+                    {
+                        
+                        if (((cooldown) -= Time.deltaTime) <= 0)
+                        {
+                            los = false;
+                        }
+                        GotoNextPoint();
 
                     }
-					
-				}
-			}
+                }
+               
+            }
 
-				
-				//AudioSource audios = other.GetComponent<AudioSource>();
-			//	float audiorange = audios.maxDistance;
-			//	if(audios.isPlaying == true)
-				//{
-				////	Player = FindClosestPlayer();
-				//	PlayerT = Player.transform;
-				//	DoWaypoints = false;
-				//	GetComponent<NavMeshAgent>().destination = PlayerT.position;
-				//}
-				//else
-				//{
-				//	DoWaypoints = true; 
-				//}
+
+        }
 
 
 
-		}
-
-	}
         public void StepEvent()
         {
             sfx.PlayEnemyStepSFX();
             if (!disableStepSonar)
             {
                 GameObject g = SonarPool.Instance.GetSonar(1f, 1f);
-                if(g != null)
+                if (g != null)
                     g.transform.position = foot.position;
             }
         }
