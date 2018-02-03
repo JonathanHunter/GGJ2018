@@ -55,14 +55,14 @@
 
 
         }
-        /*void OnCollisionEnter(Collision collision)
+        void OnCollisionEnter(Collision collision)
         {
             GameObject s = SonarPool.Instance.GetSonar(3f, 3f);
             if (s != null)
             {
                 s.transform.position = transform.position;
             }
-        }*/
+        }
         
     }
 }
