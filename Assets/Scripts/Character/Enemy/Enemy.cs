@@ -41,7 +41,6 @@
         private float hate = 15f;
         private bool smart = true;
  
-
         private void Start()
         {
             agroBubble = this.transform;

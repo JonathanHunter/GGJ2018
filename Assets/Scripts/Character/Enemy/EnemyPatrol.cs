@@ -42,16 +42,14 @@
             //shoot after given time if you have LOS then reset cooldown 
             if (( cooldown -= Time.deltaTime) <= 0 && los)
             {
-<<<<<<< HEAD
                  enemyAnimator.SetBool("fireGun", true);
                  sfx.PlayEnemyGunfireSFX();
                  Shoot();
                  cooldown = reset;
-=======
+
                 enemyAnimator.SetBool("fireGun", true);
                 sfx.PlayEnemyGunfireSFX();
                 cooldown = 5f;
->>>>>>> master
             }
              shooting = false;
             // chase for given time then roam remove agro if loss of LOS
