@@ -24,7 +24,6 @@
 			usingPad = CustomInput.UsingPad;
 			if (CustomInput.UsingPad) 
 			{
-				print("controller set on start");
 				SetImage(1);
 			}
 		}
@@ -33,11 +32,9 @@
 		{
 			if (CustomInput.UsingPad != usingPad)
 			{
-				print("input change");
 				usingPad = CustomInput.UsingPad;
 				if (usingPad)
 				{
-					print("controller change");
 					if (!(type == ActionType.Screech || type == ActionType.Reload))
 						SetImage(1);	// General parts of a controller
 					else if (CustomInput.GamePadType(0) == CustomInput.ControlType.Xbox)
@@ -48,7 +45,6 @@
 				} 
 				else
 				{
-					print("keyboard change");
 					SetImage(0);		// Keyboard and Mouse
 				}
 			}
