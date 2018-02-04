@@ -11,9 +11,8 @@
         public EnemyAI smarts; //for future use with position variation
         public Transform[] points; // locations to patr
         public float reset;  // reset for cooldown
-        public float intrest;
-        
-        new public void GotoNextPoint()
+       
+        public override void GotoNextPoint()
         {
             // Returns if no points have been set up
             if (points.Length == 0 || this.agro)
@@ -25,13 +24,11 @@
             // Choose the next point in the array as the destination,
             // cycling to the start if necessary.
             destPoint = (destPoint + 1) % points.Length;
-
         }
-        // Chase player
-       new  public void Chase()
+        /// Chase player
+       public override void Chase()
         {
-            //Chase the player to the agroRange distance which is the minimum distance needed to shoot
-            Vector3 dist = PlayerManager.Instance.player.position -  agent.transform.position;
+            Vector3 dist = PlayerManager.Instance.player.position -  agent.transform.position;  //Chase the player to the agroRange distance which is the minimum distance needed to shoot
             if (dist.magnitude >  agroRange)
             {
                  agent.destination = PlayerManager.Instance.player.position;
@@ -41,7 +38,6 @@
                  agent.transform.LookAt(PlayerManager.Instance.player);
                  agent.destination =  agent.transform.position;
             }
-
 
             //shoot after given time if you have LOS then reset cooldown 
             if (( cooldown -= Time.deltaTime) <= 0 && los)
@@ -53,7 +49,6 @@
             }
              shooting = false;
             // chase for given time then roam remove agro if loss of LOS
-
         }  
         
         protected override void LocalInit()

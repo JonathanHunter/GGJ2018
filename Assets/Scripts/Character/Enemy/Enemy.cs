@@ -44,7 +44,6 @@
 
         private void Start()
         {
-
             agroBubble = this.transform;
             this.Health = maxHealth;
             this.agro = false;
@@ -90,13 +89,7 @@
                     agent.speed += 1.5f;
                     agroRange = 3f;
                     break;
-
             }
-        }
-
-        private void FixedUpdate()
-        {
-            //was for raycast
         }
 
         private void Update()
@@ -109,7 +102,6 @@
                 }
                 return;
             }
-            
             if (!agent.enabled)
                 agent.enabled = true;
             //if the agent is moving start the animation or else don't
@@ -128,9 +120,6 @@
                 enemyAnimator.SetBool("isMoving", false);
                 enemyAnimator.speed = 1f * animRatio; // animation speed reflects agent speed
             }
-
-           
-
             LocalUpdate();
             if (this.Health <= 0)
             {
@@ -150,29 +139,23 @@
             return this.damage;
         }
 
-        public void GotoNextPoint()
-        {
-            // Returns if no points have been set up
-
+        public virtual void GotoNextPoint()
+        { 
             // Set the agent to go to the currently selected destination.
             agent.destination = transform.position;
-
-            // Choose the next point in the array as the destination,
-            // cycling to the start if necessary.
-            // destPoint = (destPoint + 1) % points.Length;
         }
 
-        public void TargetPlayer()
+        public virtual void  TargetPlayer()
         {
             //override
         }
 
-        public void Chase()
+        public virtual void Chase()
         {
             //override
         }
 
-        //Shoots
+        ///Shoots 
         public void Shoot()
         {
             GameObject g = BulletPool.Instance.GetBullet(BulletPool.BulletTypes.Enemy);
@@ -197,8 +180,6 @@
             }
         }
 
-
-        // fixed update on raycasts
         private void OnCollisionEnter(Collision collision)
         {
             if (collision.gameObject.tag == "PlayerWeapon")
@@ -210,22 +191,10 @@
                 this.InAgroRange();
             }
         }
-
-        // Handels player attacks on enemy
+        
         private void OnTriggerEnter(Collider other)
         {
-
-            //Depricated Moving to On Trigger Stay with Raycast
-            /*
-            if (other.gameObject.tag == "Player")
-            {
-                InAgroRange();
-                this.agro = true;
-                this.InAgroRange();
-            }
-            */
-
-            if (other.gameObject.tag == "PlayerWeapon")
+            if (other.gameObject.tag == "PlayerWeapon") // if hit by player bullet
             {
                 ObjectPooling.Bullets.Bullet temp = other.gameObject.GetComponent<ObjectPooling.Bullets.Bullet>();
                 if (temp == null)
@@ -239,13 +208,12 @@
                 sfx.PlayEnemyGetHitSFX();
                 TookDamage();
             }
-            if (other.gameObject.tag == "CaneWeaponHitBox" && other.GetComponent<BoxCollider>() != null)
+            if (other.gameObject.tag == "CaneWeaponHitBox" && other.GetComponent<BoxCollider>() != null) //hit by player cane
             {
                 other.GetComponent<BoxCollider>().enabled = false;
             }
         }
 
-        //Active while in range of player
         void OnTriggerStay(Collider other)
         {
             Vector3 direction = other.transform.position - this.gunPos.transform.position;
@@ -274,16 +242,10 @@
                              GotoNextPoint();
                             //lose interest in the player
                         }
-                        
-
                     }
-                }
-               
+                } 
             }
-
-
         }
-
 
         //Enemy Steps and sound generation
         public void StepEvent()

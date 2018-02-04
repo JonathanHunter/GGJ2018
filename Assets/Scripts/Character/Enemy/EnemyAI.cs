@@ -14,10 +14,8 @@
         {
             this.enemy = enemy;
         }      
-
-        /*
-         Find random location within navmesh
-         */
+        
+         ///Find random location within navmesh
         public Vector3 RandomNavmeshLocation(float radius)
         {
             Vector3 randomDirection = Random.insideUnitSphere * radius;
@@ -30,13 +28,12 @@
             }
             return finalPosition;
         }
-        /*
-        Find random location within navmesh from origin point
-        */
+       
+        /// Find random location within navmesh from origin point
         public static Vector3 RandomNavSphere(Vector3 origin, float dist, int layermask)
         {
             Vector3 randDirection = Random.insideUnitSphere * dist;
-
+ 
             randDirection += origin;
 
             NavMeshHit navHit;
@@ -44,21 +41,6 @@
             NavMesh.SamplePosition(randDirection, out navHit, dist, layermask);
 
             return navHit.position;
-        }
-
-       
-
-        // Use this for initialization
-        void Start()
-        {
-            // define the level of the enemy
-        
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
         }
     }
 }
