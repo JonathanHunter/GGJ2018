@@ -38,6 +38,7 @@
 			
 			this.alpha = 0;
             this.decreasing = true;
+            this.overlay.gameObject.SetActive(true);
             FadeOut();
         }
 
