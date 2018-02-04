@@ -104,12 +104,12 @@
 
             if (!reloading && !shooting && CustomInput.BoolFreshPress(CustomInput.UserInput.Shoot))
             {
-                this.shooting = true;
                 GameObject g = BulletPool.Instance.GetBullet(BulletPool.BulletTypes.Player);
 
                 if (g != null)
                 {
-                    GGJ2018.ObjectPooling.Bullets.Bullet rf = g.GetComponent<GGJ2018.ObjectPooling.Bullets.Bullet>();
+                    this.shooting = true;
+                    ObjectPooling.Bullets.Bullet rf = g.GetComponent<ObjectPooling.Bullets.Bullet>();
                     MeleeWeaponTrail[] fb = rf.trails;
                     if (fb != null)
                     {
@@ -119,15 +119,15 @@
 
                         }
                     }
-                }
 
-                g.transform.position = gunPos.position;
-                g.transform.rotation = this.transform.rotation;
-                this.anim.SetBool(this.shootHash, true);
-                this.agro.radius += 1f;
-                this.sfx.PlayPlayerGunfireSFX();
-                this.reloadUI.Fire(this.bullets);
-                this.bullets--;
+                    g.transform.position = gunPos.position;
+                    g.transform.rotation = gunPos.rotation;
+                    this.anim.SetBool(this.shootHash, true);
+                    this.agro.radius += 1f;
+                    this.sfx.PlayPlayerGunfireSFX();
+                    this.reloadUI.Fire(this.bullets);
+                    this.bullets--;
+                }
             }
             else if (this.shooting)
                 this.rgdb.velocity *= .75f;
