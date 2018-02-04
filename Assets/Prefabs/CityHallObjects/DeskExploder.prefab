@@ -1128,7 +1128,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1306827013122848}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.14109302, y: -2.21, z: -0.5565711}
+  m_LocalPosition: {x: 21.272757, y: 0.063, z: -43.593}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4667608333270792}
@@ -1634,13 +1634,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1248047154827290}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0.555, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4493551275852688}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!4 &4873608117508082
 Transform:
   m_ObjectHideFlags: 1
@@ -2219,7 +2219,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 1fc13c1afcf1740efae7d01211051e6f, type: 3}
+  - {fileID: 2100000, guid: 97998c3ca1978f04aa3e414f1ebc99af, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5308,6 +5308,8 @@ MonoBehaviour:
   explodedDesk: {fileID: 1124529091307324}
   myAudio: {fileID: 114823185283598816}
   isComplete: 0
+  explosionTime: 0.05
+  soundTimer: 0.5
 --- !u!114 &114070161841052708
 MonoBehaviour:
   m_ObjectHideFlags: 1

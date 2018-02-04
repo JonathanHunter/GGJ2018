@@ -1,26 +1,27 @@
 ﻿namespace GGJ2018.Effects.ExplodingDesk
 {
-    using System.Collections;
-    using System.Collections.Generic;
     using UnityEngine;
     using Util;
 
     public class ExplodingDesk : MonoBehaviour
     {
-
         public GameObject desk;
         public GameObject explodedDesk;
         public SoundPlayer myAudio;
         public bool isComplete = false;
-        private bool sfPlayed = false;
+        public float explosionTime = .1f;
+        public float soundTimer = .5f;
 
-        private float soundTimer = 3f;
+        private bool sfPlayed = false;
+        private float explosionTimer;
+        private bool flashed;
 
         // Use this for initialization
         void Start()
         {
             desk.SetActive(true);
             explodedDesk.SetActive(false);
+            this.flashed = false;
         }
 
         // Update is called once per frame
@@ -35,11 +36,6 @@
             {
                 if (sfPlayed == false)
                 {
-                    GameObject g = ObjectPooling.SonarPool.Instance.GetSonar(3f, 6f);
-                    if (g != null)
-                    {
-                        g.transform.position = this.transform.position;
-                    }
                     Destroy(desk);
                     explodedDesk.SetActive(true);
                     explodedDesk.transform.DetachChildren();
@@ -49,7 +45,28 @@
                 }
             }
 
-            if (sfPlayed){
+            if (sfPlayed)
+            {
+                if(!this.flashed)
+                {
+                    Managers.PlayerManager.Instance.player.GetComponentInChildren<CameraEffects>().Screech();
+                    this.flashed = true;
+                }
+
+                if ((this.explosionTimer -= Time.deltaTime) <= 0)
+                {
+                    GameObject g = ObjectPooling.SonarPool.Instance.GetSonar(6f, 6f);
+                    if (g != null)
+                    {
+                        g.transform.position = new Vector3(
+                            this.transform.position.x - Random.Range(-1f, 1f),
+                            0f,
+                            this.transform.position.z - Random.Range(-1f, 1f));
+                    }
+
+                    this.explosionTimer = this.explosionTime;
+                }
+
                 soundTimer -= Time.deltaTime;
                 if (soundTimer <= 0)
                 {
