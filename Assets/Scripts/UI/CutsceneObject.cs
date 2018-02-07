@@ -8,7 +8,6 @@
 
     public class CutsceneObject : MonoBehaviour
     {
-
         public AudioSource voiceClip;
         public Image image;
         public Text skipIcon;
@@ -21,7 +20,7 @@
             inactiveCol = new Color(image.color.r, image.color.g, image.color.b, 0);
             activeCol = new Color(image.color.r, image.color.g, image.color.b, 1);
         }
-
+		
         public void Activate()
         {
             skipIcon.enabled = false;
@@ -79,7 +78,7 @@
                 }
             }
         }
-
+		
         void Skip()
         {
             StopCoroutine("FadeInImage");
