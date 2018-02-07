@@ -5,44 +5,120 @@
     using Audio;
     using ObjectPooling;
 
+    /*
+     * LEVEL 1 -  Shoot until dead , no chase
+     * LEVEL 2 -  Shoot & Chase, stops if you lose LOS
+     * LEVEL 3 -  Shoot, Chase, & Hunts when out of LOS
+     * LEVEL 4 -  Shoot, Chase,Hunt, Dodge
+     * LEVEL 5 -  Shoot, Chase, Hunt, Dodge, Flee
+     * 
+     */
+
+
     public abstract class Enemy : MonoBehaviour
     {
-        public int maxHealth = 100;
+        public int level = 1;
+        public int maxHealth;
+        public int Health { get; private set; }
+        public int destPoint = 0;
+        public int damage;
         public Transform foot;
         public Transform gunPos;
+        public Transform agroBubble;
         public EnemySFXManager sfx;
         public Animator enemyAnimator;
-        public int damage;
+        public GameObject ragdoll;
+        public NavMeshAgent agent;
+        public bool los = false; // line of sight
         public bool agro;
         public bool shooting;
-        public NavMeshAgent agent;
-        public int Health { get; private set; }
-        public GameObject ragdoll;
         public bool disableStepSonar = false;
-      
-
+        public static float animRatio = 0.80f;
+        public float cooldown;
+        public float agroRange = 3f;
+        public float fov = 90f;
+        public float interest = 0;
+        private float hate = 15f;
+        private bool smart = true;
+ 
         private void Start()
         {
-          
+            agroBubble = this.transform;
             this.Health = maxHealth;
             this.agro = false;
+            agent.speed = 1f;
+            interest = hate - cooldown;
             LocalInit();
+
+            switch (level)
+            {
+                case 0:
+                    cooldown = 8f;
+                    fov = 60f;
+                    agent.speed += 0.25f;
+                    agroRange = 10f;
+                    break;
+                case 1:
+                    cooldown = 7f;
+                    fov = 70f;
+                    agent.speed += 0.5f;
+                    agroRange = 8f;
+                    break;
+                case 2:
+                    cooldown = 6f;
+                    fov = 80f;
+                    agent.speed += 0.75f;
+                    agroRange = 6f;
+                    break;
+                case 3:
+                    cooldown = 5f;
+                    fov = 90f;
+                    agent.speed += 1f;
+                    agroRange = 5f;
+                    break;
+                case 4:
+                    cooldown = 4f;
+                    fov = 100f;
+                    agent.speed += 1.25f;
+                    agroRange = 4f;
+                    break;
+                case 5:
+                    cooldown = 3f;
+                    fov = 110f;
+                    agent.speed += 1.5f;
+                    agroRange = 3f;
+                    break;
+            }
         }
 
         private void Update()
         {
             if (Managers.GameState.Instance.CurrentState != Managers.GameState.State.Playing)
             {
-                if(agent != null)
+                if (agent != null)
                 {
                     agent.enabled = false;
                 }
                 return;
             }
-
             if (!agent.enabled)
                 agent.enabled = true;
-
+            //if the agent is moving start the animation or else don't
+            if (agent.hasPath)
+            {
+                enemyAnimator.SetBool("isMoving", true);
+                enemyAnimator.speed = agent.speed * animRatio; // animation speed reflects agent speed
+            }
+            else if (agent.remainingDistance >= 0.75f && agent.remainingDistance <= 1) 
+            {
+                enemyAnimator.SetBool("isMoving", true);
+                enemyAnimator.speed = 0.75f; // animation speed reflects agent speed
+            }
+            else if (!agent.hasPath)
+            {
+                enemyAnimator.SetBool("isMoving", false);
+                enemyAnimator.speed = 1f * animRatio; // animation speed reflects agent speed
+            }
             LocalUpdate();
             if (this.Health <= 0)
             {
@@ -62,13 +138,29 @@
             return this.damage;
         }
 
-        protected void Shoot()
+        public virtual void GotoNextPoint()
+        { 
+            // Set the agent to go to the currently selected destination.
+            agent.destination = transform.position;
+        }
+
+        public virtual void  TargetPlayer()
+        {
+            //override
+        }
+
+        public virtual void Chase()
+        {
+            //override
+        }
+
+        ///Shoots 
+        public void Shoot()
         {
             GameObject g = BulletPool.Instance.GetBullet(BulletPool.BulletTypes.Enemy);
 
             if (g != null)
             {
-
                 GGJ2018.ObjectPooling.Bullets.Bullet rf = g.GetComponent<GGJ2018.ObjectPooling.Bullets.Bullet>();
                 MeleeWeaponTrail[] fb = rf.trails;
                 if (fb != null)
@@ -79,7 +171,6 @@
 
                     }
                 }
-
                 g.transform.position = gunPos.position;
                 g.transform.rotation = this.transform.rotation;
                 shooting = true;
@@ -99,17 +190,10 @@
                 this.InAgroRange();
             }
         }
-
+        
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.tag == "Player")
-            {
-                InAgroRange();
-                this.agro = true;
-                this.InAgroRange();
-            }
-
-            if (other.gameObject.tag == "PlayerWeapon")
+            if (other.gameObject.tag == "PlayerWeapon") // if hit by player bullet
             {
                 ObjectPooling.Bullets.Bullet temp = other.gameObject.GetComponent<ObjectPooling.Bullets.Bullet>();
                 if (temp == null)
@@ -123,19 +207,53 @@
                 sfx.PlayEnemyGetHitSFX();
                 TookDamage();
             }
-            if (other.gameObject.tag == "CaneWeaponHitBox" && other.GetComponent<BoxCollider>() != null)
+            if (other.gameObject.tag == "CaneWeaponHitBox" && other.GetComponent<BoxCollider>() != null) //hit by player cane
             {
                 other.GetComponent<BoxCollider>().enabled = false;
             }
         }
 
+        void OnTriggerStay(Collider other)
+        {
+            Vector3 direction = other.transform.position - this.gunPos.transform.position;
+            float angle = Vector3.Angle(direction, transform.forward);//Draw the angle in front of the AI
+
+            if (angle < fov * 0.5f)//This is the angle that the AI can see
+            {
+                RaycastHit hit;
+
+                if (Physics.Raycast(this.gunPos.transform.position, other.transform.position - this.gunPos.transform.position, out hit) && hit.transform.tag == "Player")
+                {
+                    if (hit.collider.tag == "Player")
+                    {
+                        InAgroRange();
+                        this.agro = true;
+                        this.InAgroRange();
+                        los = true;
+                        //agro animation
+                    }
+                    else
+                    {
+                        los = false;
+                        if (((interest) -= Time.deltaTime) <= 0 && !los)
+                        {
+                             agro = false;
+                             GotoNextPoint();
+                            //lose interest in the player
+                        }
+                    }
+                } 
+            }
+        }
+
+        //Enemy Steps and sound generation
         public void StepEvent()
         {
             sfx.PlayEnemyStepSFX();
             if (!disableStepSonar)
             {
                 GameObject g = SonarPool.Instance.GetSonar(1f, 1f);
-                if(g != null)
+                if (g != null)
                     g.transform.position = foot.position;
             }
         }
