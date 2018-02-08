@@ -83,7 +83,7 @@
         }
 
         public void Play()
-        { 
+        {
             Random.InitState(System.DateTime.Now.Millisecond);
             TransitionManager.Instance.LoadScene(this.scene);
         }

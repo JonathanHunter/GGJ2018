@@ -6,7 +6,7 @@
     using UnityEngine.AI;
     using GGJ2018.Managers;
 
-    public class EnemyAI : MonoBehaviour
+    public class EnemyAI
     {
         private Enemy enemy;
  

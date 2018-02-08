@@ -2442,6 +2442,11 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 180
       objectReference: {fileID: 0}
+    - target: {fileID: 114027461096026746, guid: a2511c24013eccb40ac48c2c868cc743,
+        type: 2}
+      propertyPath: ForceCursorUnLock
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a2511c24013eccb40ac48c2c868cc743, type: 2}
   m_IsPrefabParent: 0
