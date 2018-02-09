@@ -185,9 +185,8 @@
             }
             else if (this.recharging && !this.screechUI.IsRecharging)
                 this.recharging = false;
-
-            if (this.agro.radius > this.agroCap)
-                this.agro.radius = this.agroCap;
+            
+            this.agro.radius = Mathf.Min(this.agro.radius, this.agroCap);
 
             if (this.agro.radius > this.originalRadius)
                 this.agro.radius -= Time.deltaTime * .75f;
