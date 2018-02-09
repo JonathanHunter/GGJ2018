@@ -70,7 +70,8 @@ MonoBehaviour:
   bulletPools:
   - {fileID: 114293867813311288, guid: 9cec9bca88d65ca468078314fe6f47e0, type: 2}
   - {fileID: 114837251265643508, guid: 989c5678fafad684ead4a2622f989d5f, type: 2}
-  bulletPoolSizes: 0600000014000000
+  - {fileID: 114837251265643508, guid: f0ab24346d7cedd44880097e9c00eb21, type: 2}
+  bulletPoolSizes: 060000001400000014000000
 --- !u!114 &114477071555832406
 MonoBehaviour:
   m_ObjectHideFlags: 1
