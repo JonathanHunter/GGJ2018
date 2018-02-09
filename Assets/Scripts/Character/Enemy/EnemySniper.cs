@@ -3,7 +3,7 @@
     using UnityEngine;
     using UnityEngine.AI;
     using GGJ2018.Managers;
-    using GGJ2018.Character.Enemy.Smarts;
+    //using GGJ2018.Character.Enemy.Smarts;
 
     /*
      * CANT OPEN UNITY AT WORK TO CHANGE FILE NAME BUT THIS IS SNIPER SCRIPT NOW
