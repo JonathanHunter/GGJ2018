@@ -68,11 +68,8 @@
 
         private void Chase()
         {
-            if (!this.doOnce)
-            {
-                this.agent.SetDestination(Managers.PlayerManager.Instance.player.position);
-                this.agent.isStopped = false;
-            }
+            this.agent.isStopped = false;
+            this.agent.SetDestination(Managers.PlayerManager.Instance.player.position);
 
             if (Vector3.Distance(Managers.PlayerManager.Instance.player.position, this.transform.position) < 2.5f)
             {
@@ -103,11 +100,13 @@
             if(!this.doOnce)
             {
                 this.currentRunIndex = Random.Range(0, 3);
-                this.agent.destination = this.RunLocations[this.currentRunIndex].position;
-                this.agent.isStopped = false;
+                this.doOnce = true;
             }
+            
+            this.agent.isStopped = false;
+            this.agent.destination = this.RunLocations[this.currentRunIndex].position;
 
-            if (Vector3.Distance(Managers.PlayerManager.Instance.player.position, this.RunLocations[this.currentRunIndex].position) < 2.5f)
+            if (Vector3.Distance(this.transform.position, this.RunLocations[this.currentRunIndex].position) < 0.5f)
             {
                 this.agent.isStopped = true;
                 this.currState = State.Chase;

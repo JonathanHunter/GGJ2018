@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 114293867813311288}
   - component: {fileID: 54155996037033370}
   - component: {fileID: 65337682169437042}
+  - component: {fileID: 114952402511468432}
   m_Layer: 0
   m_Name: PlayerBullet
   m_TagString: PlayerWeapon
@@ -411,3 +412,15 @@ MonoBehaviour:
   _autoDestruct: 0
   _base: {fileID: 4802403700691892}
   _tip: {fileID: 4711481678562128}
+--- !u!114 &114952402511468432
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1291614907773584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d85918de6ea09b45af66d246c0f6084, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1

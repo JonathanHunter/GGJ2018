@@ -44,6 +44,9 @@
                 this.desk.explode();
                 this.fightTrigger.enabled = false;
                 this.bossDoor.SetActive(true);
+                GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+                foreach (GameObject e in enemies)
+                    e.SetActive(false);
             }
         }
     }
