@@ -140,6 +140,10 @@
         {
             //override
         }
+        public virtual void attack()
+        {
+            //overide
+        }
 
         ///Shoots 
         public void Shoot()

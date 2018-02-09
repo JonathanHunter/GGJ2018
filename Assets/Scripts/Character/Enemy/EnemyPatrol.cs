@@ -3,12 +3,9 @@
     using UnityEngine;
     using UnityEngine.AI; 
     using GGJ2018.Managers;
-    using GGJ2018.Character.Enemy.Smarts;
-    
 
     public class EnemyPatrol : Enemy 
     {
-        public EnemyAI smarts; //for future use with position variation
         public Transform[] points; // locations to patr
         public float reset;  // reset for cooldown
 
@@ -59,7 +56,7 @@
             destPoint = (destPoint + 1) % points.Length;
         }
         /// Chase player
-       public override void Chase()
+        public override void Chase()
         {
             Vector3 dist = PlayerManager.Instance.player.position -  agent.transform.position;  //Chase the player to the agroRange distance which is the minimum distance needed to shoot
             if (dist.magnitude >  agroRange)
@@ -86,8 +83,24 @@
             }
              shooting = false;
             // chase for given time then roam remove agro if loss of LOS
-        }  
-        
+        }
+
+        public override void attack()
+        {
+            base.attack();
+            //shoot after given time if you have LOS then reset cooldown 
+            if ((cooldown -= Time.deltaTime) <= 0 && los)
+            {
+                enemyAnimator.SetBool("fireGun", true);
+                sfx.PlayEnemyGunfireSFX();
+                Shoot();
+                cooldown = reset;
+
+                enemyAnimator.SetBool("fireGun", true);
+                sfx.PlayEnemyGunfireSFX();
+                cooldown = 5f;
+            }
+        }
         protected override void LocalInit()
         {
             reset = cooldown;
@@ -129,6 +142,7 @@
             {
                 TargetPlayer();
                 Chase();
+                attack();
             }
             else if (this.agro && level ==1)
             {
