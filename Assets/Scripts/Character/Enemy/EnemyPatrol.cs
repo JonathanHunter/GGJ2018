@@ -11,7 +11,40 @@
         public EnemyAI smarts; //for future use with position variation
         public Transform[] points; // locations to patr
         public float reset;  // reset for cooldown
-       
+
+        void OnTriggerStay(Collider other)
+        {
+            Vector3 direction = other.transform.position - this.gunPos.transform.position;
+            float angle = Vector3.Angle(direction, transform.forward);//Draw the angle in front of the AI
+
+            if (angle < fov * 0.5f)//This is the angle that the AI can see
+            {
+                RaycastHit hit;
+
+                if (Physics.Raycast(this.gunPos.transform.position, other.transform.position - this.gunPos.transform.position, out hit) && hit.transform.tag == "Player")
+                {
+                    if (hit.collider.tag == "Player")
+                    {
+                        InAgroRange();
+                        this.agro = true;
+                        this.InAgroRange();
+                        los = true;
+                        //agro animation
+                    }
+                    else
+                    {
+                        los = false;
+                        if (((interest) -= Time.deltaTime) <= 0 && !los)
+                        {
+                            agro = false;
+                            GotoNextPoint();
+                            //lose interest in the player
+                        }
+                    }
+                }
+            }
+        }
+
         public override void GotoNextPoint()
         {
             // Returns if no points have been set up
@@ -71,6 +104,25 @@
 
         protected override void LocalUpdate()
         {
+            if (!agent.enabled)
+                agent.enabled = true;
+            //if the agent is moving start the animation or else don't
+            if (agent.hasPath)
+            {
+                enemyAnimator.SetBool("isMoving", true);
+                enemyAnimator.speed = agent.speed * animRatio; // animation speed reflects agent speed
+            }
+            else if (agent.remainingDistance >= 0.75f && agent.remainingDistance <= 1)
+            {
+                enemyAnimator.SetBool("isMoving", true);
+                enemyAnimator.speed = 0.75f; // animation speed reflects agent speed
+            }
+            else if (!agent.hasPath)
+            {
+                enemyAnimator.SetBool("isMoving", false);
+                enemyAnimator.speed = 1f * animRatio; // animation speed reflects agent speed
+            }
+
             // Choose the next destination point when the agent gets
             // close to the current one.
             if (this.agro && level > 1)

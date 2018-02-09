@@ -70,8 +70,8 @@
         {
             if (!this.doOnce)
             {
-                this.agent.SetDestination(Managers.PlayerManager.Instance.player.position);
                 this.agent.isStopped = false;
+                this.agent.SetDestination(Managers.PlayerManager.Instance.player.position);
             }
 
             if (Vector3.Distance(Managers.PlayerManager.Instance.player.position, this.transform.position) < 2.5f)
@@ -102,9 +102,9 @@
         {
             if(!this.doOnce)
             {
+                this.agent.isStopped = false;
                 this.currentRunIndex = Random.Range(0, 3);
                 this.agent.destination = this.RunLocations[this.currentRunIndex].position;
-                this.agent.isStopped = false;
             }
 
             if (Vector3.Distance(Managers.PlayerManager.Instance.player.position, this.RunLocations[this.currentRunIndex].position) < 2.5f)
