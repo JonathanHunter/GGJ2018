@@ -101,6 +101,10 @@
                 }
                 return;
             }
+            else if (agent != null)
+            {
+                agent.enabled = true;
+            }
 
             LocalUpdate();
 

@@ -199,7 +199,7 @@
                 if (this.isInvulnerable)
                     return;
 
-                int damage = collision.gameObject.GetComponent<ObjectPooling.Bullets.Bullet>().GetDamage();
+                int damage = collision.gameObject.GetComponent<DamageDealer>().damage;
                 this.Health -= damage;
                 this.healthUI.TakeDamage(damage);
                 this.sfx.PlayPlayerGetHitSFX();
