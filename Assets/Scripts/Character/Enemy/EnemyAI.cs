@@ -79,7 +79,7 @@
         public override void attack()
         {
             //shoot after given time if you have LOS then reset cooldown 
-            if ((cooldown -= Time.deltaTime) <= 0 && los)
+            if ((cooldown -= Time.deltaTime) <= 0 && los && agent.enabled)
             {
                 shooting = true;
                 enemyAnimator.SetBool("fireGun", true); // sniper animation
