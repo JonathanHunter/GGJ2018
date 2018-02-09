@@ -5,8 +5,10 @@
     using GGJ2018.Managers;
     using GGJ2018.Character.Enemy.Smarts;
 
-
-    public class EnemyPatrol : Enemy
+    /*
+     * CANT OPEN UNITY AT WORK TO CHANGE FILE NAME BUT THIS IS SNIPER SCRIPT NOW
+     */
+    public class EnemySniper : Enemy
     {
         public Transform[] points; // locations to patr
         public float reset;  // reset for cooldown
@@ -80,14 +82,10 @@
             if ((cooldown -= Time.deltaTime) <= 0 && los)
             {
                 shooting = true;
-                enemyAnimator.SetBool("fireGun", true);
+                enemyAnimator.SetBool("fireGun", true); // sniper animation
                 sfx.PlayEnemyGunfireSFX();
                 Shoot();
                 cooldown = reset;
-
-                enemyAnimator.SetBool("fireGun", true);
-                sfx.PlayEnemyGunfireSFX();
-                cooldown = 5f;
             }
             shooting = false;
         }
@@ -95,7 +93,6 @@
         {
             reset = cooldown;
             maxHealth = 3;
-            smarts = new EnemyAI(this);
             agent = GetComponent<NavMeshAgent>();
 
             // Disabling auto-braking allows for continuous movement

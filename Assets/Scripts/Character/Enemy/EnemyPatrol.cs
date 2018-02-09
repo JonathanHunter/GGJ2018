@@ -69,43 +69,26 @@
                  agent.destination =  agent.transform.position;
             }
 
-            //shoot after given time if you have LOS then reset cooldown 
-            if (( cooldown -= Time.deltaTime) <= 0 && los)
-            {
-                 enemyAnimator.SetBool("fireGun", true);
-                 sfx.PlayEnemyGunfireSFX();
-                 Shoot();
-                 cooldown = reset;
-
-                enemyAnimator.SetBool("fireGun", true);
-                sfx.PlayEnemyGunfireSFX();
-                cooldown = 5f;
-            }
-             shooting = false;
-            // chase for given time then roam remove agro if loss of LOS
+            attack();
         }
 
         public override void attack()
         {
-            base.attack();
             //shoot after given time if you have LOS then reset cooldown 
             if ((cooldown -= Time.deltaTime) <= 0 && los)
             {
-                enemyAnimator.SetBool("fireGun", true);
+                shooting = true;
+                enemyAnimator.SetBool("fireGun", true); // sniper animation
                 sfx.PlayEnemyGunfireSFX();
                 Shoot();
                 cooldown = reset;
-
-                enemyAnimator.SetBool("fireGun", true);
-                sfx.PlayEnemyGunfireSFX();
-                cooldown = 5f;
             }
+            shooting = false;
         }
         protected override void LocalInit()
         {
             reset = cooldown;
             maxHealth = 3;
-            smarts = new EnemyAI(this);
             agent = GetComponent<NavMeshAgent>();
         
             // Disabling auto-braking allows for continuous movement
