@@ -33,13 +33,14 @@
         public bool agro;
         public bool shooting;
         public bool disableStepSonar = false;
+        public bool stationary = false;
         public static float animRatio = 0.80f;
         public float cooldown;
         public float agroRange = 3f;
         public float fov = 90f;
         public float interest = 0;
         private float hate = 15f;
-        private bool smart = true;
+      
  
         private void Start()
         {
@@ -140,6 +141,7 @@
         {
             //override
         }
+
         public virtual void attack()
         {
             //overide

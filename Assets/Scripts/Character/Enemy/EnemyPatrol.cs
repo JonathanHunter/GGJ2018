@@ -78,8 +78,8 @@
             if ((cooldown -= Time.deltaTime) <= 0 && los && agent.enabled)
             {
                 shooting = true;
-                enemyAnimator.SetBool("fireGun", true); // sniper animation
-                sfx.PlayEnemyGunfireSFX();
+               // enemyAnimator.SetBool("fireGun", true); // sniper animation
+               //  sfx.PlayEnemyGunfireSFX();
                 Shoot();
                 cooldown = reset;
             }
@@ -95,6 +95,7 @@
             // between points (ie, the agent doesn't slow down as it
             // approaches a destination point).
             agent.autoBraking = false;
+            enemyAnimator.SetBool("isMoving", false);
             GotoNextPoint();
         }
 
@@ -130,13 +131,7 @@
             else if (this.agro && level ==1)
             {
                 TargetPlayer();
-                if ((cooldown -= Time.deltaTime) <= 0 && los)
-                {
-                    enemyAnimator.SetBool("fireGun", true);
-                    sfx.PlayEnemyGunfireSFX();
-                    Shoot();
-                    cooldown = reset;
-                }
+                attack();
             }
 
             if (!agent.pathPending && agent.remainingDistance < 0.5f && !this.agro)
