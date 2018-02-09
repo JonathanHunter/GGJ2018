@@ -62,18 +62,18 @@
         /// Chase for given time then roam removes agro if loss of LOS
         public override void Chase()
         {
-            Vector3 dist = PlayerManager.Instance.player.position - agent.transform.position;  //Chase the player to the agroRange distance which is the minimum distance needed to shoot
-            if (dist.magnitude < agroRange)
+            //Chase the player to the agroRange distance which is the minimum distance needed to shoot
+            Vector3 dist = PlayerManager.Instance.player.position - agent.transform.position;  
+            if (dist.magnitude > agroRange)
             {
                 agent.destination = PlayerManager.Instance.player.position;
             }
-            else if (dist.magnitude >= agroRange)
+            else if (dist.magnitude <= agroRange)
             {
                 agent.transform.LookAt(PlayerManager.Instance.player);
                 agent.destination = agent.transform.position;
             }
-            
-            // chase for given time then roam remove agro if loss of LOS
+            attack(); 
         }
 
         public override void attack()
