@@ -29,7 +29,8 @@
         // Update is called once per frame
         void Update()
         {
-
+            if (Managers.GameState.Instance.CurrentState != Managers.GameState.State.Playing)
+                return;
 
             if (timerDown > 0)
             {

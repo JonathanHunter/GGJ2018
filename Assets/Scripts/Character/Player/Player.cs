@@ -26,7 +26,12 @@
         public HealthUI healthUI;
         public Transform gunPos;
         public BoxCollider CaneHitbox;
-       
+        public GameObject mesh;
+        public float invulnerabilityTime = 3f;
+        public float flashInterval = .09f;
+        public float agroCap = 20;
+
+
         private int moveHash;
         private int meleeHash;
         private int shootHash;
@@ -37,6 +42,10 @@
         private bool recharging;
         private float originalRadius;
         private bool dead;
+        private bool isInvulnerable = false;
+        private bool isVisible = true;
+        private float invunTimer = 0;
+        private float flashTimer = 0;
 
         public int Health { get; private set; }
 
@@ -71,7 +80,26 @@
             if (Managers.GameState.Instance.CurrentState != Managers.GameState.State.Playing)
                 return;
 
-            if(this.Health <= 0 && !this.dead)
+            if (invunTimer > 0)
+            {
+                if (flashTimer > flashInterval)
+                {
+                    isVisible = !isVisible;
+                    flashTimer = 0;
+                    this.mesh.SetActive(isVisible);
+                }
+
+                flashTimer += Time.deltaTime;
+                invunTimer -= Time.deltaTime;
+            }
+            else if (!isVisible || isInvulnerable)
+            {
+                isVisible = true;
+                this.mesh.SetActive(true);
+                isInvulnerable = false;
+            }
+
+            if (this.Health <= 0 && !this.dead)
             {
                 GameOver.Instance.Show();
                 this.sfx.PlayPlayerDieSFX();
@@ -157,6 +185,8 @@
             }
             else if (this.recharging && !this.screechUI.IsRecharging)
                 this.recharging = false;
+            
+            this.agro.radius = Mathf.Min(this.agro.radius, this.agroCap);
 
             if (this.agro.radius > this.originalRadius)
                 this.agro.radius -= Time.deltaTime * .75f;
@@ -164,13 +194,18 @@
 
         private void OnCollisionEnter(Collision collision)
         {
-            if(collision.gameObject.tag == "EnemyWeapon")
+            if (collision.gameObject.tag == "EnemyWeapon")
             {
+                if (this.isInvulnerable)
+                    return;
+
                 int damage = collision.gameObject.GetComponent<ObjectPooling.Bullets.Bullet>().GetDamage();
                 this.Health -= damage;
                 this.healthUI.TakeDamage(damage);
                 this.sfx.PlayPlayerGetHitSFX();
                 this.camEffects.TakeDamage();
+                this.isInvulnerable = true;
+                this.invunTimer = this.invulnerabilityTime;
             }
         }
 
