@@ -142,7 +142,7 @@
             //override
         }
 
-        public virtual void attack()
+        public virtual void Attack()
         {
             //overide
         }
