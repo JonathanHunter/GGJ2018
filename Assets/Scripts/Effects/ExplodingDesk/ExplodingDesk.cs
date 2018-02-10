@@ -15,6 +15,7 @@
         private bool sfPlayed = false;
         private float explosionTimer;
         private bool flashed;
+        private bool hasBoom = false;
 
         // Use this for initialization
         void Start()
@@ -45,7 +46,7 @@
                 }
             }
 
-            if (sfPlayed)
+            if (sfPlayed && !hasBoom)
             {
                 if(!this.flashed)
                 {
@@ -70,7 +71,8 @@
                 soundTimer -= Time.deltaTime;
                 if (soundTimer <= 0)
                 {
-                    Destroy(gameObject);
+                    hasBoom = true;
+                    Destroy(gameObject, 1.5f);
                 }
             }
         }
