@@ -120,5 +120,11 @@
                 this.currState = State.Run;
             }
         }
+
+        public void playPunchSound()
+        {
+            sfx.PlayBoss1PunchSFX();
+        }
+
     }
 }

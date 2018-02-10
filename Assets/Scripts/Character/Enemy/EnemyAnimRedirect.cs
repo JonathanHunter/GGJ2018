@@ -15,5 +15,10 @@
         {
             this.boss.StunDone();
         }
+
+        public void playSFX()
+        {
+            this.boss.playPunchSound();
+        }
     }
 }
