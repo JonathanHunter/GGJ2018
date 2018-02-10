@@ -2,12 +2,9 @@
 {
     using UnityEngine;
     using UnityEngine.AI;
+    using ObjectPooling;
     using GGJ2018.Managers;
-    //using GGJ2018.Character.Enemy.Smarts;
 
-    /*
-     * CANT OPEN UNITY AT WORK TO CHANGE FILE NAME BUT THIS IS SNIPER SCRIPT NOW
-     */
     public class EnemySniper : Enemy
     {
         public Transform[] points; // locations to patr
@@ -59,11 +56,15 @@
             // cycling to the start if necessary.
             destPoint = (destPoint + 1) % points.Length;
         }
-        /// Chase for given time then roam removes agro if loss of LOS
+
+        public override void TargetPlayer()
+        {
+            base.TargetPlayer();
+        }
+        /// Chase player
         public override void Chase()
         {
-            //Chase the player to the agroRange distance which is the minimum distance needed to shoot
-            Vector3 dist = PlayerManager.Instance.player.position - agent.transform.position;  
+            Vector3 dist = PlayerManager.Instance.player.position - agent.transform.position;  //Chase the player to the agroRange distance which is the minimum distance needed to shoot
             if (dist.magnitude > agroRange)
             {
                 agent.destination = PlayerManager.Instance.player.position;
@@ -73,7 +74,6 @@
                 agent.transform.LookAt(PlayerManager.Instance.player);
                 agent.destination = agent.transform.position;
             }
-            attack(); 
         }
 
         public override void attack()
@@ -81,15 +81,11 @@
             //shoot after given time if you have LOS then reset cooldown 
             if ((cooldown -= Time.deltaTime) <= 0 && los && agent.enabled)
             {
-                shooting = true;
-              //enemyAnimator.SetBool("fireGun", true); // sniper animation
-              //sfx.PlayEnemyGunfireSFX();
-                Shoot();
+                Shoot(BulletPool.Instance.GetBullet(BulletPool.BulletTypes.EnemySniper));
                 cooldown = reset;
             }
             shooting = false;
         }
-
         protected override void LocalInit()
         {
             reset = cooldown;
@@ -131,14 +127,13 @@
             {
                 TargetPlayer();
                 attack();
-                //Chase();
             }
             else if (this.agro && level == 1)
             {
                 TargetPlayer();
                 attack();
             }
-             
+
             if (!agent.pathPending && agent.remainingDistance < 0.5f && !this.agro)
             {
                 GotoNextPoint(); // search for player

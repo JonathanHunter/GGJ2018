@@ -1,7 +1,8 @@
 ﻿namespace GGJ2018.Character.Enemy
 {
     using UnityEngine;
-    using UnityEngine.AI; 
+    using UnityEngine.AI;
+    using ObjectPooling;
     using GGJ2018.Managers;
 
     public class EnemyPatrol : Enemy 
@@ -55,6 +56,11 @@
             // cycling to the start if necessary.
             destPoint = (destPoint + 1) % points.Length;
         }
+
+        public override void TargetPlayer()
+        {
+            base.TargetPlayer();
+        }
         /// Chase player
         public override void Chase()
         {
@@ -68,8 +74,6 @@
                  agent.transform.LookAt(PlayerManager.Instance.player);
                  agent.destination =  agent.transform.position;
             }
-
-            attack();
         }
 
         public override void attack()
@@ -77,10 +81,7 @@
             //shoot after given time if you have LOS then reset cooldown 
             if ((cooldown -= Time.deltaTime) <= 0 && los && agent.enabled)
             {
-                shooting = true;
-               // enemyAnimator.SetBool("fireGun", true); // sniper animation
-               //  sfx.PlayEnemyGunfireSFX();
-                Shoot();
+                Shoot(BulletPool.Instance.GetBullet(BulletPool.BulletTypes.Enemy));
                 cooldown = reset;
             }
             shooting = false;
@@ -90,7 +91,8 @@
             reset = cooldown;
             maxHealth = 3;
             agent = GetComponent<NavMeshAgent>();
-        
+            fov += 20f;
+            agroRange += 20;
             // Disabling auto-braking allows for continuous movement
             // between points (ie, the agent doesn't slow down as it
             // approaches a destination point).

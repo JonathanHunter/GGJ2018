@@ -49,8 +49,7 @@
             this.agro = false;
             agent.speed = 1f;
             interest = hate - cooldown;
-            LocalInit();
-
+            
             switch (level)
             {
                 case 0:
@@ -90,6 +89,7 @@
                     agroRange = 3f;
                     break;
             }
+            LocalInit();
         }
 
         private void Update()
@@ -134,7 +134,7 @@
 
         public virtual void  TargetPlayer()
         {
-            //override
+            agent.transform.LookAt(GGJ2018.Managers.PlayerManager.Instance.player.position);
         }
 
         public virtual void Chase()
@@ -148,11 +148,9 @@
         }
 
         ///Shoots 
-        public void Shoot()
+        public void Shoot(GameObject g)
         {
-            GameObject g = BulletPool.Instance.GetBullet(BulletPool.BulletTypes.Enemy);
-
-            if (g != null)
+           if (g != null)
             {
                 GGJ2018.ObjectPooling.Bullets.Bullet rf = g.GetComponent<GGJ2018.ObjectPooling.Bullets.Bullet>();
                 MeleeWeaponTrail[] fb = rf.trails;
@@ -161,7 +159,6 @@
                     foreach (MeleeWeaponTrail m in fb)
                     {
                         m.startTrail();
-
                     }
                 }
                 g.transform.position = gunPos.position;
