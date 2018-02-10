@@ -53,37 +53,37 @@
             switch (level)
             {
                 case 0:
-                    cooldown = 8f;
+                    cooldown = 5f;
                     fov = 60f;
                     agent.speed += 0.25f;
                     agroRange = 10f;
                     break;
                 case 1:
-                    cooldown = 7f;
+                    cooldown = 3.5f;
                     fov = 70f;
                     agent.speed += 0.5f;
                     agroRange = 8f;
                     break;
                 case 2:
-                    cooldown = 6f;
+                    cooldown = 3f;
                     fov = 80f;
                     agent.speed += 0.75f;
                     agroRange = 6f;
                     break;
                 case 3:
-                    cooldown = 5f;
+                    cooldown = 1.5f;
                     fov = 90f;
                     agent.speed += 1f;
                     agroRange = 5f;
                     break;
                 case 4:
-                    cooldown = 4f;
+                    cooldown = 1.2f;
                     fov = 100f;
                     agent.speed += 1.25f;
                     agroRange = 4f;
                     break;
                 case 5:
-                    cooldown = 3f;
+                    cooldown = 1f;
                     fov = 110f;
                     agent.speed += 1.5f;
                     agroRange = 3f;
@@ -148,7 +148,7 @@
         }
 
         ///Shoots 
-        public void Shoot(GameObject g)
+        public virtual void Shoot(GameObject g)
         {
            if (g != null)
             {

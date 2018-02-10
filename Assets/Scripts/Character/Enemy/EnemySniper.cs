@@ -81,7 +81,9 @@
             //shoot after given time if you have LOS then reset cooldown 
             if ((cooldown -= Time.deltaTime) <= 0 && los && agent.enabled)
             {
-                Shoot(BulletPool.Instance.GetBullet(BulletPool.BulletTypes.EnemySniper));
+                enemyAnimator.SetTrigger("fireGun");
+                playShotBuildupSFX();
+                //Shoot(BulletPool.Instance.GetBullet(BulletPool.BulletTypes.EnemySniper));
                 cooldown = reset;
             }
             shooting = false;
@@ -141,6 +143,27 @@
 
         }
 
+        public override void Shoot(GameObject g)
+        {
+            if (g != null)
+            {
+                GGJ2018.ObjectPooling.Bullets.Bullet rf = g.GetComponent<GGJ2018.ObjectPooling.Bullets.Bullet>();
+                MeleeWeaponTrail[] fb = rf.trails;
+                if (fb != null)
+                {
+                    foreach (MeleeWeaponTrail m in fb)
+                    {
+                        m.startTrail();
+                    }
+                }
+                g.transform.position = gunPos.position;
+                g.transform.rotation = this.transform.rotation;
+                shooting = true;
+                //this.sfx.PlayEnemyGunfireSFX();                
+            }
+        }
+
+
         protected override void TookDamage()
         {
             sfx.PlayEnemyGetHitSFX();
@@ -150,6 +173,21 @@
         protected override void InAgroRange()
         {
             TargetPlayer();
+        }
+
+        public void playShotBuildupSFX()
+        {
+            sfx.PlayEnemyRifleBuildupSFX();
+        }
+
+        public void playShotFireSFX()
+        {
+            sfx.PlayEnemyRifleFireSFX();
+        }
+
+        public void fireGun()
+        {
+            Shoot(BulletPool.Instance.GetBullet(BulletPool.BulletTypes.EnemySniper));
         }
     }
 }
