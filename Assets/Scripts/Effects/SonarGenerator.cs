@@ -6,6 +6,7 @@
     public class SonarGenerator : MonoBehaviour
     {
         public Transform sonarPoint;
+        public bool sonarEnabled;
         public float sonarRate;
         public float sonarSpeed;
         public float sonarSize;
@@ -19,7 +20,7 @@
 
         private void Update()
         {
-            if (Managers.GameState.Instance.CurrentState != Managers.GameState.State.Playing)
+            if (Managers.GameState.Instance.CurrentState != Managers.GameState.State.Playing || !this.sonarEnabled)
                 return;
 
             if((this.sonarTimer -= Time.deltaTime) < 0)
