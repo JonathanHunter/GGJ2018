@@ -33,6 +33,8 @@
         /// </summary>
         public AudioSource[] gunfire;
 
+        public AudioSource[] rifleSounds;
+
         /// <summary>
         /// The minimum distance from the enemy in which sounds still play at max volume.
         /// </summary>
@@ -160,6 +162,19 @@
                 }
             }
             gunfire[Random.Range(0, gunfire.Length)].Play();
+        }
+
+        /// <summary>
+        /// Randomly selects and plays a sound out of the enemy gunfire sfx array.
+        /// </summary>
+        public void PlayEnemyRifleBuildupSFX()
+        {
+            rifleSounds[0].Play();
+        }
+
+        public void PlayEnemyRifleFireSFX()
+        {
+            rifleSounds[1].Play();
         }
 
         /// <summary>

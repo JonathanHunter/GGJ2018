@@ -5,7 +5,7 @@
     using ObjectPooling;
     using GGJ2018.Managers;
 
-    public class EnemyPatrol : Enemy 
+    public class EnemySniper : Enemy
     {
         public Transform[] points; // locations to patr
         public float reset;  // reset for cooldown
@@ -64,15 +64,15 @@
         /// Chase player
         public override void Chase()
         {
-            Vector3 dist = PlayerManager.Instance.player.position -  agent.transform.position;  //Chase the player to the agroRange distance which is the minimum distance needed to shoot
-            if (dist.magnitude >  agroRange)
+            Vector3 dist = PlayerManager.Instance.player.position - agent.transform.position;  //Chase the player to the agroRange distance which is the minimum distance needed to shoot
+            if (dist.magnitude > agroRange)
             {
-                 agent.destination = PlayerManager.Instance.player.position;
+                agent.destination = PlayerManager.Instance.player.position;
             }
-            else if (dist.magnitude <=  agroRange)
+            else if (dist.magnitude <= agroRange)
             {
-                 agent.transform.LookAt(PlayerManager.Instance.player);
-                 agent.destination =  agent.transform.position;
+                agent.transform.LookAt(PlayerManager.Instance.player);
+                agent.destination = agent.transform.position;
             }
         }
 
@@ -81,7 +81,9 @@
             //shoot after given time if you have LOS then reset cooldown 
             if ((cooldown -= Time.deltaTime) <= 0 && los && agent.enabled)
             {
-                Shoot(BulletPool.Instance.GetBullet(BulletPool.BulletTypes.Enemy));
+                enemyAnimator.SetTrigger("fireGun");
+                playShotBuildupSFX();
+                //Shoot(BulletPool.Instance.GetBullet(BulletPool.BulletTypes.EnemySniper));
                 cooldown = reset;
             }
             shooting = false;
@@ -91,6 +93,7 @@
             reset = cooldown;
             maxHealth = 3;
             agent = GetComponent<NavMeshAgent>();
+            fov += 20f; // increase the fov for sniper
             // Disabling auto-braking allows for continuous movement
             // between points (ie, the agent doesn't slow down as it
             // approaches a destination point).
@@ -125,10 +128,9 @@
             if (this.agro && level > 1)
             {
                 TargetPlayer();
-                Chase();
                 Attack();
             }
-            else if (this.agro && level ==1)
+            else if (this.agro && level == 1)
             {
                 TargetPlayer();
                 Attack();
@@ -141,15 +143,51 @@
 
         }
 
+        public override void Shoot(GameObject g)
+        {
+            if (g != null)
+            {
+                GGJ2018.ObjectPooling.Bullets.Bullet rf = g.GetComponent<GGJ2018.ObjectPooling.Bullets.Bullet>();
+                MeleeWeaponTrail[] fb = rf.trails;
+                if (fb != null)
+                {
+                    foreach (MeleeWeaponTrail m in fb)
+                    {
+                        m.startTrail();
+                    }
+                }
+                g.transform.position = gunPos.position;
+                g.transform.rotation = this.transform.rotation;
+                shooting = true;
+                //this.sfx.PlayEnemyGunfireSFX();                
+            }
+        }
+
+
         protected override void TookDamage()
         {
             sfx.PlayEnemyGetHitSFX();
-            agent.speed = agent.speed+=0.1f ; // agent speed increase as health decrease
+            agent.speed = agent.speed += 0.1f; // agent speed increase as health decrease
         }
-        
+
         protected override void InAgroRange()
         {
-          TargetPlayer();
+            TargetPlayer();
+        }
+
+        public void playShotBuildupSFX()
+        {
+            sfx.PlayEnemyRifleBuildupSFX();
+        }
+
+        public void playShotFireSFX()
+        {
+            sfx.PlayEnemyRifleFireSFX();
+        }
+
+        public void fireGun()
+        {
+            Shoot(BulletPool.Instance.GetBullet(BulletPool.BulletTypes.EnemySniper));
         }
     }
 }
