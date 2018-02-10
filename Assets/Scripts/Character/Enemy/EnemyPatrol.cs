@@ -76,7 +76,7 @@
             }
         }
 
-        public override void attack()
+        public override void Attack()
         {
             //shoot after given time if you have LOS then reset cooldown 
             if ((cooldown -= Time.deltaTime) <= 0 && los && agent.enabled)
@@ -91,8 +91,6 @@
             reset = cooldown;
             maxHealth = 3;
             agent = GetComponent<NavMeshAgent>();
-            fov += 20f;
-            agroRange += 20;
             // Disabling auto-braking allows for continuous movement
             // between points (ie, the agent doesn't slow down as it
             // approaches a destination point).
@@ -128,12 +126,12 @@
             {
                 TargetPlayer();
                 Chase();
-                attack();
+                Attack();
             }
             else if (this.agro && level ==1)
             {
                 TargetPlayer();
-                attack();
+                Attack();
             }
 
             if (!agent.pathPending && agent.remainingDistance < 0.5f && !this.agro)
