@@ -171,11 +171,13 @@
         /// </summary>
         public void PlayEnemyRifleBuildupSFX()
         {
+            rifleSounds[0].maxDistance = 20;
             rifleSounds[0].Play();
         }
 
         public void PlayEnemyRifleFireSFX()
         {
+            rifleSounds[1].maxDistance = 20;
             rifleSounds[1].Play();
         }
 

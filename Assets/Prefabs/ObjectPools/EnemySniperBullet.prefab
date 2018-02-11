@@ -422,5 +422,5 @@ MonoBehaviour:
   trails:
   - {fileID: 114169361610180292}
   - {fileID: 114795032775459864}
-  speed: 6
+  speed: 12
   rgbdy: {fileID: 54811066486415864}
