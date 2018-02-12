@@ -128,9 +128,10 @@
                 Chase();
                 Attack();
             }
-            else if (this.agro && level ==1)
+            else if (this.agro && level ==1) 
             {
                 TargetPlayer();
+                agent.destination = agent.transform.position;
                 Attack();
             }
 
