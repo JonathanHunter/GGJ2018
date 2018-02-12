@@ -9629,6 +9629,16 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.y
       value: -135
       objectReference: {fileID: 0}
+    - target: {fileID: 82699646051985524, guid: bbf036a09f1a5b341ba7f8cca78e5945,
+        type: 2}
+      propertyPath: m_Volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114480436696687022, guid: bbf036a09f1a5b341ba7f8cca78e5945,
+        type: 2}
+      propertyPath: song.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 3e8c46fa5b861e64d945a2952db1038f, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bbf036a09f1a5b341ba7f8cca78e5945, type: 2}
   m_IsPrefabParent: 0
