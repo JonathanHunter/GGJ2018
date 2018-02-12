@@ -13,11 +13,13 @@
 
         private bool fightStarted;
         private bool doOnce;
+        private bool spawnedEnd;
 
         private void Start()
         {
             this.fightStarted = false;
             this.doOnce = false;
+            this.spawnedEnd = false;
         }
 
         private void Update()
@@ -29,9 +31,14 @@
                     this.doOnce = true;
                     this.boss.gameObject.SetActive(true);
                 }
-                else if (this.desk == null && this.boss.Health <= 0)
+                else if (this.desk == null && this.boss.Health <= 0 && !this.spawnedEnd)
                 {
+                    GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+                    foreach (GameObject e in enemies)
+                        e.SetActive(true);
+
                     this.endTrigger.SetActive(true);
+                    this.spawnedEnd = true;
                 }
             }
         }

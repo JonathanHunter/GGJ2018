@@ -11,6 +11,7 @@ namespace GGJ2018
 		{
 			if (other.gameObject.CompareTag("Player"))
 			{
+                this.gameObject.GetComponent<Collider>().enabled = false;
 				TransitionManager.Instance.LoadScene(nextScene);
 			}
 		}
