@@ -311,7 +311,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   song:
   - {fileID: 8300000, guid: 185adcb37e0ce1a43b752b47cde36700, type: 3}
-  - {fileID: 8300000, guid: 884d659bbc0e6314a985e5c3e48ac072, type: 3}
+  - {fileID: 8300000, guid: 78f97db4ca146ad4492c8f30cd495d2d, type: 3}
   audio: {fileID: 82699646051985524}
   SFX: 0
   playOnLoad: 0
