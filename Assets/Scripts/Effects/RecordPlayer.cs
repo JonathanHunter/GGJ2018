@@ -27,6 +27,7 @@
                 this.mesh.enabled = false;
                 this.col.enabled = false;
                 this.sonar.sonarEnabled = false;
+                this.sfx.loop = false;
                 this.sfx.PlaySong(1);
             }
         }
