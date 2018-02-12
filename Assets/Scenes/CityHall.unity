@@ -427,7 +427,7 @@ MonoBehaviour:
   canvas: {fileID: 1756938654}
   retry: {fileID: 1961054565}
   quit: {fileID: 109223961}
-  scene: Room
+  scene: CityHall
 --- !u!114 &31763507
 MonoBehaviour:
   m_ObjectHideFlags: 0
