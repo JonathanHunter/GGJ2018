@@ -29,6 +29,7 @@
                 this.sonar.sonarEnabled = false;
                 this.sfx.loop = false;
                 this.sfx.PlaySong(1);
+                this.health = int.MaxValue;
             }
         }
 
