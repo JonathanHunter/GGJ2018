@@ -12,7 +12,7 @@
         {
             if (Managers.GameState.Instance.CurrentState != Managers.GameState.State.Playing || this.ForceCursorUnLock)
                 UnLock();
-            else
+            else if (Input.GetKeyDown(KeyCode.Mouse0))
                 Lock();
         }
 

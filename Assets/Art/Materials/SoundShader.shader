@@ -14,6 +14,7 @@ Shader "Custom/SoundShader"
 	SubShader
 	{
 		Blend One One
+		ZTest Always
 		ZWrite Off
 		Cull Off
 
@@ -51,6 +52,7 @@ Shader "Custom/SoundShader"
 			};
 
 			sampler2D _MainTex;
+			float4 _MainTex_TexelSize;
 			float4 _MainTex_ST;
 			float _LineHeight;
 
@@ -60,13 +62,15 @@ Shader "Custom/SoundShader"
 				o.vertex = UnityObjectToClipPos(v.vertex);
 				o.uv = TRANSFORM_TEX(v.uv, _MainTex);
 
+
 				o.screenuv = ((o.vertex.xy / o.vertex.w) + 1)/2;
-				o.screenuv.y = 1 - o.screenuv.y;
-				o.depth = -mul(UNITY_MATRIX_MV, v.vertex).z *_ProjectionParams.w;
+				if (_ProjectionParams.x < 0)
+					o.screenuv.y = 1 - o.screenuv.y;
+				o.depth = -UnityObjectToViewPos(v.vertex).z *_ProjectionParams.w;
 
 				o.objectPos = v.vertex.xyz;		
 				o.normal = UnityObjectToWorldNormal(v.normal);
-				o.viewDir = normalize(UnityWorldSpaceViewDir(mul(unity_ObjectToWorld, v.vertex)));
+				o.viewDir = normalize(UnityObjectToWorldNormal(v.vertex));
 
 				return o;
 			}
