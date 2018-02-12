@@ -48,8 +48,7 @@
             this.Health = maxHealth;
             this.agro = false;
             agent.speed = 1f;
-            interest = hate - cooldown;
-            
+                       
             switch (level)
             {
                 case 0:
@@ -89,6 +88,7 @@
                     agroRange = 3f;
                     break;
             }
+            interest = hate - cooldown; 
             LocalInit();
         }
 
