@@ -35,6 +35,8 @@
 
         public AudioSource[] rifleSounds;
 
+        public AudioSource bossPunch;
+
         /// <summary>
         /// The minimum distance from the enemy in which sounds still play at max volume.
         /// </summary>
@@ -177,6 +179,11 @@
         {
             rifleSounds[1].maxDistance = 25;
             rifleSounds[1].Play();
+        }
+
+        public void PlayBoss1PunchSFX()
+        {
+            bossPunch.Play();
         }
 
         /// <summary>
