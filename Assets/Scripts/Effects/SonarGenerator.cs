@@ -10,6 +10,9 @@
         public float sonarRate;
         public float sonarSpeed;
         public float sonarSize;
+        //SFX params
+        public AudioSource sfx;
+        public float minPitch = 1, maxPitch = 1;
 
         private float sonarTimer;
 
@@ -28,7 +31,11 @@
                 GameObject s = SonarPool.Instance.GetSonar(this.sonarSpeed, this.sonarSize);
                 if (s != null)
                     s.transform.position = this.sonarPoint.position;
-
+                if (sfx != null)
+                {
+                    sfx.pitch = Random.Range(minPitch, maxPitch);
+                    sfx.Play();
+                }
                 this.sonarTimer = this.sonarRate;
             }
         }
