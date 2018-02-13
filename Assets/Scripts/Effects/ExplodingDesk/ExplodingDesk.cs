@@ -8,6 +8,7 @@
         public GameObject desk;
         public GameObject explodedDesk;
         public SoundPlayer myAudio;
+        public AudioSource ambientExitSound;
         public bool isComplete = false;
         public float explosionTime = .1f;
         public float soundTimer = .5f;
@@ -43,6 +44,10 @@
                     Destroy(explodedDesk);
                     sfPlayed = true;
                     myAudio.PlaySong(0);
+                    if (ambientExitSound != null)
+                    {
+                        ambientExitSound.Stop();
+                    }
                 }
             }
 
